@@ -1,17 +1,16 @@
-// Prisma schema — only generic auth + role scaffolding.
-// Domain entities (Subject, Course, Enrollment, ...) are added during the contest.
+// Prisma schema — high-school education portal.
+// Domain: Class (Osztály), Subject (Tárgy), SubjectAssignment (year-class-teacher-subject),
+//          Grade (Jegy) with type and weight.
 
 generator client {
   provider      = "prisma-client-js"
-  // native = local OS (Windows dev), rhel-openssl-3.0.x = Vercel serverless runtime
+  // native = local Windows dev, rhel-openssl-3.0.x = Vercel serverless runtime
   binaryTargets = ["native", "rhel-openssl-3.0.x"]
 }
 
 datasource db {
   provider  = "postgresql"
   url       = env("DATABASE_URL")
-  // directUrl is used for migrations and only differs from `url` on Supabase
-  // (pooler vs. direct). On localhost both point to the same Docker Postgres.
   directUrl = env("DIRECT_URL")
 }
 
@@ -22,20 +21,85 @@ enum Role {
   STUDENT
 }
 
-model User {
-  id            String    @id @default(cuid())
-  email         String    @unique
-  passwordHash  String
-  name          String
-  role          Role      @default(STUDENT)
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-
-  sessions      Session[]
-  accounts      Account[]
+enum GradeType {
+  ORAL      // felelés (default weight 1)
+  TEST      // témazáró (default weight 3)
+  HOMEWORK  // házi (default weight 1)
+  MID_YEAR  // féléves jegy
+  YEAR_END  // év végi jegy
 }
 
-// NextAuth required models (kept generic; works with any provider).
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  name         String
+  role         Role     @default(STUDENT)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // School relations
+  schoolClass       SchoolClass?        @relation("ClassStudents", fields: [classId], references: [id])
+  classId           String?
+  taughtAssignments SubjectAssignment[] @relation("TeacherAssignments")
+  grades            Grade[]             @relation("StudentGrades")
+
+  // NextAuth
+  sessions Session[]
+  accounts Account[]
+}
+
+model SchoolClass {
+  id         String              @id @default(cuid())
+  startYear  Int // pl. 2024
+  identifier String // pl. "A"
+  students   User[]              @relation("ClassStudents")
+  assignments SubjectAssignment[]
+  createdAt  DateTime            @default(now())
+
+  @@unique([startYear, identifier])
+}
+
+model Subject {
+  id          String              @id @default(cuid())
+  code        String              @unique // pl. "MAT"
+  name        String
+  description String?
+  bookTitle   String?
+  lessons     String[]            @default([])
+  assignments SubjectAssignment[]
+  createdAt   DateTime            @default(now())
+}
+
+model SubjectAssignment {
+  id          String      @id @default(cuid())
+  year        Int // tanév kezdő éve (pl. 2025)
+  subject     Subject     @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  subjectId   String
+  schoolClass SchoolClass @relation(fields: [classId], references: [id], onDelete: Cascade)
+  classId     String
+  teacher     User        @relation("TeacherAssignments", fields: [teacherId], references: [id])
+  teacherId   String
+  grades      Grade[]
+  createdAt   DateTime    @default(now())
+
+  @@unique([year, subjectId, classId])
+}
+
+model Grade {
+  id           String            @id @default(cuid())
+  student      User              @relation("StudentGrades", fields: [studentId], references: [id], onDelete: Cascade)
+  studentId    String
+  assignment   SubjectAssignment @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
+  assignmentId String
+  value        Int // 1-5
+  type         GradeType         @default(ORAL)
+  weight       Int               @default(1)
+  comment      String?
+  givenAt      DateTime          @default(now())
+}
+
+// NextAuth required models
 model Account {
   id                String  @id @default(cuid())
   userId            String

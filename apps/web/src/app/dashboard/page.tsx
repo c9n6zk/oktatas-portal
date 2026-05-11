@@ -2,10 +2,10 @@ import { requireAuth } from "@/lib/rbac";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 const ROLE_GREETING: Record<string, string> = {
-  SUPERADMIN: "Rendszer szuperadminisztrátor",
+  SUPERADMIN: "Szuper-adminisztrátor",
   ADMIN: "Adminisztrátor",
   INSTRUCTOR: "Oktató",
-  STUDENT: "Hallgató",
+  STUDENT: "Diák",
 };
 
 export default async function DashboardPage() {
