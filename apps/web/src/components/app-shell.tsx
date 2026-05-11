@@ -24,6 +24,7 @@ const NAV: NavItem[] = [
   { href: "/admin/groups", label: "Csoportok", icon: "UsersRound", roles: ["ADMIN", "SUPERADMIN"] },
   { href: "/admin/schedule", label: "Órarend kezelés", icon: "CalendarCog", roles: ["ADMIN", "SUPERADMIN"] },
   { href: "/timetable", label: "Órarend", icon: "Calendar", roles: ["STUDENT", "INSTRUCTOR", "ADMIN", "SUPERADMIN"] },
+  { href: "/messages", label: "Üzenetek", icon: "MessageSquare" },
   { href: "/polls", label: "Szavazások", icon: "Vote" },
   { href: "/events", label: "Események", icon: "CalendarDays" },
   { href: "/profile", label: "Profil", icon: "UserCircle" },
@@ -92,10 +93,6 @@ export function AppShell({ user, children }: AppShellProps) {
         </header>
 
         <main className="flex-1 container py-4 md:py-8">{children}</main>
-
-        <footer className="border-t py-4 text-center text-sm text-muted-foreground">
-          <div className="container">Padtárs · Modern Fullstack Verseny 2026</div>
-        </footer>
       </div>
     </div>
   );
