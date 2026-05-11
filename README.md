@@ -43,9 +43,13 @@ Az alábbi 4 fiókkal mind a 4 szerepkör kipróbálható. Jelszó: `password`.
 | **Statisztikák oktatónak** | Osztály × tárgy súlyozott átlag, diákszám, jegyszám |
 | **Féléves + Év végi jegy** | Különálló típusok (`MID_YEAR`, `YEAR_END`), év végi automata javaslat |
 | **Iskolai események** | Admin létrehozza, Diák+Oktató látja (cím, hely, kezdés/vég) |
-| **🌗 Sötét / világos mód** | `next-themes` integrációval, rendszer-szintű detektálás |
-| **📱 Reszponzív web + natív mobil** | Tailwind reszponzív + Expo natív kliens |
-| **📍 GPS-alapú jelenléti rendszer** | Mobilon "Itt vagyok" gomb → `expo-location` → lat/lng + assignment ID elküldése a backendnek |
+| **💬 Üzenetküldés** (Diák↔Oktató kétirányú) | Kontaktlista + thread nézet (`/messages`), olvasatlan badge, automata "olvasottra állítás", RBAC: diák csak az osztályát/csoportját tanító oktatókkal, oktató csak a saját diákjaival |
+| **🗳️ Szavazás / kérdőív** | Admin létrehozza, célközönség szűkíthető (`ALL` / `STUDENTS` / `INSTRUCTORS` / `CLASS`), élő eredmény (`/polls`) |
+| **🗓️ Órarend** + helyettesítő tanár | Heti óra (nap, kezdés-vég, terem) `SubjectAssignment`-hez kötve; oktatónként helyettesítő bejelölhető (`/timetable`, `/admin/schedule`) |
+| **👥 Csoportok** (osztály-független) | `Group` modell, tetszőleges diák-halmaz, `SubjectAssignment` `groupId`-vel — pl. nyelvi csoport, haladó matek (`/admin/groups`) |
+| **♿ Accessibility** — világos / sötét / **magas kontraszt** | `next-themes` + 3. téma WCAG AAA ~21:1 fekete/sárga kontraszttal, vastag keretek, aláhúzott linkek, erős focus outline |
+| **📱 Reszponzív web** | Tailwind breakpoint-ok, mobil hamburger nav, mobil-első üzenőfal (`100dvh` dynamic viewport) |
+| **📍 GPS-alapú jelenléti rendszer** *(innováció)* | Mobilon "Itt vagyok" gomb → `expo-location` → lat/lng + assignment ID elküldése a backendnek (`Attendance.source="gps"`) |
 | **📷 Kamera** | Natív demo komponens (`expo-camera`) |
 | **🔔 Push értesítés (end-to-end)** | Mobil app login után regisztrálja az Expo push tokent (`/api/mobile/push-token`). Jegybeíráskor a szerver értesítést küld a diák eszközére (`PushToken` modell + Expo push REST API). |
 
@@ -68,17 +72,25 @@ apps/
   web/                      Next.js 15 — frontend + REST API
     src/app/(authed)/       Védett oldalak (Server Component layout)
       student/grades/       Diák: saját jegyek + súlyozott átlag
-      instructor/grading/   Oktató: jegybeírás osztály-bontásban
+      instructor/grading/   Oktató: jegybeírás osztály-bontásban + statisztika
       admin/users/          Admin: felhasználók
       admin/classes/        Admin: osztályok
       admin/subjects/       Admin: tárgyak
       admin/assignments/    Admin: tárgy-osztály-oktató hozzárendelések
+      admin/groups/         Admin: csoportok (osztály-független)
+      admin/schedule/       Admin: heti órarend + helyettesítő tanár
+      timetable/            Diák/Oktató: heti órarend nézet
+      messages/             Diák↔Oktató kétirányú üzenetváltás
+      polls/                Szavazás / kérdőív
       events/               Iskolai események
+      profile/              Saját profil
     src/app/api/            REST endpoint-ok (NextAuth + domain + mobil)
       classes /subjects /assignments /grades /events /admin/users
-      mobile/ login,me,grades,attendance
-    src/lib/                auth.ts (full), auth.config.ts (Edge), rbac, mobile-auth
-    src/components/         AppShell + shadcn UI
+      messages /polls /groups /schedule
+      mobile/ login,me,grades,attendance,push-token
+    src/app/                error.tsx, global-error.tsx, not-found.tsx
+    src/lib/                auth.ts (full), auth.config.ts (Edge), rbac, mobile-auth, messaging
+    src/components/         AppShell + DesktopSidebar + MobileNav + ThemeToggle + shadcn UI
   mobile/                   Expo + expo-router
     app/(auth)/login        Bejelentkezés
     app/(app)/dashboard     Áttekintés (jegy statisztika)
@@ -88,11 +100,14 @@ apps/
     app/(app)/profile       Profil + kilépés
     src/api/                API client + SecureStore token
     src/auth/               AuthProvider
+    src/push/               Expo push token regisztráció
 
 packages/
   db/                       Prisma schema + client + seed
-    prisma/schema.prisma    7 modell + 2 enum
-    prisma/seed.ts          4 user, 2 osztály, 4 tárgy, 6 assignment, 10 jegy
+    prisma/schema.prisma    14 modell + 4 enum
+    prisma/seed.ts          4 user, 2 osztály, 4 tárgy, 6 assignment, 10 jegy,
+                            3 esemény, 2 csoport, 6 órarend bejegyzés,
+                            1 kérdőív (4 opció), 3 demo üzenet
   shared/                   Zod schémák + grading helper
     src/domain.ts           SchoolClass, Subject, Assignment, Grade, Event Zod schémák
     src/grading.ts          calculateWeightedAverage, suggestedYearEndGrade
@@ -115,6 +130,14 @@ Mind védve (`requireAuth` / `requireRole` / `requireAnyRole` middleware-ekkel).
 | `/api/grades/[id]` | DELETE | INSTRUCTOR (saját) + ADMIN+ | Jegy törlés |
 | `/api/events` | GET / POST | auth / ADMIN+ | Esemény lista / létrehozás |
 | `/api/events/[id]` | DELETE | ADMIN+ | Esemény törlés |
+| `/api/messages` | GET / POST | auth | Beszélgetések listája / új üzenet (jogosultság ellenőrzéssel) |
+| `/api/messages/[userId]` | GET | auth | Thread + automata olvasottra állítás |
+| `/api/polls` | GET / POST | auth / ADMIN+ | Szavazás lista (célközönség-szűrve) / létrehozás |
+| `/api/polls/[id]` | POST / DELETE | auth / ADMIN+ | Szavazat leadás / szavazás törlés |
+| `/api/groups` | GET / POST | auth / ADMIN+ | Csoport lista / létrehozás |
+| `/api/groups/[id]` | PATCH / DELETE | ADMIN+ | Tagok módosítása / törlés |
+| `/api/schedule` | GET / POST | auth / ADMIN+ | Heti órarend / új óra (terem, idő) |
+| `/api/schedule/[id]` | PATCH / DELETE | ADMIN+ | Helyettesítő tanár / törlés |
 | `/api/admin/users` | GET / POST | ADMIN+ | Felhasználó lista / létrehozás |
 | `/api/admin/users/[id]` | PATCH / DELETE | ADMIN+ / SUPERADMIN promotion-höz | Role-változtatás / törlés |
 | `/api/register` | POST | public | Új diák regisztráció |
@@ -132,33 +155,46 @@ Mind védve (`requireAuth` / `requireRole` / `requireAnyRole` middleware-ekkel).
 - pnpm ≥ 9
 - Docker Desktop (a Postgres-hez)
 
-### Lépések
+### Lépések (cca. 2 perc)
 
 ```bash
-# 1. Függőségek
+# 1. Függőségek (~30 mp első alkalommal)
 pnpm install
 
-# 2. Postgres indítása Docker-rel (port 5433)
+# 2. Postgres indítása Docker-rel (port 5433-on, hogy ne ütközzön rendszerszintűvel)
 docker compose up -d
 
-# 3. Env (alapból mindenre konfigurálva)
-cp .env.example .env
+# 3. .env létrehozása az .env.example-ből
+cp .env.example .env            # Linux / macOS / Git Bash
+# Windows PowerShell:
+# Copy-Item .env.example .env
 
-# 4. Adatbázis init + seed (4 demo user, 2 osztály, 4 tárgy, 10 jegy)
+# 4. Adatbázis séma + seed (4 demo user, 2 osztály, 4 tárgy, 10 jegy,
+#    3 esemény, 2 csoport, 6 órarend bejegyzés, 1 kérdőív, 3 üzenet)
 pnpm db:push
 pnpm db:seed
 
 # 5. Web indítás
 pnpm dev
-# → http://localhost:3000
+# → http://localhost:3000  (Login: student@demo.hu / password)
 
-# 6. Mobil indítás (másik terminálban)
-cd apps/mobile
-pnpm dev
+# 6. Mobil indítás (külön terminál, opcionális)
+cd apps/mobile && pnpm dev
 # → QR kód: Expo Go app-pal beolvasod telefonon
 ```
 
-A telepítési útmutató részletesen a [DEPLOY.md](./DEPLOY.md) fájlban (Vercel + Supabase cloud setup is).
+A felhő-üzemeltetéshez (Vercel + Supabase) lásd a [DEPLOY.md](./DEPLOY.md) fájlt.
+
+### Tipikus problémák és megoldásuk
+
+| Tünet | Megoldás |
+|---|---|
+| `Port 5433 is already in use` | A `docker-compose.yml`-ben átírható a portmap (`5433:5432` → `5434:5432`), majd a `.env`-ben `localhost:5433` → `localhost:5434`. |
+| `Port 3000 is in use, using available port 3001` | Egy másik dev szerver fut. Vagy fogadd el a 3001-et, vagy `npx kill-port 3000`. |
+| Prisma `EPERM: operation not permitted` Windowson `db:push` után | A futó Next.js dev szerver fogja a Prisma engine .dll-t. `npx kill-port 3000` majd `pnpm --filter @repo/db generate`. |
+| Vercel deploy `Cannot find module .prisma/client` | A monorepo build során a Prisma client copy lépés kell — lásd `apps/web/vercel.json` és `apps/web/next.config.mjs` (`outputFileTracingIncludes`). |
+| Mobil app nem éri el a backendet | `apps/mobile/.env`-ben az `EXPO_PUBLIC_API_URL` legyen a PC LAN IP-je (pl. `http://192.168.x.x:3000`), **ne** `localhost` — a telefonon az `localhost` saját magát jelenti. Android emulátor: `http://10.0.2.2:3000`. |
+| `AUTH_SECRET` hiba | A `.env`-ben legyen min. 32 karakteres. `openssl rand -base64 32` adja a megfelelő értéket. |
 
 ## 📱 Mobil app tesztelése
 
@@ -225,12 +261,24 @@ erDiagram
   User ||--o{ Grade : "kap"
   User ||--o{ SubjectAssignment : "tanít"
   User }o--|| SchoolClass : "tartozik"
+  User }o--o{ Group : "tagja"
+  User ||--o{ Message : "küld/kap"
+  User ||--o{ Attendance : "rögzít"
+  User ||--o{ Event : "létrehoz"
+  User ||--o{ Poll : "létrehoz"
+  User ||--o{ PollResponse : "szavaz"
+  User ||--o{ PushToken : "regisztrál"
   SchoolClass ||--o{ SubjectAssignment : "kap"
   Subject ||--o{ SubjectAssignment : "része"
+  Group ||--o{ SubjectAssignment : "kap"
   SubjectAssignment ||--o{ Grade : "tartalmaz"
   SubjectAssignment ||--o{ Attendance : "tartalmaz"
-  User ||--o{ Event : "létrehoz"
+  SubjectAssignment ||--o{ ScheduleEntry : "tartalmaz"
+  Poll ||--o{ PollOption : "tartalmaz"
+  PollOption ||--o{ PollResponse : "kapja"
 ```
+
+**Modellek (14):** `User`, `SchoolClass`, `Group`, `Subject`, `SubjectAssignment`, `ScheduleEntry`, `Grade`, `Attendance`, `Event`, `Message`, `Poll`, `PollOption`, `PollResponse`, `PushToken` *(+ NextAuth: Account, Session, VerificationToken)*.
 
 ## 📄 Licenc
 

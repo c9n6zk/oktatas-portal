@@ -46,3 +46,11 @@ coverage/
 # Debug / test artifacts
 .playwright-mcp/
 *.png
+
+# Belső jegyzetek, tervek, AI-kontextus — ne legyen a repóban
+CLAUDE.md
+CHEATSHEET.md
+COMPETITION_PLAN.md
+DOMAIN_PLAN.md
+FELADATLEIRAS.md
+STATUSZ.md
