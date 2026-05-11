@@ -1,6 +1,7 @@
 import { useState } from "react";
 import {
   Alert,
+  Image,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
@@ -69,7 +70,11 @@ export default function LoginScreen() {
         <View style={styles.card}>
           <View style={styles.logoRow}>
             <View style={styles.logoBox}>
-              <Text style={styles.logoLetter}>P</Text>
+              <Image
+                source={require("../../assets/icon.png")}
+                style={styles.logoImage}
+                resizeMode="contain"
+              />
             </View>
             <Text style={styles.title}>Padtárs</Text>
           </View>
@@ -148,14 +153,15 @@ const styles = StyleSheet.create({
   card: { backgroundColor: "#1a1a1a", padding: 20, borderRadius: 16, gap: 6 },
   logoRow: { flexDirection: "row", alignItems: "center", gap: 10, marginBottom: 4 },
   logoBox: {
-    width: 40,
-    height: 40,
-    borderRadius: 10,
-    backgroundColor: "#8b5cf6",
+    width: 56,
+    height: 56,
+    borderRadius: 14,
+    backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+    overflow: "hidden",
   },
-  logoLetter: { color: "#fff", fontSize: 22, fontWeight: "800" },
+  logoImage: { width: 56, height: 56, transform: [{ scale: 1.7 }] },
   title: { fontSize: 26, fontWeight: "700", color: "#fff" },
   subtitle: { fontSize: 13, color: "#888", marginBottom: 12 },
   sectionLabel: {

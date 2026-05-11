@@ -49,7 +49,7 @@ export function AppShell({ user, children }: AppShellProps) {
   return (
     <div className="min-h-screen flex flex-col">
       <header className="border-b sticky top-0 bg-background/95 backdrop-blur z-10">
-        <div className="container flex h-16 items-center justify-between gap-4">
+        <div className="container flex h-24 items-center justify-between gap-4">
           <div className="flex items-center gap-6">
             <Link href="/dashboard" className="whitespace-nowrap">
               <Logo />
