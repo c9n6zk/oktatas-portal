@@ -105,14 +105,9 @@ export default async function ProfilePage() {
         </Card>
       )}
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Biztonság</CardTitle>
-          <CardDescription>
-            Jelszó hash-elve bcrypt-tel tárolódik. Mobil belépés JWT-vel (Bearer token).
-          </CardDescription>
-        </CardHeader>
-      </Card>
+      <p className="text-xs text-muted-foreground pt-2 border-t">
+        Biztonság: jelszó hash-elve bcrypt-tel tárolódik. Mobil belépés JWT-vel (Bearer token).
+      </p>
     </div>
   );
 }

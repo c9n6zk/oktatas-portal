@@ -1,0 +1,199 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e163]:
+    - banner [ref=e164]:
+      - generic [ref=e165]:
+        - generic [ref=e166]:
+          - link "Padtárs logó Padtárs" [ref=e167] [cursor=pointer]:
+            - /url: /dashboard
+            - generic [ref=e168]:
+              - img "Padtárs logó" [ref=e170]
+              - generic [ref=e171]: Padtárs
+          - navigation [ref=e172]:
+            - link "Áttekintés" [ref=e173] [cursor=pointer]:
+              - /url: /dashboard
+            - link "Saját jegyek" [ref=e174] [cursor=pointer]:
+              - /url: /student/grades
+            - link "Események" [ref=e175] [cursor=pointer]:
+              - /url: /events
+            - link "Profil" [ref=e176] [cursor=pointer]:
+              - /url: /profile
+        - generic [ref=e177]:
+          - generic [ref=e178]: Diák
+          - generic [ref=e179]: student@demo.hu
+          - button "Téma váltás" [ref=e180] [cursor=pointer]:
+            - img [ref=e181]
+            - img
+          - button "Kilépés" [ref=e188] [cursor=pointer]:
+            - img [ref=e189]
+    - main [ref=e192]:
+      - generic [ref=e193]:
+        - generic [ref=e194]:
+          - heading "Saját jegyek" [level=1] [ref=e195]
+          - paragraph [ref=e196]: Diák Béla — jegyek tantárgyak szerint csoportosítva, súlyozott átlaggal
+        - generic [ref=e197]:
+          - generic [ref=e198]:
+            - generic [ref=e200]:
+              - generic [ref=e201]:
+                - heading "Irodalom" [level=3] [ref=e202]
+                - paragraph [ref=e203]: IRO · 2024/A · Oktató Géza
+              - generic [ref=e204]:
+                - generic [ref=e205]: "4.50"
+                - generic [ref=e206]: súlyozott átlag
+                - generic [ref=e207]: "javasolt: 5"
+            - table [ref=e210]:
+              - rowgroup [ref=e211]:
+                - row "Típus Jegy Súly Megjegyzés Dátum" [ref=e212]:
+                  - columnheader "Típus" [ref=e213]
+                  - columnheader "Jegy" [ref=e214]
+                  - columnheader "Súly" [ref=e215]
+                  - columnheader "Megjegyzés" [ref=e216]
+                  - columnheader "Dátum" [ref=e217]
+              - rowgroup [ref=e218]:
+                - row "Témazáró 5 2× alma 2026. 05. 11." [ref=e219]:
+                  - cell "Témazáró" [ref=e220]:
+                    - generic [ref=e221]: Témazáró
+                  - cell "5" [ref=e222]:
+                    - generic [ref=e223]: "5"
+                  - cell "2×" [ref=e224]
+                  - cell "alma" [ref=e225]
+                  - cell "2026. 05. 11." [ref=e226]
+                - row "Felelés 5 1× Petőfi felelés 2026. 05. 11." [ref=e227]:
+                  - cell "Felelés" [ref=e228]:
+                    - generic [ref=e229]: Felelés
+                  - cell "5" [ref=e230]:
+                    - generic [ref=e231]: "5"
+                  - cell "1×" [ref=e232]
+                  - cell "Petőfi felelés" [ref=e233]
+                  - cell "2026. 05. 11." [ref=e234]
+                - row "Témazáró 4 3× — 2026. 05. 11." [ref=e235]:
+                  - cell "Témazáró" [ref=e236]:
+                    - generic [ref=e237]: Témazáró
+                  - cell "4" [ref=e238]:
+                    - generic [ref=e239]: "4"
+                  - cell "3×" [ref=e240]
+                  - cell "—" [ref=e241]
+                  - cell "2026. 05. 11." [ref=e242]
+          - generic [ref=e243]:
+            - generic [ref=e245]:
+              - generic [ref=e246]:
+                - heading "Matematika" [level=3] [ref=e247]
+                - paragraph [ref=e248]: MAT · 2024/A · Oktató Géza
+              - generic [ref=e249]:
+                - generic [ref=e250]: "4.33"
+                - generic [ref=e251]: súlyozott átlag
+                - generic [ref=e252]: "javasolt: 4"
+            - table [ref=e255]:
+              - rowgroup [ref=e256]:
+                - row "Típus Jegy Súly Megjegyzés Dátum" [ref=e257]:
+                  - columnheader "Típus" [ref=e258]
+                  - columnheader "Jegy" [ref=e259]
+                  - columnheader "Súly" [ref=e260]
+                  - columnheader "Megjegyzés" [ref=e261]
+                  - columnheader "Dátum" [ref=e262]
+              - rowgroup [ref=e263]:
+                - row "Felelés 3 1× — 2026. 05. 11." [ref=e264]:
+                  - cell "Felelés" [ref=e265]:
+                    - generic [ref=e266]: Felelés
+                  - cell "3" [ref=e267]:
+                    - generic [ref=e268]: "3"
+                  - cell "1×" [ref=e269]
+                  - cell "—" [ref=e270]
+                  - cell "2026. 05. 11." [ref=e271]
+                - row "Témazáró 5 3× Egyenletek témazáró 2026. 05. 11." [ref=e272]:
+                  - cell "Témazáró" [ref=e273]:
+                    - generic [ref=e274]: Témazáró
+                  - cell "5" [ref=e275]:
+                    - generic [ref=e276]: "5"
+                  - cell "3×" [ref=e277]
+                  - cell "Egyenletek témazáró" [ref=e278]
+                  - cell "2026. 05. 11." [ref=e279]
+                - row "Féléves 4 1× — 2026. 05. 11." [ref=e280]:
+                  - cell "Féléves" [ref=e281]:
+                    - generic [ref=e282]: Féléves
+                  - cell "4" [ref=e283]:
+                    - generic [ref=e284]: "4"
+                  - cell "1×" [ref=e285]
+                  - cell "—" [ref=e286]
+                  - cell "2026. 05. 11." [ref=e287]
+                - row "Felelés 4 1× Aktív óra 2026. 05. 11." [ref=e288]:
+                  - cell "Felelés" [ref=e289]:
+                    - generic [ref=e290]: Felelés
+                  - cell "4" [ref=e291]:
+                    - generic [ref=e292]: "4"
+                  - cell "1×" [ref=e293]
+                  - cell "Aktív óra" [ref=e294]
+                  - cell "2026. 05. 11." [ref=e295]
+          - generic [ref=e296]:
+            - generic [ref=e298]:
+              - generic [ref=e299]:
+                - heading "Informatika" [level=3] [ref=e300]
+                - paragraph [ref=e301]: INF · 2024/A · Oktató Géza
+              - generic [ref=e302]:
+                - generic [ref=e303]: "5.00"
+                - generic [ref=e304]: súlyozott átlag
+                - generic [ref=e305]: "javasolt: 5"
+            - table [ref=e308]:
+              - rowgroup [ref=e309]:
+                - row "Típus Jegy Súly Megjegyzés Dátum" [ref=e310]:
+                  - columnheader "Típus" [ref=e311]
+                  - columnheader "Jegy" [ref=e312]
+                  - columnheader "Súly" [ref=e313]
+                  - columnheader "Megjegyzés" [ref=e314]
+                  - columnheader "Dátum" [ref=e315]
+              - rowgroup [ref=e316]:
+                - row "Házi 5 1× Python házi 2026. 05. 11." [ref=e317]:
+                  - cell "Házi" [ref=e318]:
+                    - generic [ref=e319]: Házi
+                  - cell "5" [ref=e320]:
+                    - generic [ref=e321]: "5"
+                  - cell "1×" [ref=e322]
+                  - cell "Python házi" [ref=e323]
+                  - cell "2026. 05. 11." [ref=e324]
+                - row "Témazáró 5 3× — 2026. 05. 11." [ref=e325]:
+                  - cell "Témazáró" [ref=e326]:
+                    - generic [ref=e327]: Témazáró
+                  - cell "5" [ref=e328]:
+                    - generic [ref=e329]: "5"
+                  - cell "3×" [ref=e330]
+                  - cell "—" [ref=e331]
+                  - cell "2026. 05. 11." [ref=e332]
+          - generic [ref=e333]:
+            - generic [ref=e335]:
+              - generic [ref=e336]:
+                - heading "Biológia" [level=3] [ref=e337]
+                - paragraph [ref=e338]: BIO · 2024/A · Oktató Géza
+              - generic [ref=e339]:
+                - generic [ref=e340]: "3.50"
+                - generic [ref=e341]: súlyozott átlag
+                - generic [ref=e342]: "javasolt: 4"
+            - table [ref=e345]:
+              - rowgroup [ref=e346]:
+                - row "Típus Jegy Súly Megjegyzés Dátum" [ref=e347]:
+                  - columnheader "Típus" [ref=e348]
+                  - columnheader "Jegy" [ref=e349]
+                  - columnheader "Súly" [ref=e350]
+                  - columnheader "Megjegyzés" [ref=e351]
+                  - columnheader "Dátum" [ref=e352]
+              - rowgroup [ref=e353]:
+                - row "Felelés 3 1× — 2026. 05. 11." [ref=e354]:
+                  - cell "Felelés" [ref=e355]:
+                    - generic [ref=e356]: Felelés
+                  - cell "3" [ref=e357]:
+                    - generic [ref=e358]: "3"
+                  - cell "1×" [ref=e359]
+                  - cell "—" [ref=e360]
+                  - cell "2026. 05. 11." [ref=e361]
+                - row "Felelés 4 1× Sejt felelés 2026. 05. 11." [ref=e362]:
+                  - cell "Felelés" [ref=e363]:
+                    - generic [ref=e364]: Felelés
+                  - cell "4" [ref=e365]:
+                    - generic [ref=e366]: "4"
+                  - cell "1×" [ref=e367]
+                  - cell "Sejt felelés" [ref=e368]
+                  - cell "2026. 05. 11." [ref=e369]
+    - contentinfo [ref=e370]:
+      - generic [ref=e371]: Padtárs · Modern Fullstack Verseny 2026
+  - region "Notifications alt+T"
+  - button "Open Next.js Dev Tools" [ref=e53] [cursor=pointer]:
+    - img [ref=e54]
+  - alert [ref=e57]

@@ -1,0 +1,31 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e444]:
+    - banner [ref=e445]:
+      - generic [ref=e446]:
+        - generic [ref=e447]:
+          - img "Padtárs logó" [ref=e449]
+          - generic [ref=e450]: Padtárs
+        - generic [ref=e451]:
+          - button "Téma váltás" [ref=e452] [cursor=pointer]:
+            - img [ref=e453]
+            - img
+          - link "Belépés" [ref=e459] [cursor=pointer]:
+            - /url: /login
+          - link "Regisztráció" [ref=e460] [cursor=pointer]:
+            - /url: /register
+    - main [ref=e461]:
+      - generic [ref=e462]:
+        - img "Padtárs logó" [ref=e466]
+        - heading "Padtárs" [level=1] [ref=e467]
+        - paragraph [ref=e468]: A digitális iskolatársad — modern oktatásszervezési portál diákok, oktatók és adminisztrátorok számára.
+        - generic [ref=e469]:
+          - link "Belépés" [ref=e470] [cursor=pointer]:
+            - /url: /login
+          - link "Új fiók" [ref=e471] [cursor=pointer]:
+            - /url: /register
+    - contentinfo [ref=e472]:
+      - generic [ref=e473]: Modern Fullstack Verseny 2026 · Built with Next.js, Prisma, NextAuth, Expo
+  - region "Notifications alt+T"
+  - button "Open Next.js Dev Tools" [ref=e53] [cursor=pointer]:
+    - img [ref=e54]
+  - alert [ref=e57]

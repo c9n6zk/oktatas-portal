@@ -1,0 +1,63 @@
+- generic [ref=e1]:
+  - generic [ref=e163]:
+    - banner [ref=e164]:
+      - generic [ref=e165]:
+        - generic [ref=e166]:
+          - link "Padtárs logó Padtárs" [ref=e167] [cursor=pointer]:
+            - /url: /dashboard
+            - generic [ref=e168]:
+              - img "Padtárs logó" [ref=e170]
+              - generic [ref=e171]: Padtárs
+          - navigation [ref=e172]:
+            - link "Áttekintés" [ref=e173] [cursor=pointer]:
+              - /url: /dashboard
+            - link "Saját jegyek" [ref=e174] [cursor=pointer]:
+              - /url: /student/grades
+            - link "Események" [active] [ref=e175] [cursor=pointer]:
+              - /url: /events
+            - link "Profil" [ref=e176] [cursor=pointer]:
+              - /url: /profile
+        - generic [ref=e177]:
+          - generic [ref=e178]: Diák
+          - generic [ref=e179]: student@demo.hu
+          - button "Téma váltás" [ref=e180] [cursor=pointer]:
+            - img [ref=e181]
+            - img
+          - button "Kilépés" [ref=e188] [cursor=pointer]:
+            - img [ref=e189]
+    - main [ref=e192]:
+      - generic [ref=e372]:
+        - generic [ref=e373]:
+          - heading "Iskolai események" [level=1] [ref=e374]
+          - paragraph [ref=e375]: Az iskola közelgő eseményei. Az adminok hoznak létre újat.
+        - generic [ref=e376]:
+          - generic [ref=e377]:
+            - generic [ref=e380]:
+              - heading "Szalagavató 2025" [level=3] [ref=e381]
+              - paragraph [ref=e382]: 2026. máj. 18. 18:34 – 21:34
+            - generic [ref=e383]:
+              - generic [ref=e384]: 📍 Sportcsarnok
+              - generic [ref=e385]: A végzős évfolyam szalagavató ünnepélye.
+              - generic [ref=e386]: "Létrehozta: Admin Anna"
+          - generic [ref=e387]:
+            - generic [ref=e390]:
+              - heading "Iskolai sportnap" [level=3] [ref=e391]
+              - paragraph [ref=e392]: 2026. máj. 25. 18:34 – 0:34
+            - generic [ref=e393]:
+              - generic [ref=e394]: 📍 Tornapálya
+              - generic [ref=e395]: Évszakos sportnap minden évfolyamnak. Atlétika, labdajátékok.
+              - generic [ref=e396]: "Létrehozta: Admin Anna"
+          - generic [ref=e397]:
+            - generic [ref=e400]:
+              - heading "Szülői értekezlet" [level=3] [ref=e401]
+              - paragraph [ref=e402]: 2026. jún. 2. 12:34 – 14:34
+            - generic [ref=e403]:
+              - generic [ref=e404]: 📍 Aula
+              - generic [ref=e405]: Második félév zárása, jegyek megbeszélése.
+              - generic [ref=e406]: "Létrehozta: Szuper Admin"
+    - contentinfo [ref=e370]:
+      - generic [ref=e371]: Padtárs · Modern Fullstack Verseny 2026
+  - region "Notifications alt+T"
+  - button "Open Next.js Dev Tools" [ref=e53] [cursor=pointer]:
+    - img [ref=e54]
+  - alert [ref=e57]

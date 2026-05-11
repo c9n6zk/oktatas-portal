@@ -1,0 +1,113 @@
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]:
+          - link "Padtárs logó Padtárs" [ref=e6] [cursor=pointer]:
+            - /url: /dashboard
+            - generic [ref=e7]:
+              - img "Padtárs logó" [ref=e9]
+              - generic [ref=e10]: Padtárs
+          - navigation [ref=e11]:
+            - link "Áttekintés" [ref=e12] [cursor=pointer]:
+              - /url: /dashboard
+            - link "Jegybeírás" [ref=e13] [cursor=pointer]:
+              - /url: /instructor/grading
+            - link "Felhasználók" [ref=e14] [cursor=pointer]:
+              - /url: /admin/users
+            - link "Osztályok" [ref=e15] [cursor=pointer]:
+              - /url: /admin/classes
+            - link "Tárgyak" [ref=e16] [cursor=pointer]:
+              - /url: /admin/subjects
+            - link "Hozzárendelések" [ref=e17] [cursor=pointer]:
+              - /url: /admin/assignments
+            - link "Események" [ref=e18] [cursor=pointer]:
+              - /url: /events
+            - link "Profil" [ref=e19] [cursor=pointer]:
+              - /url: /profile
+        - generic [ref=e20]:
+          - generic [ref=e21]: Admin
+          - generic [ref=e22]: admin@demo.hu
+          - button "Téma váltás" [ref=e23] [cursor=pointer]:
+            - img [ref=e24]
+            - img
+          - button "Kilépés" [ref=e31] [cursor=pointer]:
+            - img [ref=e32]
+    - main [ref=e35]:
+      - generic [ref=e36]:
+        - generic [ref=e37]:
+          - heading "Tárgyak" [level=1] [ref=e38]
+          - paragraph [ref=e39]: Tárgy létrehozás (kód, név, leírás, könyv, leckék). Az osztályhoz rendelés külön oldalon.
+        - generic [ref=e40]:
+          - generic [ref=e41]:
+            - heading "Tantárgyak (5)" [level=3] [ref=e138]
+            - paragraph [ref=e43]: A leckék vesszővel elválasztott listával adhatók meg.
+          - generic [ref=e45]:
+            - button "Új tárgy" [active] [ref=e47] [cursor=pointer]:
+              - img [ref=e48]
+              - text: Új tárgy
+            - table [ref=e50]:
+              - rowgroup [ref=e51]:
+                - row "Kód Név Tankönyv Leckék Hozzárendelés Művelet" [ref=e52]:
+                  - columnheader "Kód" [ref=e53]
+                  - columnheader "Név" [ref=e54]
+                  - columnheader "Tankönyv" [ref=e55]
+                  - columnheader "Leckék" [ref=e56]
+                  - columnheader "Hozzárendelés" [ref=e57]
+                  - columnheader "Művelet" [ref=e58]
+              - rowgroup [ref=e59]:
+                - row "BIO Biológia Biológia 10. 4 db 1 Törlés" [ref=e60]:
+                  - cell "BIO" [ref=e61]
+                  - cell "Biológia" [ref=e62]
+                  - cell "Biológia 10." [ref=e63]
+                  - cell "4 db" [ref=e64]
+                  - cell "1" [ref=e65]
+                  - cell "Törlés" [ref=e66]:
+                    - button "Törlés" [ref=e67] [cursor=pointer]:
+                      - img [ref=e68]
+                - row "INF Informatika Informatika 10. 4 db 2 Törlés" [ref=e71]:
+                  - cell "INF" [ref=e72]
+                  - cell "Informatika" [ref=e73]
+                  - cell "Informatika 10." [ref=e74]
+                  - cell "4 db" [ref=e75]
+                  - cell "2" [ref=e76]
+                  - cell "Törlés" [ref=e77]:
+                    - button "Törlés" [ref=e78] [cursor=pointer]:
+                      - img [ref=e79]
+                - row "IRO Irodalom Irodalmi szöveggyűjtemény 10. 4 db 1 Törlés" [ref=e82]:
+                  - cell "IRO" [ref=e83]
+                  - cell "Irodalom" [ref=e84]
+                  - cell "Irodalmi szöveggyűjtemény 10." [ref=e85]
+                  - cell "4 db" [ref=e86]
+                  - cell "1" [ref=e87]
+                  - cell "Törlés" [ref=e88]:
+                    - button "Törlés" [ref=e89] [cursor=pointer]:
+                      - img [ref=e90]
+                - row "MAT Matematika Matematika 10. — Nemzeti Tankönyvkiadó 4 db 2 Törlés" [ref=e93]:
+                  - cell "MAT" [ref=e94]
+                  - cell "Matematika" [ref=e95]
+                  - cell "Matematika 10. — Nemzeti Tankönyvkiadó" [ref=e96]
+                  - cell "4 db" [ref=e97]
+                  - cell "2" [ref=e98]
+                  - cell "Törlés" [ref=e99]:
+                    - button "Törlés" [ref=e100] [cursor=pointer]:
+                      - img [ref=e101]
+                - row "TST Teszt tárgy — 2 db 0 Törlés" [ref=e139]:
+                  - cell "TST" [ref=e140]
+                  - cell "Teszt tárgy" [ref=e141]
+                  - cell "—" [ref=e142]
+                  - cell "2 db" [ref=e143]
+                  - cell "0" [ref=e144]
+                  - cell "Törlés" [ref=e145]:
+                    - button "Törlés" [ref=e146] [cursor=pointer]:
+                      - img [ref=e147]
+    - contentinfo [ref=e104]:
+      - generic [ref=e105]: Padtárs · Modern Fullstack Verseny 2026
+  - region "Notifications alt+T":
+    - list:
+      - listitem [ref=e150]:
+        - img [ref=e152]
+        - generic [ref=e155]: Tárgy létrehozva
+  - button "Open Next.js Dev Tools" [ref=e111] [cursor=pointer]:
+    - img [ref=e112]
+  - alert [ref=e156]

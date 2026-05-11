@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { requireAnyRole } from "@/lib/rbac";
 import { prisma } from "@repo/db";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { GradingPanel } from "./GradingPanel";
 
@@ -59,27 +59,20 @@ export default async function AssignmentDetailPage({
       </div>
 
       {assignment.subject.description && (
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-lg">A tárgy</CardTitle>
-            <CardDescription>{assignment.subject.description}</CardDescription>
-          </CardHeader>
-          {(assignment.subject.bookTitle || assignment.subject.lessons.length > 0) && (
-            <CardContent className="text-sm space-y-2">
-              {assignment.subject.bookTitle && (
-                <div><strong>Könyv:</strong> {assignment.subject.bookTitle}</div>
-              )}
-              {assignment.subject.lessons.length > 0 && (
-                <div>
-                  <strong>Leckék:</strong>{" "}
-                  <span className="text-muted-foreground">
-                    {assignment.subject.lessons.join(" · ")}
-                  </span>
-                </div>
-              )}
-            </CardContent>
+        <div className="space-y-1 text-sm">
+          <p className="text-muted-foreground">{assignment.subject.description}</p>
+          {assignment.subject.bookTitle && (
+            <div><strong>Könyv:</strong> {assignment.subject.bookTitle}</div>
           )}
-        </Card>
+          {assignment.subject.lessons.length > 0 && (
+            <div>
+              <strong>Leckék:</strong>{" "}
+              <span className="text-muted-foreground">
+                {assignment.subject.lessons.join(" · ")}
+              </span>
+            </div>
+          )}
+        </div>
       )}
 
       <GradingPanel

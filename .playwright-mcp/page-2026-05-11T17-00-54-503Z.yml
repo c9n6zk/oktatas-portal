@@ -1,0 +1,111 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e183]:
+    - banner [ref=e184]:
+      - generic [ref=e185]:
+        - generic [ref=e186]:
+          - link "Padtárs logó Padtárs" [ref=e187] [cursor=pointer]:
+            - /url: /dashboard
+            - generic [ref=e188]:
+              - img "Padtárs logó" [ref=e190]
+              - generic [ref=e191]: Padtárs
+          - navigation [ref=e192]:
+            - link "Áttekintés" [ref=e193] [cursor=pointer]:
+              - /url: /dashboard
+            - link "Jegybeírás" [ref=e194] [cursor=pointer]:
+              - /url: /instructor/grading
+            - link "Események" [ref=e195] [cursor=pointer]:
+              - /url: /events
+            - link "Profil" [ref=e196] [cursor=pointer]:
+              - /url: /profile
+        - generic [ref=e197]:
+          - generic [ref=e198]: Oktató
+          - generic [ref=e199]: instructor@demo.hu
+          - button "Téma váltás" [ref=e200] [cursor=pointer]:
+            - img [ref=e201]
+            - img
+          - button "Kilépés" [ref=e208] [cursor=pointer]:
+            - img [ref=e209]
+    - main [ref=e212]:
+      - generic [ref=e213]:
+        - generic [ref=e214]:
+          - heading "Jegybeírás" [level=1] [ref=e215]
+          - paragraph [ref=e216]: A te tárgyhozzárendeléseid
+        - generic [ref=e217]:
+          - generic [ref=e218]:
+            - generic [ref=e220]:
+              - generic [ref=e221]:
+                - heading "Matematika" [level=3] [ref=e222]
+                - paragraph [ref=e223]: MAT · 2025/2026 tanév
+              - generic [ref=e224]: 2024/A
+            - generic [ref=e225]:
+              - generic [ref=e226]:
+                - generic [ref=e227]: "Oktató: Oktató Géza"
+                - generic [ref=e228]: 1 diák · 4 jegy beírva
+              - link "Jegyek kezelése →" [ref=e229] [cursor=pointer]:
+                - /url: /instructor/grading/cmp1el6nq000cvmlgryah3v78
+          - generic [ref=e230]:
+            - generic [ref=e232]:
+              - generic [ref=e233]:
+                - heading "Irodalom" [level=3] [ref=e234]
+                - paragraph [ref=e235]: IRO · 2025/2026 tanév
+              - generic [ref=e236]: 2024/A
+            - generic [ref=e237]:
+              - generic [ref=e238]:
+                - generic [ref=e239]: "Oktató: Oktató Géza"
+                - generic [ref=e240]: 1 diák · 3 jegy beírva
+              - link "Jegyek kezelése →" [ref=e241] [cursor=pointer]:
+                - /url: /instructor/grading/cmp1el6nu000evmlgsyjs346g
+          - generic [ref=e242]:
+            - generic [ref=e244]:
+              - generic [ref=e245]:
+                - heading "Biológia" [level=3] [ref=e246]
+                - paragraph [ref=e247]: BIO · 2025/2026 tanév
+              - generic [ref=e248]: 2024/A
+            - generic [ref=e249]:
+              - generic [ref=e250]:
+                - generic [ref=e251]: "Oktató: Oktató Géza"
+                - generic [ref=e252]: 1 diák · 2 jegy beírva
+              - link "Jegyek kezelése →" [ref=e253] [cursor=pointer]:
+                - /url: /instructor/grading/cmp1el6o0000ivmlg2d3puum5
+          - generic [ref=e254]:
+            - generic [ref=e256]:
+              - generic [ref=e257]:
+                - heading "Informatika" [level=3] [ref=e258]
+                - paragraph [ref=e259]: INF · 2025/2026 tanév
+              - generic [ref=e260]: 2024/A
+            - generic [ref=e261]:
+              - generic [ref=e262]:
+                - generic [ref=e263]: "Oktató: Oktató Géza"
+                - generic [ref=e264]: 1 diák · 2 jegy beírva
+              - link "Jegyek kezelése →" [ref=e265] [cursor=pointer]:
+                - /url: /instructor/grading/cmp1el6nx000gvmlgywhpslo1
+          - generic [ref=e266]:
+            - generic [ref=e268]:
+              - generic [ref=e269]:
+                - heading "Matematika" [level=3] [ref=e270]
+                - paragraph [ref=e271]: MAT · 2025/2026 tanév
+              - generic [ref=e272]: 2024/B
+            - generic [ref=e273]:
+              - generic [ref=e274]:
+                - generic [ref=e275]: "Oktató: Oktató Géza"
+                - generic [ref=e276]: 0 diák · 0 jegy beírva
+              - link "Jegyek kezelése →" [ref=e277] [cursor=pointer]:
+                - /url: /instructor/grading/cmp1el6o3000kvmlgk9lhalf9
+          - generic [ref=e278]:
+            - generic [ref=e280]:
+              - generic [ref=e281]:
+                - heading "Informatika" [level=3] [ref=e282]
+                - paragraph [ref=e283]: INF · 2025/2026 tanév
+              - generic [ref=e284]: 2024/B
+            - generic [ref=e285]:
+              - generic [ref=e286]:
+                - generic [ref=e287]: "Oktató: Oktató Géza"
+                - generic [ref=e288]: 0 diák · 0 jegy beírva
+              - link "Jegyek kezelése →" [ref=e289] [cursor=pointer]:
+                - /url: /instructor/grading/cmp1el6o6000mvmlgbpxmj8r4
+    - contentinfo [ref=e290]:
+      - generic [ref=e291]: Padtárs · Modern Fullstack Verseny 2026
+  - region "Notifications alt+T"
+  - button "Open Next.js Dev Tools" [ref=e179] [cursor=pointer]:
+    - img [ref=e180]
+  - alert [ref=e48]

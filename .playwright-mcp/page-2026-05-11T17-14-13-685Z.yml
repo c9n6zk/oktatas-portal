@@ -1,0 +1,74 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]:
+          - link "Padtárs logó Padtárs" [ref=e6] [cursor=pointer]:
+            - /url: /dashboard
+            - generic [ref=e7]:
+              - img "Padtárs logó" [ref=e9]
+              - generic [ref=e10]: Padtárs
+          - navigation [ref=e11]:
+            - link "Áttekintés" [ref=e12] [cursor=pointer]:
+              - /url: /dashboard
+            - link "Jegybeírás" [ref=e13] [cursor=pointer]:
+              - /url: /instructor/grading
+            - link "Felhasználók" [ref=e14] [cursor=pointer]:
+              - /url: /admin/users
+            - link "Osztályok" [ref=e15] [cursor=pointer]:
+              - /url: /admin/classes
+            - link "Tárgyak" [ref=e16] [cursor=pointer]:
+              - /url: /admin/subjects
+            - link "Hozzárendelések" [ref=e17] [cursor=pointer]:
+              - /url: /admin/assignments
+            - link "Események" [ref=e18] [cursor=pointer]:
+              - /url: /events
+            - link "Profil" [ref=e19] [cursor=pointer]:
+              - /url: /profile
+        - generic [ref=e20]:
+          - generic [ref=e21]: Admin
+          - generic [ref=e22]: admin@demo.hu
+          - button "Téma váltás" [ref=e23] [cursor=pointer]:
+            - img [ref=e24]
+            - img
+          - button "Kilépés" [ref=e31] [cursor=pointer]:
+            - img [ref=e32]
+    - main [ref=e35]:
+      - generic [ref=e36]:
+        - generic [ref=e37]:
+          - heading "Üdv, Admin Anna!" [level=1] [ref=e38]
+          - paragraph [ref=e39]: Adminisztrátor áttekintés
+        - generic [ref=e40]:
+          - generic [ref=e41]:
+            - generic [ref=e42]: Felhasználók
+            - generic [ref=e43]: "5"
+            - generic [ref=e44]:
+              - generic [ref=e45]: 2 diák · 1 oktató
+              - generic [ref=e46]: 2 admin / szuperadmin
+          - generic [ref=e47]:
+            - generic [ref=e48]: Osztályok
+            - generic [ref=e49]: "2"
+          - generic [ref=e50]:
+            - generic [ref=e51]: Tantárgyak
+            - generic [ref=e52]: "5"
+          - generic [ref=e53]:
+            - generic [ref=e54]: Hozzárendelések
+            - generic [ref=e55]: "7"
+          - generic [ref=e56]:
+            - generic [ref=e57]: Beírt jegyek
+            - generic [ref=e58]: "11"
+          - generic [ref=e59]:
+            - generic [ref=e60]: Iskolai események
+            - generic [ref=e61]: "3"
+        - generic [ref=e62]:
+          - link "Felhasználók →" [ref=e63] [cursor=pointer]:
+            - /url: /admin/users
+          - link "Osztályok →" [ref=e64] [cursor=pointer]:
+            - /url: /admin/classes
+          - link "Tantárgyak →" [ref=e65] [cursor=pointer]:
+            - /url: /admin/subjects
+          - link "Hozzárendelések →" [ref=e66] [cursor=pointer]:
+            - /url: /admin/assignments
+    - contentinfo [ref=e67]:
+      - generic [ref=e68]: Padtárs · Modern Fullstack Verseny 2026
+  - region "Notifications alt+T"

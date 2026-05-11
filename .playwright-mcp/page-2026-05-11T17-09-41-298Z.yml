@@ -1,0 +1,126 @@
+- generic [ref=e1]:
+  - generic [ref=e131]:
+    - banner [ref=e132]:
+      - generic [ref=e133]:
+        - generic [ref=e134]:
+          - link "Padtárs logó Padtárs" [ref=e135] [cursor=pointer]:
+            - /url: /dashboard
+            - generic [ref=e136]:
+              - img "Padtárs logó" [ref=e138]
+              - generic [ref=e139]: Padtárs
+          - navigation [ref=e140]:
+            - link "Áttekintés" [ref=e141] [cursor=pointer]:
+              - /url: /dashboard
+            - link "Jegybeírás" [ref=e142] [cursor=pointer]:
+              - /url: /instructor/grading
+            - link "Felhasználók" [ref=e143] [cursor=pointer]:
+              - /url: /admin/users
+            - link "Osztályok" [ref=e144] [cursor=pointer]:
+              - /url: /admin/classes
+            - link "Tárgyak" [ref=e145] [cursor=pointer]:
+              - /url: /admin/subjects
+            - link "Hozzárendelések" [ref=e146] [cursor=pointer]:
+              - /url: /admin/assignments
+            - link "Események" [ref=e147] [cursor=pointer]:
+              - /url: /events
+            - link "Profil" [ref=e148] [cursor=pointer]:
+              - /url: /profile
+        - generic [ref=e149]:
+          - generic [ref=e150]: Admin
+          - generic [ref=e151]: admin@demo.hu
+          - button "Téma váltás" [ref=e152] [cursor=pointer]:
+            - img [ref=e153]
+            - img
+          - button "Kilépés" [ref=e160] [cursor=pointer]:
+            - img [ref=e161]
+    - main [ref=e164]:
+      - generic [ref=e165]:
+        - generic [ref=e166]:
+          - heading "Felhasználók" [level=1] [ref=e167]
+          - paragraph [ref=e168]: 5 felhasználó. Új létrehozás, role-változtatás, törlés.
+        - generic [ref=e169]:
+          - generic [ref=e170]:
+            - heading "Összes felhasználó" [level=3] [ref=e171]
+            - paragraph [ref=e172]: ADMIN nem promotolhat ADMIN/SUPERADMIN szerepre; csak SUPERADMIN tudja.
+          - generic [ref=e174]:
+            - button "Új felhasználó" [active] [ref=e176] [cursor=pointer]:
+              - img [ref=e177]
+              - text: Új felhasználó
+            - table [ref=e179]:
+              - rowgroup [ref=e180]:
+                - row "Név Email Szerepkör Osztály Műveletek" [ref=e181]:
+                  - columnheader "Név" [ref=e182]
+                  - columnheader "Email" [ref=e183]
+                  - columnheader "Szerepkör" [ref=e184]
+                  - columnheader "Osztály" [ref=e185]
+                  - columnheader "Műveletek" [ref=e186]
+              - rowgroup [ref=e187]:
+                - row "Szuper Admin superadmin@demo.hu Szuper-admin — Törlés" [ref=e188]:
+                  - cell "Szuper Admin" [ref=e189]
+                  - cell "superadmin@demo.hu" [ref=e190]
+                  - cell "Szuper-admin" [ref=e191]:
+                    - combobox [ref=e192]:
+                      - option "Oktató"
+                      - option "Diák"
+                      - option "Szuper-admin" [selected]
+                  - cell "—" [ref=e193]
+                  - cell "Törlés" [ref=e194]:
+                    - button "Törlés" [ref=e195] [cursor=pointer]:
+                      - img [ref=e196]
+                - row "Admin Anna admin@demo.hu Admin — Törlés" [ref=e199]:
+                  - cell "Admin Anna" [ref=e200]
+                  - cell "admin@demo.hu" [ref=e201]
+                  - cell "Admin" [ref=e202]:
+                    - combobox [disabled] [ref=e203]:
+                      - option "Oktató"
+                      - option "Diák"
+                      - option "Admin" [selected]
+                  - cell "—" [ref=e204]
+                  - cell "Törlés" [ref=e205]:
+                    - button "Törlés" [disabled]:
+                      - img
+                - row "Oktató Géza instructor@demo.hu Oktató — Törlés" [ref=e206]:
+                  - cell "Oktató Géza" [ref=e207]
+                  - cell "instructor@demo.hu" [ref=e208]
+                  - cell "Oktató" [ref=e209]:
+                    - combobox [ref=e210]:
+                      - option "Oktató" [selected]
+                      - option "Diák"
+                  - cell "—" [ref=e211]
+                  - cell "Törlés" [ref=e212]:
+                    - button "Törlés" [ref=e213] [cursor=pointer]:
+                      - img [ref=e214]
+                - row "Diák Béla student@demo.hu Diák 2024/A Törlés" [ref=e217]:
+                  - cell "Diák Béla" [ref=e218]
+                  - cell "student@demo.hu" [ref=e219]
+                  - cell "Diák" [ref=e220]:
+                    - combobox [ref=e221]:
+                      - option "Oktató"
+                      - option "Diák" [selected]
+                  - cell "2024/A" [ref=e222]:
+                    - generic [ref=e223]: 2024/A
+                  - cell "Törlés" [ref=e224]:
+                    - button "Törlés" [ref=e225] [cursor=pointer]:
+                      - img [ref=e226]
+                - row "Teszt Diák teszt.diak@demo.hu Diák 2024/B Törlés" [ref=e255]:
+                  - cell "Teszt Diák" [ref=e256]
+                  - cell "teszt.diak@demo.hu" [ref=e257]
+                  - cell "Diák" [ref=e258]:
+                    - combobox [ref=e259]:
+                      - option "Oktató"
+                      - option "Diák" [selected]
+                  - cell "2024/B" [ref=e260]:
+                    - generic [ref=e261]: 2024/B
+                  - cell "Törlés" [ref=e262]:
+                    - button "Törlés" [ref=e263] [cursor=pointer]:
+                      - img [ref=e264]
+    - contentinfo [ref=e229]:
+      - generic [ref=e230]: Padtárs · Modern Fullstack Verseny 2026
+  - region "Notifications alt+T":
+    - list:
+      - listitem [ref=e267]:
+        - img [ref=e269]
+        - generic [ref=e272]: Felhasználó létrehozva
+  - button "Open Next.js Dev Tools" [ref=e59] [cursor=pointer]:
+    - img [ref=e60]
+  - alert [ref=e63]

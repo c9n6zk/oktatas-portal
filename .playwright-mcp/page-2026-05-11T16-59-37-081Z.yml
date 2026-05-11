@@ -1,0 +1,96 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e64]:
+    - banner [ref=e65]:
+      - generic [ref=e66]:
+        - generic [ref=e67]:
+          - link "Padtárs logó Padtárs" [ref=e68] [cursor=pointer]:
+            - /url: /dashboard
+            - generic [ref=e69]:
+              - img "Padtárs logó" [ref=e71]
+              - generic [ref=e72]: Padtárs
+          - navigation [ref=e73]:
+            - link "Áttekintés" [ref=e74] [cursor=pointer]:
+              - /url: /dashboard
+            - link "Saját jegyek" [ref=e75] [cursor=pointer]:
+              - /url: /student/grades
+            - link "Események" [ref=e76] [cursor=pointer]:
+              - /url: /events
+            - link "Profil" [ref=e77] [cursor=pointer]:
+              - /url: /profile
+        - generic [ref=e78]:
+          - generic [ref=e79]: Diák
+          - generic [ref=e80]: student@demo.hu
+          - button "Téma váltás" [ref=e81] [cursor=pointer]:
+            - img [ref=e82]
+            - img
+          - button "Kilépés" [ref=e89] [cursor=pointer]:
+            - img [ref=e90]
+    - main [ref=e93]:
+      - generic [ref=e94]:
+        - generic [ref=e95]:
+          - heading "Üdv, Diák Béla!" [level=1] [ref=e96]
+          - paragraph [ref=e97]: Diák · 2024/A osztály
+        - generic [ref=e98]:
+          - generic [ref=e100]:
+            - paragraph [ref=e101]: Tantárgyak
+            - heading "4" [level=3] [ref=e102]
+          - generic [ref=e104]:
+            - paragraph [ref=e105]: Összes jegy
+            - heading "11" [level=3] [ref=e106]
+          - generic [ref=e108]:
+            - paragraph [ref=e109]: Tanulmányi átlag
+            - heading "4.33" [level=3] [ref=e110]
+        - generic [ref=e111]:
+          - generic [ref=e112]:
+            - generic [ref=e114]:
+              - heading "Tantárgyak átlaga" [level=3] [ref=e115]
+              - link "Részletek →" [ref=e116] [cursor=pointer]:
+                - /url: /student/grades
+            - generic [ref=e118]:
+              - generic [ref=e119]:
+                - generic [ref=e120]:
+                  - generic [ref=e121]: Matematika
+                  - generic [ref=e122]: 4 jegy
+                - generic [ref=e123]: "4.33"
+              - generic [ref=e124]:
+                - generic [ref=e125]:
+                  - generic [ref=e126]: Irodalom
+                  - generic [ref=e127]: 3 jegy
+                - generic [ref=e128]: "4.50"
+              - generic [ref=e129]:
+                - generic [ref=e130]:
+                  - generic [ref=e131]: Informatika
+                  - generic [ref=e132]: 2 jegy
+                - generic [ref=e133]: "5.00"
+              - generic [ref=e134]:
+                - generic [ref=e135]:
+                  - generic [ref=e136]: Biológia
+                  - generic [ref=e137]: 2 jegy
+                - generic [ref=e138]: "3.50"
+          - generic [ref=e139]:
+            - generic [ref=e141]:
+              - heading "Közelgő események" [level=3] [ref=e142]
+              - link "Összes →" [ref=e143] [cursor=pointer]:
+                - /url: /events
+            - generic [ref=e145]:
+              - generic [ref=e146]:
+                - generic [ref=e147]:
+                  - generic [ref=e148]: Szalagavató 2025
+                  - generic [ref=e149]: 2026. máj. 18. 18:34
+                - generic [ref=e150]: Sportcsarnok
+              - generic [ref=e151]:
+                - generic [ref=e152]:
+                  - generic [ref=e153]: Iskolai sportnap
+                  - generic [ref=e154]: 2026. máj. 25. 18:34
+                - generic [ref=e155]: Tornapálya
+              - generic [ref=e156]:
+                - generic [ref=e157]:
+                  - generic [ref=e158]: Szülői értekezlet
+                  - generic [ref=e159]: 2026. jún. 2. 12:34
+                - generic [ref=e160]: Aula
+    - contentinfo [ref=e161]:
+      - generic [ref=e162]: Padtárs · Modern Fullstack Verseny 2026
+  - region "Notifications alt+T"
+  - button "Open Next.js Dev Tools" [ref=e53] [cursor=pointer]:
+    - img [ref=e54]
+  - alert [ref=e57]

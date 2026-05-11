@@ -1,0 +1,49 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - generic [ref=e4]:
+      - heading "Belépés" [level=3] [ref=e5]
+      - paragraph [ref=e6]: Lépj be a saját adataiddal, vagy próbáld ki egy demo fiókkal.
+    - generic [ref=e7]:
+      - generic [ref=e8]:
+        - generic [ref=e9]:
+          - text: Email
+          - textbox "Email" [ref=e10]:
+            - /placeholder: te@iskola.hu
+        - generic [ref=e11]:
+          - text: Jelszó
+          - textbox "Jelszó" [ref=e12]
+        - button "Belépés" [ref=e13] [cursor=pointer]
+      - paragraph [ref=e14]:
+        - text: Nincs még fiókod?
+        - link "Regisztrálj" [ref=e15] [cursor=pointer]:
+          - /url: /register
+      - generic [ref=e20]: demo fiókok
+      - generic [ref=e21]:
+        - paragraph [ref=e22]: Kattints egy fiókra a gyors belépéshez
+        - generic [ref=e23]:
+          - button "Szuper Admin Szuper-admin · Minden funkció, admin kezelés superadmin" [ref=e24] [cursor=pointer]:
+            - generic [ref=e25]:
+              - generic [ref=e26]:
+                - generic [ref=e27]: Szuper Admin
+                - generic [ref=e28]: Szuper-admin · Minden funkció, admin kezelés
+              - generic [ref=e29]: superadmin
+          - button "Admin Anna Admin · Felhasználók, tárgyak, osztályok admin" [ref=e30] [cursor=pointer]:
+            - generic [ref=e31]:
+              - generic [ref=e32]:
+                - generic [ref=e33]: Admin Anna
+                - generic [ref=e34]: Admin · Felhasználók, tárgyak, osztályok
+              - generic [ref=e35]: admin
+          - button "Oktató Géza Oktató · Jegybeírás, statisztika instructor" [ref=e36] [cursor=pointer]:
+            - generic [ref=e37]:
+              - generic [ref=e38]:
+                - generic [ref=e39]: Oktató Géza
+                - generic [ref=e40]: Oktató · Jegybeírás, statisztika
+              - generic [ref=e41]: instructor
+          - button "Diák Béla Diák · Saját jegyek, súlyozott átlag student" [ref=e42] [cursor=pointer]:
+            - generic [ref=e43]:
+              - generic [ref=e44]:
+                - generic [ref=e45]: Diák Béla
+                - generic [ref=e46]: Diák · Saját jegyek, súlyozott átlag
+              - generic [ref=e47]: student
+  - region "Notifications alt+T"
+  - alert [ref=e48]

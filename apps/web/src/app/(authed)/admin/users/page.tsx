@@ -1,6 +1,5 @@
 import { requireRole } from "@/lib/rbac";
 import { prisma } from "@repo/db";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { UsersPanel } from "./UsersPanel";
 
 export default async function AdminUsersPage() {
@@ -29,38 +28,28 @@ export default async function AdminUsersPage() {
       <div>
         <h1 className="text-3xl font-bold">Felhasználók</h1>
         <p className="text-muted-foreground">
-          {users.length} felhasználó. Új létrehozás, role-változtatás, törlés.
+          {users.length} felhasználó · ADMIN nem promotolhat ADMIN/SUPERADMIN szerepre; csak SUPERADMIN tudja.
         </p>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Összes felhasználó</CardTitle>
-          <CardDescription>
-            ADMIN nem promotolhat ADMIN/SUPERADMIN szerepre; csak SUPERADMIN tudja.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <UsersPanel
-            initialUsers={users.map((u) => ({
-              id: u.id,
-              email: u.email,
-              name: u.name,
-              role: u.role,
-              classId: u.classId,
-              className: u.schoolClass
-                ? `${u.schoolClass.startYear}/${u.schoolClass.identifier}`
-                : null,
-            }))}
-            classes={classes.map((c) => ({
-              id: c.id,
-              label: `${c.startYear}/${c.identifier}`,
-            }))}
-            currentUserId={session.user.id}
-            isSuperAdmin={session.user.role === "SUPERADMIN"}
-          />
-        </CardContent>
-      </Card>
+      <UsersPanel
+        initialUsers={users.map((u) => ({
+          id: u.id,
+          email: u.email,
+          name: u.name,
+          role: u.role,
+          classId: u.classId,
+          className: u.schoolClass
+            ? `${u.schoolClass.startYear}/${u.schoolClass.identifier}`
+            : null,
+        }))}
+        classes={classes.map((c) => ({
+          id: c.id,
+          label: `${c.startYear}/${c.identifier}`,
+        }))}
+        currentUserId={session.user.id}
+        isSuperAdmin={session.user.role === "SUPERADMIN"}
+      />
     </div>
   );
 }

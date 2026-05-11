@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(findstr LISTENING)",
+      "Bash(findstr -i \"3000 3001 8080 4000 5173\")",
+      "Bash(node -e \"const s = require\\('sharp'\\); console.log\\('sharp version:', s.versions\\);\")",
+      "Bash(python -c \"from PIL import Image; print\\('Pillow:', Image.__version__\\)\")",
+      "Bash(curl -s -o /tmp/r.html -w \"HTTP %{http_code}\\\\n\" https://oktatas-portal-afiyylcnl-c9n6zks-projects.vercel.app/)",
+      "Bash(curl -s -o /tmp/r2.html -w \"HTTP %{http_code}\\\\n\" https://oktatas-portal.vercel.app/)",
+      "Bash(curl -s -o /tmp/r.html -w 'HTTP %{http_code}\\\\n' -H 'User-Agent: Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36 Chrome/120.0.0.0' -H 'Accept: text/html,application/xhtml+xml,application/xml' https://oktatas-portal.vercel.app/)",
+      "PowerShell(git add FELADATLEIRAS.md)",
+      "PowerShell(git commit -m \"docs: add full task spec \\(FELADATLEIRAS.md\\) as reference\" 2>&1)",
+      "PowerShell(git add CLAUDE.md)",
+      "PowerShell(git commit -m \"docs: add project-local CLAUDE.md \\(auto-loaded reference in every Claude Code window\\)\" 2>&1)",
+      "PowerShell(npx kill-port 3000 2>&1 | Select-Object -Last 1; Start-Sleep -Seconds 2; \"---Lokál push---\"; $env:DATABASE_URL=\"postgresql://postgres:postgres@localhost:5433/oktatas?schema=public\"; $env:DIRECT_URL=\"postgresql://postgres:postgres@localhost:5433/oktatas?schema=public\"; pnpm db:push 2>&1 | Select-Object -Last 5; \"---Supabase push---\"; $env:DATABASE_URL=\"postgresql://postgres.cfngfevjdpnnznotjedb:.%25yrfM7%267q5ApFM@aws-0-eu-west-1.pooler.supabase.com:6543/postgres?pgbouncer=true\"; $env:DIRECT_URL=\"postgresql://postgres.cfngfevjdpnnznotjedb:.%25yrfM7%267q5ApFM@aws-0-eu-west-1.pooler.supabase.com:5432/postgres\"; pnpm --filter @repo/db exec prisma db push --skip-generate 2>&1 | Select-Object -Last 4)",
+      "PowerShell(Get-NetTCPConnection -State Listen | Where-Object { $_.LocalPort -eq 3000 } | Select-Object LocalPort,OwningProcess)",
+      "Bash(curl -s -o nul -w \"%{http_code}\" http://localhost:3000/login)",
+      "PowerShell(Get-NetTCPConnection -State Listen | Where-Object { $_.LocalPort -in 3000,3001,3002,4000 } | Select-Object LocalPort,OwningProcess | Format-Table)",
+      "PowerShell(Get-Process node -ErrorAction SilentlyContinue)",
+      "PowerShell($ready = $false; $attempts = 0; while \\(-not $ready -and $attempts -lt 30\\) { try { $r = Invoke-WebRequest -Uri \"http://localhost:3000/login\" -UseBasicParsing -TimeoutSec 2 -ErrorAction Stop; if \\($r.StatusCode -eq 200\\) { $ready = $true } } catch { Start-Sleep 2; $attempts++ } }; if \\($ready\\) { \"Ready on 3000\" } else { \"Not ready\" })",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/login)"
+    ]
+  }
+}

@@ -1,0 +1,142 @@
+- generic:
+  - generic:
+    - banner:
+      - generic:
+        - generic:
+          - link:
+            - /url: /dashboard
+            - generic:
+              - generic:
+                - img
+              - generic: Padtárs
+          - navigation:
+            - link:
+              - /url: /dashboard
+              - text: Áttekintés
+            - link:
+              - /url: /instructor/grading
+              - text: Jegybeírás
+            - link:
+              - /url: /admin/users
+              - text: Felhasználók
+            - link:
+              - /url: /admin/classes
+              - text: Osztályok
+            - link:
+              - /url: /admin/subjects
+              - text: Tárgyak
+            - link:
+              - /url: /admin/assignments
+              - text: Hozzárendelések
+            - link:
+              - /url: /events
+              - text: Események
+            - link:
+              - /url: /profile
+              - text: Profil
+        - generic:
+          - generic: Admin
+          - generic: admin@demo.hu
+          - button:
+            - img
+          - generic:
+            - button:
+              - img
+    - main:
+      - generic:
+        - generic:
+          - heading [level=1]: Felhasználók
+          - paragraph: 4 felhasználó. Új létrehozás, role-változtatás, törlés.
+        - generic:
+          - generic:
+            - heading [level=3]: Összes felhasználó
+            - paragraph: ADMIN nem promotolhat ADMIN/SUPERADMIN szerepre; csak SUPERADMIN tudja.
+          - generic:
+            - generic:
+              - generic:
+                - button [expanded]:
+                  - img
+                  - text: Új felhasználó
+              - generic:
+                - table:
+                  - rowgroup:
+                    - row:
+                      - columnheader: Név
+                      - columnheader: Email
+                      - columnheader: Szerepkör
+                      - columnheader: Osztály
+                      - columnheader: Műveletek
+                  - rowgroup:
+                    - row:
+                      - cell: Szuper Admin
+                      - cell: superadmin@demo.hu
+                      - cell:
+                        - combobox
+                      - cell: —
+                      - cell:
+                        - button:
+                          - img
+                    - row:
+                      - cell: Admin Anna
+                      - cell: admin@demo.hu
+                      - cell:
+                        - combobox [disabled]
+                      - cell: —
+                      - cell:
+                        - button [disabled]:
+                          - img
+                    - row:
+                      - cell: Oktató Géza
+                      - cell: instructor@demo.hu
+                      - cell:
+                        - combobox
+                      - cell: —
+                      - cell:
+                        - button:
+                          - img
+                    - row:
+                      - cell: Diák Béla
+                      - cell: student@demo.hu
+                      - cell:
+                        - combobox
+                      - cell:
+                        - generic: 2024/A
+                      - cell:
+                        - button:
+                          - img
+    - contentinfo:
+      - generic: Padtárs · Modern Fullstack Verseny 2026
+  - region "Notifications alt+T"
+  - button "Open Next.js Dev Tools" [ref=e59] [cursor=pointer]:
+    - img [ref=e60]
+  - alert
+  - dialog "Új felhasználó" [ref=e232]:
+    - generic [ref=e233]:
+      - heading "Új felhasználó" [level=2] [ref=e234]
+      - paragraph [ref=e235]: A jelszót később a felhasználó tudja módosítani belépés után.
+    - generic [ref=e236]:
+      - generic [ref=e237]:
+        - text: Név
+        - textbox "Név" [active] [ref=e238]
+      - generic [ref=e239]:
+        - text: Email
+        - textbox "Email" [ref=e240]
+      - generic [ref=e241]:
+        - text: Jelszó (min. 6)
+        - textbox "Jelszó (min. 6)" [ref=e242]
+      - generic [ref=e243]:
+        - generic [ref=e244]:
+          - text: Szerepkör
+          - combobox "Szerepkör" [ref=e245]:
+            - option "Oktató"
+            - option "Diák" [selected]
+        - generic [ref=e246]:
+          - text: Osztály (diák)
+          - combobox "Osztály (diák)" [ref=e247]:
+            - option "— nincs —" [selected]
+            - option "2024/A"
+            - option "2024/B"
+      - button "Létrehozás" [ref=e249] [cursor=pointer]
+    - button "Bezárás" [ref=e250] [cursor=pointer]:
+      - img [ref=e251]
+      - generic [ref=e254]: Bezárás

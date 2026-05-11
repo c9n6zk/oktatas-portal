@@ -1,0 +1,120 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e49]:
+    - banner [ref=e50]:
+      - generic [ref=e51]:
+        - generic [ref=e52]:
+          - link "Padtárs logó Padtárs" [ref=e53] [cursor=pointer]:
+            - /url: /dashboard
+            - generic [ref=e54]:
+              - img "Padtárs logó" [ref=e56]
+              - generic [ref=e57]: Padtárs
+          - navigation [ref=e58]:
+            - link "Áttekintés" [ref=e59] [cursor=pointer]:
+              - /url: /dashboard
+            - link "Jegybeírás" [ref=e60] [cursor=pointer]:
+              - /url: /instructor/grading
+            - link "Események" [ref=e61] [cursor=pointer]:
+              - /url: /events
+            - link "Profil" [ref=e62] [cursor=pointer]:
+              - /url: /profile
+        - generic [ref=e63]:
+          - generic [ref=e64]: Oktató
+          - generic [ref=e65]: instructor@demo.hu
+          - button "Téma váltás" [ref=e66] [cursor=pointer]:
+            - img [ref=e67]
+            - img
+          - button "Kilépés" [ref=e74] [cursor=pointer]:
+            - img [ref=e75]
+    - main [ref=e78]:
+      - generic [ref=e79]:
+        - generic [ref=e80]:
+          - heading "Üdv, Oktató Géza!" [level=1] [ref=e81]
+          - paragraph [ref=e82]: Oktató · 6 hozzárendelés
+        - generic [ref=e83]:
+          - generic [ref=e85]:
+            - paragraph [ref=e86]: Tárgyhozzárendelések
+            - heading "6" [level=3] [ref=e87]
+          - generic [ref=e89]:
+            - paragraph [ref=e90]: Diákok összesen
+            - heading "4" [level=3] [ref=e91]
+          - generic [ref=e93]:
+            - paragraph [ref=e94]: Beírt jegyek
+            - heading "11" [level=3] [ref=e95]
+        - generic [ref=e96]:
+          - generic [ref=e97]:
+            - generic [ref=e98]:
+              - heading "Osztály statisztika" [level=3] [ref=e99]
+              - link "Jegybeírás →" [ref=e100] [cursor=pointer]:
+                - /url: /instructor/grading
+            - paragraph [ref=e101]: Súlyozott átlag osztály × tárgy bontásban
+          - generic [ref=e103]:
+            - generic [ref=e104]:
+              - generic [ref=e105]:
+                - generic [ref=e106]: Matematika
+                - generic [ref=e107]: 2024/A osztály · 1 diák · 4 jegy
+              - generic [ref=e108]:
+                - generic [ref=e109]: "4.33"
+                - generic [ref=e110]: átlag
+            - generic [ref=e111]:
+              - generic [ref=e112]:
+                - generic [ref=e113]: Irodalom
+                - generic [ref=e114]: 2024/A osztály · 1 diák · 3 jegy
+              - generic [ref=e115]:
+                - generic [ref=e116]: "4.50"
+                - generic [ref=e117]: átlag
+            - generic [ref=e118]:
+              - generic [ref=e119]:
+                - generic [ref=e120]: Informatika
+                - generic [ref=e121]: 2024/A osztály · 1 diák · 2 jegy
+              - generic [ref=e122]:
+                - generic [ref=e123]: "5.00"
+                - generic [ref=e124]: átlag
+            - generic [ref=e125]:
+              - generic [ref=e126]:
+                - generic [ref=e127]: Biológia
+                - generic [ref=e128]: 2024/A osztály · 1 diák · 2 jegy
+              - generic [ref=e129]:
+                - generic [ref=e130]: "3.50"
+                - generic [ref=e131]: átlag
+            - generic [ref=e132]:
+              - generic [ref=e133]:
+                - generic [ref=e134]: Matematika
+                - generic [ref=e135]: 2024/B osztály · 0 diák · 0 jegy
+              - generic [ref=e136]:
+                - generic [ref=e137]: —
+                - generic [ref=e138]: átlag
+            - generic [ref=e139]:
+              - generic [ref=e140]:
+                - generic [ref=e141]: Informatika
+                - generic [ref=e142]: 2024/B osztály · 0 diák · 0 jegy
+              - generic [ref=e143]:
+                - generic [ref=e144]: —
+                - generic [ref=e145]: átlag
+        - generic [ref=e146]:
+          - heading "Közelgő események" [level=3] [ref=e148]
+          - generic [ref=e150]:
+            - generic [ref=e151]:
+              - generic [ref=e152]:
+                - generic [ref=e153]: Szalagavató 2025
+                - generic [ref=e154]: 2026. máj. 18. 18:34
+              - generic [ref=e155]: Sportcsarnok
+            - generic [ref=e156]:
+              - generic [ref=e157]:
+                - generic [ref=e158]: Iskolai sportnap
+                - generic [ref=e159]: 2026. máj. 25. 18:34
+              - generic [ref=e160]: Tornapálya
+            - generic [ref=e161]:
+              - generic [ref=e162]:
+                - generic [ref=e163]: Szülői értekezlet
+                - generic [ref=e164]: 2026. jún. 2. 12:34
+              - generic [ref=e165]: Aula
+    - contentinfo [ref=e166]:
+      - generic [ref=e167]: Padtárs · Modern Fullstack Verseny 2026
+  - region "Notifications alt+T":
+    - list:
+      - listitem [ref=e168]:
+        - img [ref=e170]
+        - generic [ref=e173]: Sikeres belépés
+  - button "Open Next.js Dev Tools" [ref=e179] [cursor=pointer]:
+    - img [ref=e180]
+  - alert [ref=e48]

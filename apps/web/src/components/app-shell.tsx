@@ -20,6 +20,10 @@ const NAV: NavItem[] = [
   { href: "/admin/classes", label: "Osztályok", roles: ["ADMIN", "SUPERADMIN"] },
   { href: "/admin/subjects", label: "Tárgyak", roles: ["ADMIN", "SUPERADMIN"] },
   { href: "/admin/assignments", label: "Hozzárendelések", roles: ["ADMIN", "SUPERADMIN"] },
+  { href: "/admin/groups", label: "Csoportok", roles: ["ADMIN", "SUPERADMIN"] },
+  { href: "/admin/schedule", label: "Órarend kezelés", roles: ["ADMIN", "SUPERADMIN"] },
+  { href: "/timetable", label: "Órarend", roles: ["STUDENT", "INSTRUCTOR", "ADMIN", "SUPERADMIN"] },
+  { href: "/polls", label: "Szavazások" },
   { href: "/events", label: "Események" },
   { href: "/profile", label: "Profil" },
 ];

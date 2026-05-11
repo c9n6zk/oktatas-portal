@@ -1,0 +1,107 @@
+- generic [ref=e1]:
+  - generic [ref=e183]:
+    - banner [ref=e184]:
+      - generic [ref=e185]:
+        - generic [ref=e186]:
+          - link "Padtárs logó Padtárs" [ref=e187] [cursor=pointer]:
+            - /url: /dashboard
+            - generic [ref=e188]:
+              - img "Padtárs logó" [ref=e190]
+              - generic [ref=e191]: Padtárs
+          - navigation [ref=e192]:
+            - link "Áttekintés" [ref=e193] [cursor=pointer]:
+              - /url: /dashboard
+            - link "Jegybeírás" [ref=e194] [cursor=pointer]:
+              - /url: /instructor/grading
+            - link "Események" [ref=e195] [cursor=pointer]:
+              - /url: /events
+            - link "Profil" [ref=e196] [cursor=pointer]:
+              - /url: /profile
+        - generic [ref=e197]:
+          - generic [ref=e198]: Oktató
+          - generic [ref=e199]: instructor@demo.hu
+          - button "Téma váltás" [ref=e200] [cursor=pointer]:
+            - img [ref=e201]
+            - img
+          - button "Kilépés" [ref=e208] [cursor=pointer]:
+            - img [ref=e209]
+    - main [ref=e212]:
+      - generic [ref=e292]:
+        - generic [ref=e294]:
+          - link "← Vissza" [ref=e295] [cursor=pointer]:
+            - /url: /instructor/grading
+          - heading "Matematika" [level=1] [ref=e296]
+          - paragraph [ref=e297]: 2024/A · 2025/2026 tanév · Oktató Géza
+        - generic [ref=e298]:
+          - generic [ref=e299]:
+            - heading "A tárgy" [level=3] [ref=e300]
+            - paragraph [ref=e301]: Algebra, geometria, függvények
+          - generic [ref=e302]:
+            - generic [ref=e303]:
+              - strong [ref=e304]: "Könyv:"
+              - text: Matematika 10. — Nemzeti Tankönyvkiadó
+            - generic [ref=e305]:
+              - strong [ref=e306]: "Leckék:"
+              - text: 1. Halmazok · 2. Egyenletek · 3. Függvények · 4. Geometria
+        - generic [ref=e307]:
+          - generic [ref=e310]:
+            - heading "Osztály jegyei" [level=3] [ref=e311]
+            - paragraph [ref=e312]:
+              - text: "1 diák · 5 jegy · osztály súlyozott átlag:"
+              - strong [ref=e313]: "4.22"
+          - generic [ref=e316]:
+            - generic [ref=e317]:
+              - generic [ref=e318]:
+                - generic [ref=e319]: Diák Béla
+                - generic [ref=e320]: student@demo.hu
+              - generic [ref=e321]:
+                - generic [ref=e322]:
+                  - generic [ref=e323]: "4.22"
+                  - generic [ref=e324]: átlag
+                - button "Új jegy" [active] [ref=e325] [cursor=pointer]:
+                  - img [ref=e326]
+                  - text: Új jegy
+            - generic [ref=e327]:
+              - generic [ref=e384]:
+                - generic [ref=e385]: Témazáró
+                - generic [ref=e386]: "4"
+                - generic [ref=e387]: 3×
+                - generic [ref=e388]: "\"Teszt jegy Playwright-tel\""
+                - button "Törlés" [ref=e389] [cursor=pointer]:
+                  - img [ref=e390]
+              - generic [ref=e328]:
+                - generic [ref=e329]: Felelés
+                - generic [ref=e330]: "4"
+                - generic [ref=e331]: 1×
+                - generic [ref=e332]: "\"Aktív óra\""
+                - button "Törlés" [ref=e333] [cursor=pointer]:
+                  - img [ref=e334]
+              - generic [ref=e337]:
+                - generic [ref=e338]: Felelés
+                - generic [ref=e339]: "3"
+                - generic [ref=e340]: 1×
+                - button "Törlés" [ref=e341] [cursor=pointer]:
+                  - img [ref=e342]
+              - generic [ref=e345]:
+                - generic [ref=e346]: Témazáró
+                - generic [ref=e347]: "5"
+                - generic [ref=e348]: 3×
+                - generic [ref=e349]: "\"Egyenletek témazáró\""
+                - button "Törlés" [ref=e350] [cursor=pointer]:
+                  - img [ref=e351]
+              - generic [ref=e354]:
+                - generic [ref=e355]: Féléves
+                - generic [ref=e356]: "4"
+                - generic [ref=e357]: 1×
+                - button "Törlés" [ref=e358] [cursor=pointer]:
+                  - img [ref=e359]
+    - contentinfo [ref=e290]:
+      - generic [ref=e291]: Padtárs · Modern Fullstack Verseny 2026
+  - region "Notifications alt+T":
+    - list:
+      - listitem [ref=e393]:
+        - img [ref=e395]
+        - generic [ref=e398]: Jegy beírva
+  - button "Open Next.js Dev Tools" [ref=e179] [cursor=pointer]:
+    - img [ref=e180]
+  - alert [ref=e48]

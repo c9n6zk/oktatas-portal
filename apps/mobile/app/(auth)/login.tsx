@@ -71,7 +71,7 @@ export default function LoginScreen() {
           <View style={styles.logoRow}>
             <View style={styles.logoBox}>
               <Image
-                source={require("../../assets/icon.png")}
+                source={require("../../assets/icon-dark.png")}
                 style={styles.logoImage}
                 resizeMode="contain"
               />
@@ -155,13 +155,11 @@ const styles = StyleSheet.create({
   logoBox: {
     width: 56,
     height: 56,
-    borderRadius: 14,
-    backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
     overflow: "hidden",
   },
-  logoImage: { width: 56, height: 56, transform: [{ scale: 1.7 }] },
+  logoImage: { width: 56, height: 56 },
   title: { fontSize: 26, fontWeight: "700", color: "#fff" },
   subtitle: { fontSize: 13, color: "#888", marginBottom: 12 },
   sectionLabel: {

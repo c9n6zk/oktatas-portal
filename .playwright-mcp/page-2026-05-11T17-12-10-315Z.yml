@@ -1,0 +1,174 @@
+- generic:
+  - generic:
+    - banner:
+      - generic:
+        - generic:
+          - link:
+            - /url: /dashboard
+            - generic:
+              - generic:
+                - img
+              - generic: Padtárs
+          - navigation:
+            - link:
+              - /url: /dashboard
+              - text: Áttekintés
+            - link:
+              - /url: /instructor/grading
+              - text: Jegybeírás
+            - link:
+              - /url: /admin/users
+              - text: Felhasználók
+            - link:
+              - /url: /admin/classes
+              - text: Osztályok
+            - link:
+              - /url: /admin/subjects
+              - text: Tárgyak
+            - link:
+              - /url: /admin/assignments
+              - text: Hozzárendelések
+            - link:
+              - /url: /events
+              - text: Események
+            - link:
+              - /url: /profile
+              - text: Profil
+        - generic:
+          - generic: Admin
+          - generic: admin@demo.hu
+          - button:
+            - img
+          - generic:
+            - button:
+              - img
+    - main:
+      - generic:
+        - generic:
+          - heading [level=1]: Tárgyhozzárendelések
+          - paragraph: Adott évben mely oktató tanítja mely osztálynak mely tárgyat.
+        - generic:
+          - generic:
+            - heading [level=3]: Hozzárendelések (6)
+            - paragraph: Egy év + tárgy + osztály kombináció csak egyszer szerepelhet.
+          - generic:
+            - generic:
+              - generic:
+                - button [expanded]:
+                  - img
+                  - text: Új hozzárendelés
+              - generic:
+                - table:
+                  - rowgroup:
+                    - row:
+                      - columnheader: Tanév
+                      - columnheader: Tárgy
+                      - columnheader: Osztály
+                      - columnheader: Oktató
+                      - columnheader: Jegyek
+                      - columnheader: Művelet
+                  - rowgroup:
+                    - row:
+                      - cell: 2025/2026
+                      - cell:
+                        - generic: Matematika
+                        - generic: MAT
+                      - cell: 2024/A
+                      - cell: Oktató Géza
+                      - cell: "4"
+                      - cell:
+                        - button:
+                          - img
+                    - row:
+                      - cell: 2025/2026
+                      - cell:
+                        - generic: Irodalom
+                        - generic: IRO
+                      - cell: 2024/A
+                      - cell: Oktató Géza
+                      - cell: "3"
+                      - cell:
+                        - button:
+                          - img
+                    - row:
+                      - cell: 2025/2026
+                      - cell:
+                        - generic: Informatika
+                        - generic: INF
+                      - cell: 2024/A
+                      - cell: Oktató Géza
+                      - cell: "2"
+                      - cell:
+                        - button:
+                          - img
+                    - row:
+                      - cell: 2025/2026
+                      - cell:
+                        - generic: Biológia
+                        - generic: BIO
+                      - cell: 2024/A
+                      - cell: Oktató Géza
+                      - cell: "2"
+                      - cell:
+                        - button:
+                          - img
+                    - row:
+                      - cell: 2025/2026
+                      - cell:
+                        - generic: Matematika
+                        - generic: MAT
+                      - cell: 2024/B
+                      - cell: Oktató Géza
+                      - cell: "0"
+                      - cell:
+                        - button:
+                          - img
+                    - row:
+                      - cell: 2025/2026
+                      - cell:
+                        - generic: Informatika
+                        - generic: INF
+                      - cell: 2024/B
+                      - cell: Oktató Géza
+                      - cell: "0"
+                      - cell:
+                        - button:
+                          - img
+    - contentinfo:
+      - generic: Padtárs · Modern Fullstack Verseny 2026
+  - region "Notifications alt+T"
+  - button "Open Next.js Dev Tools" [ref=e145] [cursor=pointer]:
+    - img [ref=e146]
+  - alert
+  - dialog "Új tárgyhozzárendelés" [ref=e150]:
+    - heading "Új tárgyhozzárendelés" [level=2] [ref=e152]
+    - generic [ref=e153]:
+      - generic [ref=e154]:
+        - text: Tanév kezdő éve
+        - spinbutton "Tanév kezdő éve" [active] [ref=e155]: "2026"
+      - generic [ref=e156]:
+        - text: Tárgy
+        - combobox "Tárgy" [ref=e157]:
+          - option "— válassz —"
+          - option "BIO — Biológia"
+          - option "INF — Informatika"
+          - option "IRO — Irodalom"
+          - option "MAT — Matematika"
+          - option "TST — Teszt tárgy" [selected]
+      - generic [ref=e158]:
+        - text: Osztály
+        - combobox "Osztály" [ref=e159]:
+          - option "— válassz —"
+          - option "2024/A"
+          - option "2024/B" [selected]
+      - generic [ref=e160]:
+        - text: Oktató
+        - combobox "Oktató" [ref=e161]:
+          - option "— válassz —" [selected]
+          - option "Admin Anna (ADMIN)"
+          - option "Oktató Géza (INSTRUCTOR)"
+          - option "Szuper Admin (SUPERADMIN)"
+      - button "Létrehozás" [ref=e163] [cursor=pointer]
+    - button "Bezárás" [ref=e164] [cursor=pointer]:
+      - img [ref=e165]
+      - generic [ref=e168]: Bezárás

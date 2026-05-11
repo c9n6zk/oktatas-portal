@@ -1,4 +1,4 @@
-import { PrismaClient, Role, GradeType } from "@prisma/client";
+import { PrismaClient, Role, GradeType, DayOfWeek, PollAudience } from "@prisma/client";
 import bcrypt from "bcryptjs";
 
 const prisma = new PrismaClient();
@@ -112,12 +112,20 @@ async function main() {
 
   // 4. Tárgy-Osztály-Oktató hozzárendelések (SubjectAssignments) — 2025 tanév
   // Osztály A: mind a 4 tárgy. Osztály B: matematika + informatika.
-  const mkAssignment = (subjectId: string, classId: string) =>
-    prisma.subjectAssignment.upsert({
-      where: { year_subjectId_classId: { year: 2025, subjectId, classId } },
-      update: { teacherId: instructor.id },
-      create: { year: 2025, subjectId, classId, teacherId: instructor.id },
+  const mkAssignment = async (subjectId: string, classId: string) => {
+    const existing = await prisma.subjectAssignment.findFirst({
+      where: { year: 2025, subjectId, classId },
     });
+    if (existing) {
+      return prisma.subjectAssignment.update({
+        where: { id: existing.id },
+        data: { teacherId: instructor.id },
+      });
+    }
+    return prisma.subjectAssignment.create({
+      data: { year: 2025, subjectId, classId, teacherId: instructor.id },
+    });
+  };
 
   const aMat = await mkAssignment(matematika.id, classA.id);
   const aIro = await mkAssignment(irodalom.id, classA.id);
@@ -182,6 +190,60 @@ async function main() {
     ],
   });
 
+  // 7. Csoportok (Groups) — pl. nyelvi haladó/kezdő, specializáció
+  await prisma.group.deleteMany({});
+  const csoportHaladoMat = await prisma.group.create({
+    data: {
+      name: "Haladó matematika",
+      description: "Versenyző haladó matek csoport 2024/A és 2024/B osztályból",
+      members: { connect: [{ id: student.id }] }, // Diák Béla benne van
+    },
+  });
+  const csoportAngolKezdo = await prisma.group.create({
+    data: {
+      name: "Angol kezdő",
+      description: "Angol nyelvi kezdő csoport keresztben az évfolyamból",
+    },
+  });
+
+  // 8. Órarend (ScheduleEntry) — heti bejegyzések a 4 osztály A tárgyhoz
+  await prisma.scheduleEntry.deleteMany({});
+  await prisma.scheduleEntry.createMany({
+    data: [
+      // Matematika 2024/A — hétfő + szerda
+      { assignmentId: aMat.id, dayOfWeek: DayOfWeek.MONDAY, startTime: "08:00", endTime: "08:45", room: "201" },
+      { assignmentId: aMat.id, dayOfWeek: DayOfWeek.WEDNESDAY, startTime: "10:00", endTime: "10:45", room: "201" },
+      // Irodalom 2024/A — kedd
+      { assignmentId: aIro.id, dayOfWeek: DayOfWeek.TUESDAY, startTime: "09:00", endTime: "09:45", room: "105" },
+      // Informatika 2024/A — csütörtök
+      { assignmentId: aInf.id, dayOfWeek: DayOfWeek.THURSDAY, startTime: "11:00", endTime: "11:45", room: "Számtech 1" },
+      { assignmentId: aInf.id, dayOfWeek: DayOfWeek.THURSDAY, startTime: "11:55", endTime: "12:40", room: "Számtech 1" },
+      // Biológia 2024/A — péntek
+      { assignmentId: aBio.id, dayOfWeek: DayOfWeek.FRIDAY, startTime: "08:55", endTime: "09:40", room: "Bio labor" },
+    ],
+  });
+
+  // 9. Példa kérdőív (Poll)
+  await prisma.pollResponse.deleteMany({});
+  await prisma.pollOption.deleteMany({});
+  await prisma.poll.deleteMany({});
+  await prisma.poll.create({
+    data: {
+      question: "Melyik időpont lenne a legjobb a következő szülői értekezletre?",
+      description: "A választáshoz szükséges, hogy 80%-os részvétel legyen.",
+      audience: PollAudience.ALL,
+      createdById: admin.id,
+      options: {
+        create: [
+          { text: "Hétfő 17:00", order: 0 },
+          { text: "Szerda 18:00", order: 1 },
+          { text: "Péntek 17:30", order: 2 },
+          { text: "Szombat 10:00", order: 3 },
+        ],
+      },
+    },
+  });
+
   console.log("Seed kész ✓");
   console.log("");
   console.log("Belépés: <email> / password");
@@ -195,6 +257,10 @@ async function main() {
   console.log("  4 tárgy (Matematika, Irodalom, Informatika, Biológia)");
   console.log("  6 tárgy-osztály hozzárendelés (2025 tanév)");
   console.log("  10 jegy Diák Bélának");
+  console.log("  3 esemény");
+  console.log("  2 csoport (Haladó matek, Angol kezdő)");
+  console.log("  6 órarend bejegyzés");
+  console.log("  1 kérdőív (Szülői értekezlet időpont, 4 opció)");
 }
 
 main()

@@ -29,6 +29,23 @@ enum GradeType {
   YEAR_END  // év végi jegy
 }
 
+enum DayOfWeek {
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
+  SUNDAY
+}
+
+enum PollAudience {
+  ALL          // mindenki válaszolhat
+  STUDENTS     // csak diákok
+  INSTRUCTORS  // csak oktatók
+  CLASS        // csak adott osztály diákjai (classId-vel)
+}
+
 model User {
   id           String   @id @default(cuid())
   email        String   @unique
@@ -45,6 +62,10 @@ model User {
   grades            Grade[]             @relation("StudentGrades")
   attendances       Attendance[]        @relation("StudentAttendance")
   eventsCreated     Event[]             @relation("EventCreator")
+  groups            Group[]             @relation("GroupMembers")
+  substituteFor     ScheduleEntry[]     @relation("SubstituteTeacher")
+  pollsCreated      Poll[]              @relation("PollCreator")
+  pollResponses     PollResponse[]      @relation("PollResponseUser")
 
   // NextAuth
   sessions Session[]
@@ -57,9 +78,21 @@ model SchoolClass {
   identifier String // pl. "A"
   students   User[]              @relation("ClassStudents")
   assignments SubjectAssignment[]
+  polls      Poll[]
   createdAt  DateTime            @default(now())
 
   @@unique([startYear, identifier])
+}
+
+// Csoport — hallgatók egy alhalmaza (pl. nyelvi csoport, haladó matek).
+// A csoport tantárgyhoz rendelhető, ugyanúgy mint az osztály.
+model Group {
+  id          String              @id @default(cuid())
+  name        String              @unique
+  description String?
+  members     User[]              @relation("GroupMembers")
+  assignments SubjectAssignment[]
+  createdAt   DateTime            @default(now())
 }
 
 model Subject {
@@ -74,19 +107,36 @@ model Subject {
 }
 
 model SubjectAssignment {
-  id          String      @id @default(cuid())
+  id          String           @id @default(cuid())
   year        Int // tanév kezdő éve (pl. 2025)
-  subject     Subject     @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  subject     Subject          @relation(fields: [subjectId], references: [id], onDelete: Cascade)
   subjectId   String
-  schoolClass SchoolClass @relation(fields: [classId], references: [id], onDelete: Cascade)
-  classId     String
-  teacher     User        @relation("TeacherAssignments", fields: [teacherId], references: [id])
+  // Vagy osztály VAGY csoport — legalább az egyik kötelező (app-szintű validáció).
+  schoolClass SchoolClass?     @relation(fields: [classId], references: [id], onDelete: Cascade)
+  classId     String?
+  group       Group?           @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  groupId     String?
+  teacher     User             @relation("TeacherAssignments", fields: [teacherId], references: [id])
   teacherId   String
   grades      Grade[]
-  attendances Attendance[] @relation("AssignmentAttendance")
-  createdAt   DateTime    @default(now())
+  attendances Attendance[]     @relation("AssignmentAttendance")
+  scheduleEntries ScheduleEntry[]
+  createdAt   DateTime         @default(now())
+}
 
-  @@unique([year, subjectId, classId])
+// Heti órarend bejegyzés — egy SubjectAssignment-hez 0 vagy több ScheduleEntry tartozik.
+model ScheduleEntry {
+  id           String            @id @default(cuid())
+  assignment   SubjectAssignment @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
+  assignmentId String
+  dayOfWeek    DayOfWeek
+  startTime    String            // "08:00" formátum
+  endTime      String            // "08:45" formátum
+  room         String?
+  // Helyettesítő tanár — opcionális, ha valaki más helyettesít az adott órán
+  substituteTeacher   User?   @relation("SubstituteTeacher", fields: [substituteTeacherId], references: [id])
+  substituteTeacherId String?
+  createdAt    DateTime          @default(now())
 }
 
 model Grade {
@@ -113,6 +163,45 @@ model Event {
   createdBy   User     @relation("EventCreator", fields: [createdById], references: [id])
   createdById String
   createdAt   DateTime @default(now())
+}
+
+// Szavazás / kérdőív (admin létrehozza, célközönség szűkíthető).
+model Poll {
+  id          String         @id @default(cuid())
+  question    String
+  description String?
+  audience    PollAudience   @default(ALL)
+  // ha audience = CLASS, ez a classId határozza meg melyik osztálynak megy
+  schoolClass SchoolClass?   @relation(fields: [classId], references: [id], onDelete: SetNull)
+  classId     String?
+  createdBy   User           @relation("PollCreator", fields: [createdById], references: [id])
+  createdById String
+  options     PollOption[]
+  responses   PollResponse[]
+  closesAt    DateTime?
+  createdAt   DateTime       @default(now())
+}
+
+model PollOption {
+  id        String         @id @default(cuid())
+  poll      Poll           @relation(fields: [pollId], references: [id], onDelete: Cascade)
+  pollId    String
+  text      String
+  order     Int            @default(0)
+  responses PollResponse[]
+}
+
+model PollResponse {
+  id        String     @id @default(cuid())
+  poll      Poll       @relation(fields: [pollId], references: [id], onDelete: Cascade)
+  pollId    String
+  option    PollOption @relation(fields: [optionId], references: [id], onDelete: Cascade)
+  optionId  String
+  user      User       @relation("PollResponseUser", fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  createdAt DateTime   @default(now())
+
+  @@unique([pollId, userId]) // egy user egy szavazásban egyszer szavaz
 }
 
 // Jelenléti rögzítés (mobil GPS-szel) — opcionális innovation feature.

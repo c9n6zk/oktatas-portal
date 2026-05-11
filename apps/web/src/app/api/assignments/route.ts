@@ -8,17 +8,20 @@ export async function GET(req: Request) {
   const year = url.searchParams.get("year");
   const teacherId = url.searchParams.get("teacherId");
   const classId = url.searchParams.get("classId");
+  const groupId = url.searchParams.get("groupId");
 
   const assignments = await prisma.subjectAssignment.findMany({
     where: {
       ...(year ? { year: Number(year) } : {}),
       ...(teacherId ? { teacherId } : {}),
       ...(classId ? { classId } : {}),
+      ...(groupId ? { groupId } : {}),
     },
     orderBy: [{ year: "desc" }],
     include: {
       subject: true,
       schoolClass: true,
+      group: true,
       teacher: { select: { id: true, name: true, email: true } },
       _count: { select: { grades: true } },
     },
@@ -34,8 +37,14 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 });
     }
     const created = await prisma.subjectAssignment.create({
-      data: parsed.data,
-      include: { subject: true, schoolClass: true, teacher: true },
+      data: {
+        year: parsed.data.year,
+        subjectId: parsed.data.subjectId,
+        classId: parsed.data.classId ?? null,
+        groupId: parsed.data.groupId ?? null,
+        teacherId: parsed.data.teacherId,
+      },
+      include: { subject: true, schoolClass: true, group: true, teacher: true },
     });
     return NextResponse.json({ assignment: created }, { status: 201 });
   } catch (e) {

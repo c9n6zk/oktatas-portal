@@ -1,0 +1,131 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]:
+          - link "Padtárs logó Padtárs" [ref=e6] [cursor=pointer]:
+            - /url: /dashboard
+            - generic [ref=e7]:
+              - img "Padtárs logó" [ref=e9]
+              - generic [ref=e10]: Padtárs
+          - navigation [ref=e11]:
+            - link "Áttekintés" [ref=e12] [cursor=pointer]:
+              - /url: /dashboard
+            - link "Jegybeírás" [ref=e13] [cursor=pointer]:
+              - /url: /instructor/grading
+            - link "Felhasználók" [ref=e14] [cursor=pointer]:
+              - /url: /admin/users
+            - link "Osztályok" [ref=e15] [cursor=pointer]:
+              - /url: /admin/classes
+            - link "Tárgyak" [ref=e16] [cursor=pointer]:
+              - /url: /admin/subjects
+            - link "Hozzárendelések" [ref=e17] [cursor=pointer]:
+              - /url: /admin/assignments
+            - link "Csoportok" [ref=e18] [cursor=pointer]:
+              - /url: /admin/groups
+            - link "Órarend kezelés" [ref=e19] [cursor=pointer]:
+              - /url: /admin/schedule
+            - link "Órarend" [ref=e20] [cursor=pointer]:
+              - /url: /timetable
+            - link "Szavazások" [ref=e21] [cursor=pointer]:
+              - /url: /polls
+            - link "Események" [ref=e22] [cursor=pointer]:
+              - /url: /events
+            - link "Profil" [ref=e23] [cursor=pointer]:
+              - /url: /profile
+        - generic [ref=e24]:
+          - generic [ref=e25]: Szuper-admin
+          - generic [ref=e26]: superadmin@demo.hu
+          - button "Téma váltás" [ref=e27] [cursor=pointer]:
+            - img [ref=e28]
+            - img
+          - button "Kilépés" [ref=e35] [cursor=pointer]:
+            - img [ref=e36]
+    - main [ref=e39]:
+      - generic [ref=e40]:
+        - generic [ref=e41]:
+          - heading "Felhasználók" [level=1] [ref=e42]
+          - paragraph [ref=e43]: 5 felhasználó · ADMIN nem promotolhat ADMIN/SUPERADMIN szerepre; csak SUPERADMIN tudja.
+        - generic [ref=e44]:
+          - button "Új felhasználó" [ref=e46] [cursor=pointer]:
+            - img [ref=e47]
+            - text: Új felhasználó
+          - table [ref=e49]:
+            - rowgroup [ref=e50]:
+              - row "Név Email Szerepkör Osztály Műveletek" [ref=e51]:
+                - columnheader "Név" [ref=e52]
+                - columnheader "Email" [ref=e53]
+                - columnheader "Szerepkör" [ref=e54]
+                - columnheader "Osztály" [ref=e55]
+                - columnheader "Műveletek" [ref=e56]
+            - rowgroup [ref=e57]:
+              - row "Szuper Admin superadmin@demo.hu Szuper-admin — Törlés" [ref=e58]:
+                - cell "Szuper Admin" [ref=e59]
+                - cell "superadmin@demo.hu" [ref=e60]
+                - cell "Szuper-admin" [ref=e61]:
+                  - combobox [disabled] [ref=e62]:
+                    - option "Szuper-admin" [selected]
+                    - option "Admin"
+                    - option "Oktató"
+                    - option "Diák"
+                - cell "—" [ref=e63]
+                - cell "Törlés" [ref=e64]:
+                  - button "Törlés" [disabled]:
+                    - img
+              - row "Admin Anna admin@demo.hu Admin — Törlés" [ref=e65]:
+                - cell "Admin Anna" [ref=e66]
+                - cell "admin@demo.hu" [ref=e67]
+                - cell "Admin" [ref=e68]:
+                  - combobox [ref=e69]:
+                    - option "Szuper-admin"
+                    - option "Admin" [selected]
+                    - option "Oktató"
+                    - option "Diák"
+                - cell "—" [ref=e70]
+                - cell "Törlés" [ref=e71]:
+                  - button "Törlés" [ref=e72] [cursor=pointer]:
+                    - img [ref=e73]
+              - row "Oktató Géza instructor@demo.hu Oktató — Törlés" [ref=e76]:
+                - cell "Oktató Géza" [ref=e77]
+                - cell "instructor@demo.hu" [ref=e78]
+                - cell "Oktató" [ref=e79]:
+                  - combobox [ref=e80]:
+                    - option "Szuper-admin"
+                    - option "Admin"
+                    - option "Oktató" [selected]
+                    - option "Diák"
+                - cell "—" [ref=e81]
+                - cell "Törlés" [ref=e82]:
+                  - button "Törlés" [ref=e83] [cursor=pointer]:
+                    - img [ref=e84]
+              - row "Diák Béla student@demo.hu Diák 2024/A Törlés" [ref=e87]:
+                - cell "Diák Béla" [ref=e88]
+                - cell "student@demo.hu" [ref=e89]
+                - cell "Diák" [ref=e90]:
+                  - combobox [ref=e91]:
+                    - option "Szuper-admin"
+                    - option "Admin"
+                    - option "Oktató"
+                    - option "Diák" [selected]
+                - cell "2024/A" [ref=e92]:
+                  - generic [ref=e93]: 2024/A
+                - cell "Törlés" [ref=e94]:
+                  - button "Törlés" [ref=e95] [cursor=pointer]:
+                    - img [ref=e96]
+              - row "Teszt Diák teszt.diak@demo.hu Diák 2024/B Törlés" [ref=e99]:
+                - cell "Teszt Diák" [ref=e100]
+                - cell "teszt.diak@demo.hu" [ref=e101]
+                - cell "Diák" [ref=e102]:
+                  - combobox [ref=e103]:
+                    - option "Szuper-admin"
+                    - option "Admin"
+                    - option "Oktató"
+                    - option "Diák" [selected]
+                - cell "2024/B" [ref=e104]:
+                  - generic [ref=e105]: 2024/B
+                - cell "Törlés" [ref=e106]:
+                  - button "Törlés" [ref=e107] [cursor=pointer]:
+                    - img [ref=e108]
+    - contentinfo [ref=e111]:
+      - generic [ref=e112]: Padtárs · Modern Fullstack Verseny 2026
+  - region "Notifications alt+T"

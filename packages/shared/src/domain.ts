@@ -17,13 +17,19 @@ export const subjectSchema = z.object({
 });
 export type SubjectInput = z.infer<typeof subjectSchema>;
 
-// SubjectAssignment
-export const subjectAssignmentSchema = z.object({
-  year: z.number().int().min(1990).max(2100),
-  subjectId: z.string().min(1),
-  classId: z.string().min(1),
-  teacherId: z.string().min(1),
-});
+// SubjectAssignment — class VAGY group, vagy mindkettő
+export const subjectAssignmentSchema = z
+  .object({
+    year: z.number().int().min(1990).max(2100),
+    subjectId: z.string().min(1),
+    classId: z.string().min(1).nullable().optional(),
+    groupId: z.string().min(1).nullable().optional(),
+    teacherId: z.string().min(1),
+  })
+  .refine((d) => d.classId || d.groupId, {
+    message: "Osztály vagy csoport megadása kötelező",
+    path: ["classId"],
+  });
 export type SubjectAssignmentInput = z.infer<typeof subjectAssignmentSchema>;
 
 // Grade types — must match Prisma enum GradeType.

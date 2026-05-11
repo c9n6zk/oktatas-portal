@@ -1,0 +1,103 @@
+- generic:
+  - generic:
+    - banner:
+      - generic:
+        - generic:
+          - link:
+            - /url: /dashboard
+            - generic:
+              - generic:
+                - img
+              - generic: Padtárs
+          - navigation:
+            - link:
+              - /url: /dashboard
+              - text: Áttekintés
+            - link:
+              - /url: /instructor/grading
+              - text: Jegybeírás
+            - link:
+              - /url: /admin/users
+              - text: Felhasználók
+            - link:
+              - /url: /admin/classes
+              - text: Osztályok
+            - link:
+              - /url: /admin/subjects
+              - text: Tárgyak
+            - link:
+              - /url: /admin/assignments
+              - text: Hozzárendelések
+            - link:
+              - /url: /events
+              - text: Események
+            - link:
+              - /url: /profile
+              - text: Profil
+        - generic:
+          - generic: Admin
+          - generic: admin@demo.hu
+          - button:
+            - img
+          - generic:
+            - button:
+              - img
+    - main:
+      - generic:
+        - generic:
+          - heading [level=1]: Osztályok
+          - paragraph: Osztály = kezdés éve + azonosító, pl. 2024/A. Új osztály létrehozása, törlés.
+        - generic:
+          - generic:
+            - heading [level=3]: Összes osztály (2)
+            - paragraph: Egy osztály törlésével az ahhoz tartozó hozzárendelések is törlődnek.
+          - generic:
+            - generic:
+              - generic:
+                - button [expanded]:
+                  - img
+                  - text: Új osztály
+              - generic:
+                - table:
+                  - rowgroup:
+                    - row:
+                      - columnheader: Osztály
+                      - columnheader: Diákok
+                      - columnheader: Tárgyhozzárendelések
+                      - columnheader: Művelet
+                  - rowgroup:
+                    - row:
+                      - cell: 2024/A
+                      - cell: "1"
+                      - cell: "4"
+                      - cell:
+                        - button:
+                          - img
+                    - row:
+                      - cell: 2024/B
+                      - cell: "1"
+                      - cell: "2"
+                      - cell:
+                        - button:
+                          - img
+    - contentinfo:
+      - generic: Padtárs · Modern Fullstack Verseny 2026
+  - region "Notifications alt+T"
+  - button "Open Next.js Dev Tools" [ref=e83] [cursor=pointer]:
+    - img [ref=e84]
+  - alert
+  - dialog "Új osztály" [ref=e88]:
+    - heading "Új osztály" [level=2] [ref=e90]
+    - generic [ref=e91]:
+      - generic [ref=e92]:
+        - generic [ref=e93]:
+          - text: Kezdés éve
+          - spinbutton "Kezdés éve" [active] [ref=e94]: "2024"
+        - generic [ref=e95]:
+          - text: Azonosító
+          - textbox "Azonosító" [ref=e96]:
+            - /placeholder: A
+      - button "Létrehozás" [ref=e98] [cursor=pointer]
+    - button "Bezárás" [ref=e99] [cursor=pointer]:
+      - img [ref=e100]
+      - generic [ref=e103]: Bezárás

@@ -1,0 +1,68 @@
+- generic [ref=e1]:
+  - generic [ref=e163]:
+    - banner [ref=e164]:
+      - generic [ref=e165]:
+        - generic [ref=e166]:
+          - link "Padtárs logó Padtárs" [ref=e167] [cursor=pointer]:
+            - /url: /dashboard
+            - generic [ref=e168]:
+              - img "Padtárs logó" [ref=e170]
+              - generic [ref=e171]: Padtárs
+          - navigation [ref=e172]:
+            - link "Áttekintés" [ref=e173] [cursor=pointer]:
+              - /url: /dashboard
+            - link "Saját jegyek" [ref=e174] [cursor=pointer]:
+              - /url: /student/grades
+            - link "Események" [ref=e175] [cursor=pointer]:
+              - /url: /events
+            - link "Profil" [active] [ref=e176] [cursor=pointer]:
+              - /url: /profile
+        - generic [ref=e177]:
+          - generic [ref=e178]: Diák
+          - generic [ref=e179]: student@demo.hu
+          - button "Téma váltás" [ref=e180] [cursor=pointer]:
+            - img [ref=e181]
+            - img
+          - button "Kilépés" [ref=e188] [cursor=pointer]:
+            - img [ref=e189]
+    - main [ref=e192]:
+      - generic [ref=e407]:
+        - generic [ref=e408]:
+          - heading "Profil" [level=1] [ref=e409]
+          - paragraph [ref=e410]: Bejelentkezett fiók adatai
+        - generic [ref=e411]:
+          - heading "Alapadatok" [level=3] [ref=e413]
+          - generic [ref=e414]:
+            - generic [ref=e415]:
+              - generic [ref=e416]: Név
+              - generic [ref=e417]: Diák Béla
+            - generic [ref=e418]:
+              - generic [ref=e419]: Email
+              - generic [ref=e420]: student@demo.hu
+            - generic [ref=e421]:
+              - generic [ref=e422]: Szerepkör
+              - generic [ref=e423]: Diák
+            - generic [ref=e424]:
+              - generic [ref=e425]: Osztály
+              - generic [ref=e426]: 2024/A
+            - generic [ref=e427]:
+              - generic [ref=e428]: Regisztráció
+              - generic [ref=e429]: 2026. 05. 11. 16:08:29
+        - generic [ref=e430]:
+          - heading "Statisztika" [level=3] [ref=e432]
+          - generic [ref=e433]:
+            - generic [ref=e434]:
+              - generic [ref=e435]: Összes jegy
+              - generic [ref=e436]: "11"
+            - generic [ref=e437]:
+              - generic [ref=e438]: Különböző tantárgyak
+              - generic [ref=e439]: "4"
+        - generic [ref=e441]:
+          - heading "Biztonság" [level=3] [ref=e442]
+          - paragraph [ref=e443]: Jelszó hash-elve bcrypt-tel tárolódik. Mobil belépés JWT-vel (Bearer token).
+    - contentinfo [ref=e370]:
+      - generic [ref=e371]: Padtárs · Modern Fullstack Verseny 2026
+  - region "Notifications alt+T"
+  - button "Open Next.js Dev Tools" [ref=e53] [cursor=pointer]:
+    - img [ref=e54]
+  - alert [ref=e57]

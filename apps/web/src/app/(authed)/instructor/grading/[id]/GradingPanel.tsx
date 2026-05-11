@@ -9,7 +9,6 @@ import {
   calculateWeightedAverage,
   type GradeType,
 } from "@repo/shared";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -119,26 +118,17 @@ export function GradingPanel({
   }
 
   return (
-    <Card>
-      <CardHeader>
-        <div className="flex items-start justify-between gap-3">
-          <div>
-            <CardTitle>Osztály jegyei</CardTitle>
-            <CardDescription>
-              {students.length} diák · {grades.length} jegy · osztály súlyozott átlag:{" "}
-              <strong className="text-foreground">
-                {classAvg !== null ? classAvg.toFixed(2) : "—"}
-              </strong>
-            </CardDescription>
-          </div>
-        </div>
-      </CardHeader>
-      <CardContent>
-        <div className="space-y-4">
-          {students.length === 0 ? (
-            <p className="text-muted-foreground text-center py-8">Az osztálynak nincs diákja.</p>
-          ) : (
-            students.map((s) => {
+    <div className="space-y-4">
+      <p className="text-sm text-muted-foreground">
+        {students.length} diák · {grades.length} jegy · osztály súlyozott átlag:{" "}
+        <strong className="text-foreground">
+          {classAvg !== null ? classAvg.toFixed(2) : "—"}
+        </strong>
+      </p>
+      {students.length === 0 ? (
+        <p className="text-muted-foreground text-center py-8">Az osztálynak nincs diákja.</p>
+      ) : (
+        students.map((s) => {
               const studentGrades = grades.filter((g) => g.studentId === s.id);
               const avg = calculateWeightedAverage(studentGrades);
               return (
@@ -264,11 +254,9 @@ export function GradingPanel({
                     </div>
                   )}
                 </div>
-              );
-            })
-          )}
-        </div>
-      </CardContent>
-    </Card>
+          );
+        })
+      )}
+    </div>
   );
 }

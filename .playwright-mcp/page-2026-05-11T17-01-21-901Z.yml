@@ -1,0 +1,134 @@
+- generic:
+  - generic:
+    - banner:
+      - generic:
+        - generic:
+          - link:
+            - /url: /dashboard
+            - generic:
+              - generic:
+                - img
+              - generic: Padtárs
+          - navigation:
+            - link:
+              - /url: /dashboard
+              - text: Áttekintés
+            - link:
+              - /url: /instructor/grading
+              - text: Jegybeírás
+            - link:
+              - /url: /events
+              - text: Események
+            - link:
+              - /url: /profile
+              - text: Profil
+        - generic:
+          - generic: Oktató
+          - generic: instructor@demo.hu
+          - button:
+            - img
+          - generic:
+            - button:
+              - img
+    - main:
+      - generic:
+        - generic:
+          - generic:
+            - link:
+              - /url: /instructor/grading
+              - text: ← Vissza
+            - heading [level=1]: Matematika
+            - paragraph: 2024/A · 2025/2026 tanév · Oktató Géza
+        - generic:
+          - generic:
+            - heading [level=3]: A tárgy
+            - paragraph: Algebra, geometria, függvények
+          - generic:
+            - generic:
+              - strong: "Könyv:"
+              - text: Matematika 10. — Nemzeti Tankönyvkiadó
+            - generic:
+              - strong: "Leckék:"
+              - text: 1. Halmazok · 2. Egyenletek · 3. Függvények · 4. Geometria
+        - generic:
+          - generic:
+            - generic:
+              - generic:
+                - heading [level=3]: Osztály jegyei
+                - paragraph:
+                  - text: "1 diák · 4 jegy · osztály súlyozott átlag:"
+                  - strong: "4.33"
+          - generic:
+            - generic:
+              - generic:
+                - generic:
+                  - generic:
+                    - generic: Diák Béla
+                    - generic: student@demo.hu
+                  - generic:
+                    - generic:
+                      - generic: "4.33"
+                      - generic: átlag
+                    - button [expanded]:
+                      - img
+                      - text: Új jegy
+                - generic:
+                  - generic:
+                    - generic: Felelés
+                    - generic: "4"
+                    - generic: 1×
+                    - generic: "\"Aktív óra\""
+                    - button:
+                      - img
+                  - generic:
+                    - generic: Felelés
+                    - generic: "3"
+                    - generic: 1×
+                    - button:
+                      - img
+                  - generic:
+                    - generic: Témazáró
+                    - generic: "5"
+                    - generic: 3×
+                    - generic: "\"Egyenletek témazáró\""
+                    - button:
+                      - img
+                  - generic:
+                    - generic: Féléves
+                    - generic: "4"
+                    - generic: 1×
+                    - button:
+                      - img
+    - contentinfo:
+      - generic: Padtárs · Modern Fullstack Verseny 2026
+  - region "Notifications alt+T"
+  - button "Open Next.js Dev Tools" [ref=e179] [cursor=pointer]:
+    - img [ref=e180]
+  - alert
+  - 'dialog "Új jegy: Diák Béla" [ref=e363]':
+    - generic [ref=e364]:
+      - 'heading "Új jegy: Diák Béla" [level=2] [ref=e365]'
+      - paragraph [ref=e366]: A súlyt automatikusan a típus határozza meg, de felülírható.
+    - generic [ref=e367]:
+      - generic [ref=e368]:
+        - generic [ref=e369]:
+          - text: Jegy (1-5)
+          - spinbutton "Jegy (1-5)" [active] [ref=e370]: "5"
+        - generic [ref=e371]:
+          - text: Típus
+          - combobox "Típus" [ref=e372]:
+            - option "Felelés"
+            - option "Témazáró" [selected]
+            - option "Házi"
+            - option "Féléves"
+            - option "Év végi"
+      - generic [ref=e373]:
+        - text: Súly (üres = default)
+        - spinbutton "Súly (üres = default)" [ref=e374]
+      - generic [ref=e375]:
+        - text: Megjegyzés
+        - textbox "Megjegyzés" [ref=e376]
+      - button "Beírás" [ref=e378] [cursor=pointer]
+    - button "Bezárás" [ref=e379] [cursor=pointer]:
+      - img [ref=e380]
+      - generic [ref=e383]: Bezárás

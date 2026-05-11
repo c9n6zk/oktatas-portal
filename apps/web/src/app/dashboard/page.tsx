@@ -5,6 +5,7 @@ import { calculateWeightedAverage } from "@repo/shared";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { StatCard } from "@/components/ui/stat-card";
 
 const ROLE_GREETING: Record<string, string> = {
   SUPERADMIN: "Szuper-adminisztrátor",
@@ -72,27 +73,13 @@ async function StudentDashboard({ userId, userName }: { userId: string; userName
         </p>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-3">
-        <Card>
-          <CardHeader className="pb-2">
-            <CardDescription>Tantárgyak</CardDescription>
-            <CardTitle className="text-3xl">{subjectAvgs.length}</CardTitle>
-          </CardHeader>
-        </Card>
-        <Card>
-          <CardHeader className="pb-2">
-            <CardDescription>Összes jegy</CardDescription>
-            <CardTitle className="text-3xl">{grades.length}</CardTitle>
-          </CardHeader>
-        </Card>
-        <Card>
-          <CardHeader className="pb-2">
-            <CardDescription>Tanulmányi átlag</CardDescription>
-            <CardTitle className="text-3xl tabular-nums">
-              {overall !== null && !isNaN(overall) ? overall.toFixed(2) : "—"}
-            </CardTitle>
-          </CardHeader>
-        </Card>
+      <div className="grid gap-3 md:grid-cols-3">
+        <StatCard label="Tantárgyak" value={subjectAvgs.length} />
+        <StatCard label="Összes jegy" value={grades.length} />
+        <StatCard
+          label="Tanulmányi átlag"
+          value={overall !== null && !isNaN(overall) ? overall.toFixed(2) : "—"}
+        />
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
@@ -203,25 +190,10 @@ async function InstructorDashboard({ userId, userName }: { userId: string; userN
         <p className="text-muted-foreground">Oktató · {assignments.length} hozzárendelés</p>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-3">
-        <Card>
-          <CardHeader className="pb-2">
-            <CardDescription>Tárgyhozzárendelések</CardDescription>
-            <CardTitle className="text-3xl">{assignments.length}</CardTitle>
-          </CardHeader>
-        </Card>
-        <Card>
-          <CardHeader className="pb-2">
-            <CardDescription>Diákok összesen</CardDescription>
-            <CardTitle className="text-3xl">{totalStudents}</CardTitle>
-          </CardHeader>
-        </Card>
-        <Card>
-          <CardHeader className="pb-2">
-            <CardDescription>Beírt jegyek</CardDescription>
-            <CardTitle className="text-3xl">{gradesCount}</CardTitle>
-          </CardHeader>
-        </Card>
+      <div className="grid gap-3 md:grid-cols-3">
+        <StatCard label="Tárgyhozzárendelések" value={assignments.length} />
+        <StatCard label="Diákok összesen" value={totalStudents} />
+        <StatCard label="Beírt jegyek" value={gradesCount} />
       </div>
 
       <Card>
@@ -316,47 +288,22 @@ async function AdminDashboard({ userName, role }: { userName: string; role: stri
         <p className="text-muted-foreground">{ROLE_GREETING[role]} áttekintés</p>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <Card>
-          <CardHeader className="pb-2">
-            <CardDescription>Felhasználók</CardDescription>
-            <CardTitle className="text-3xl">{userCount}</CardTitle>
-          </CardHeader>
-          <CardContent className="text-xs text-muted-foreground space-y-1">
-            <div>{studentCount} diák · {instructorCount} oktató</div>
-            <div>{adminCount} admin / szuperadmin</div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="pb-2">
-            <CardDescription>Osztályok</CardDescription>
-            <CardTitle className="text-3xl">{classCount}</CardTitle>
-          </CardHeader>
-        </Card>
-        <Card>
-          <CardHeader className="pb-2">
-            <CardDescription>Tantárgyak</CardDescription>
-            <CardTitle className="text-3xl">{subjectCount}</CardTitle>
-          </CardHeader>
-        </Card>
-        <Card>
-          <CardHeader className="pb-2">
-            <CardDescription>Hozzárendelések</CardDescription>
-            <CardTitle className="text-3xl">{assignmentCount}</CardTitle>
-          </CardHeader>
-        </Card>
-        <Card>
-          <CardHeader className="pb-2">
-            <CardDescription>Beírt jegyek</CardDescription>
-            <CardTitle className="text-3xl">{gradeCount}</CardTitle>
-          </CardHeader>
-        </Card>
-        <Card>
-          <CardHeader className="pb-2">
-            <CardDescription>Iskolai események</CardDescription>
-            <CardTitle className="text-3xl">{eventCount}</CardTitle>
-          </CardHeader>
-        </Card>
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <StatCard
+          label="Felhasználók"
+          value={userCount}
+          hint={
+            <>
+              <div>{studentCount} diák · {instructorCount} oktató</div>
+              <div>{adminCount} admin / szuperadmin</div>
+            </>
+          }
+        />
+        <StatCard label="Osztályok" value={classCount} />
+        <StatCard label="Tantárgyak" value={subjectCount} />
+        <StatCard label="Hozzárendelések" value={assignmentCount} />
+        <StatCard label="Beírt jegyek" value={gradeCount} />
+        <StatCard label="Iskolai események" value={eventCount} />
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">

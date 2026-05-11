@@ -35,9 +35,14 @@ export default async function EventsPage() {
       ) : (
         <div className="grid gap-4 md:grid-cols-2">
           {events.map((e) => {
-            const isPast = e.endsAt
-              ? new Date(e.endsAt) < new Date()
-              : new Date(e.startsAt) < new Date();
+            const start = new Date(e.startsAt);
+            const end = e.endsAt ? new Date(e.endsAt) : null;
+            const isPast = end ? end < new Date() : start < new Date();
+            const sameDay =
+              end !== null &&
+              start.getFullYear() === end.getFullYear() &&
+              start.getMonth() === end.getMonth() &&
+              start.getDate() === end.getDate();
             return (
               <Card key={e.id} className={isPast ? "opacity-60" : ""}>
                 <CardHeader>
@@ -45,14 +50,17 @@ export default async function EventsPage() {
                     <div>
                       <CardTitle className="text-lg">{e.title}</CardTitle>
                       <CardDescription>
-                        {new Date(e.startsAt).toLocaleString("hu-HU", {
+                        {start.toLocaleString("hu-HU", {
                           dateStyle: "medium",
                           timeStyle: "short",
                         })}
-                        {e.endsAt &&
-                          ` – ${new Date(e.endsAt).toLocaleString("hu-HU", {
-                            timeStyle: "short",
-                          })}`}
+                        {end &&
+                          ` – ${end.toLocaleString(
+                            "hu-HU",
+                            sameDay
+                              ? { timeStyle: "short" }
+                              : { dateStyle: "medium", timeStyle: "short" },
+                          )}`}
                       </CardDescription>
                     </div>
                     {isPast && <Badge variant="outline">Lezárult</Badge>}

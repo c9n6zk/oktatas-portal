@@ -1,0 +1,139 @@
+- generic:
+  - generic:
+    - banner:
+      - generic:
+        - generic:
+          - link:
+            - /url: /dashboard
+            - generic:
+              - generic:
+                - img
+              - generic: Padtárs
+          - navigation:
+            - link:
+              - /url: /dashboard
+              - text: Áttekintés
+            - link:
+              - /url: /instructor/grading
+              - text: Jegybeírás
+            - link:
+              - /url: /admin/users
+              - text: Felhasználók
+            - link:
+              - /url: /admin/classes
+              - text: Osztályok
+            - link:
+              - /url: /admin/subjects
+              - text: Tárgyak
+            - link:
+              - /url: /admin/assignments
+              - text: Hozzárendelések
+            - link:
+              - /url: /events
+              - text: Események
+            - link:
+              - /url: /profile
+              - text: Profil
+        - generic:
+          - generic: Admin
+          - generic: admin@demo.hu
+          - button:
+            - img
+          - generic:
+            - button:
+              - img
+    - main:
+      - generic:
+        - generic:
+          - heading [level=1]: Tárgyak
+          - paragraph: Tárgy létrehozás (kód, név, leírás, könyv, leckék). Az osztályhoz rendelés külön oldalon.
+        - generic:
+          - generic:
+            - heading [level=3]: Tantárgyak (4)
+            - paragraph: A leckék vesszővel elválasztott listával adhatók meg.
+          - generic:
+            - generic:
+              - generic:
+                - button [expanded]:
+                  - img
+                  - text: Új tárgy
+              - generic:
+                - table:
+                  - rowgroup:
+                    - row:
+                      - columnheader: Kód
+                      - columnheader: Név
+                      - columnheader: Tankönyv
+                      - columnheader: Leckék
+                      - columnheader: Hozzárendelés
+                      - columnheader: Művelet
+                  - rowgroup:
+                    - row:
+                      - cell: BIO
+                      - cell: Biológia
+                      - cell: Biológia 10.
+                      - cell: 4 db
+                      - cell: "1"
+                      - cell:
+                        - button:
+                          - img
+                    - row:
+                      - cell: INF
+                      - cell: Informatika
+                      - cell: Informatika 10.
+                      - cell: 4 db
+                      - cell: "2"
+                      - cell:
+                        - button:
+                          - img
+                    - row:
+                      - cell: IRO
+                      - cell: Irodalom
+                      - cell: Irodalmi szöveggyűjtemény 10.
+                      - cell: 4 db
+                      - cell: "1"
+                      - cell:
+                        - button:
+                          - img
+                    - row:
+                      - cell: MAT
+                      - cell: Matematika
+                      - cell: Matematika 10. — Nemzeti Tankönyvkiadó
+                      - cell: 4 db
+                      - cell: "2"
+                      - cell:
+                        - button:
+                          - img
+    - contentinfo:
+      - generic: Padtárs · Modern Fullstack Verseny 2026
+  - region "Notifications alt+T"
+  - button "Open Next.js Dev Tools" [ref=e111] [cursor=pointer]:
+    - img [ref=e112]
+  - alert
+  - dialog "Új tárgy" [ref=e116]:
+    - heading "Új tárgy" [level=2] [ref=e118]
+    - generic [ref=e119]:
+      - generic [ref=e120]:
+        - generic [ref=e121]:
+          - text: Kód
+          - textbox "Kód" [active] [ref=e122]:
+            - /placeholder: MAT
+        - generic [ref=e123]:
+          - text: Név
+          - textbox "Név" [ref=e124]:
+            - /placeholder: Matematika
+      - generic [ref=e125]:
+        - text: Leírás
+        - textbox "Leírás" [ref=e126]
+      - generic [ref=e127]:
+        - text: Tankönyv
+        - textbox "Tankönyv" [ref=e128]:
+          - /placeholder: Matematika 10.
+      - generic [ref=e129]:
+        - text: Leckék (vesszővel)
+        - textbox "Leckék (vesszővel)" [ref=e130]:
+          - /placeholder: 1. Halmazok, 2. Egyenletek, 3. Függvények
+      - button "Létrehozás" [ref=e132] [cursor=pointer]
+    - button "Bezárás" [ref=e133] [cursor=pointer]:
+      - img [ref=e134]
+      - generic [ref=e137]: Bezárás
