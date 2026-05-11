@@ -1,4 +1,5 @@
 "use client";
+import { useEffect, useState } from "react";
 import { Contrast, Monitor, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
@@ -10,8 +11,10 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 export function ThemeToggle() {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
   const { setTheme, theme, resolvedTheme } = useTheme();
-  const current = theme === "system" ? resolvedTheme : theme;
+  const current = !mounted ? null : theme === "system" ? resolvedTheme : theme;
 
   return (
     <DropdownMenu>

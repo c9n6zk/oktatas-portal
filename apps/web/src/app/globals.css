@@ -90,6 +90,15 @@
     outline: 3px solid hsl(var(--ring)) !important;
     outline-offset: 2px !important;
   }
+  /* Sárga (bg-accent / bg-primary) háttéren minden szöveg legyen fekete az olvashatóságért. */
+  .high-contrast .bg-accent,
+  .high-contrast .bg-primary {
+    color: hsl(var(--primary-foreground));
+  }
+  .high-contrast .bg-accent *,
+  .high-contrast .bg-primary * {
+    color: hsl(var(--primary-foreground)) !important;
+  }
 }
 
 @layer base {

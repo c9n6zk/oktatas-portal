@@ -244,6 +244,42 @@ async function main() {
     },
   });
 
+  // Demo üzenetek diák↔oktató közt.
+  await prisma.message.deleteMany({
+    where: {
+      OR: [
+        { senderId: student.id, recipientId: instructor.id },
+        { senderId: instructor.id, recipientId: student.id },
+      ],
+    },
+  });
+  const msgNow = Date.now();
+  await prisma.message.createMany({
+    data: [
+      {
+        senderId: student.id,
+        recipientId: instructor.id,
+        body: "Tanár úr, kérdezni szeretnék a holnapi témazáróról. Az utolsó leckét is kell tanulni?",
+        createdAt: new Date(msgNow - 1000 * 60 * 60 * 26),
+        readAt: new Date(msgNow - 1000 * 60 * 60 * 25),
+      },
+      {
+        senderId: instructor.id,
+        recipientId: student.id,
+        body: "Szia Béla! Igen, az utolsó leckét is kérdezem, de a feladatok az előzőekre épülnek.",
+        createdAt: new Date(msgNow - 1000 * 60 * 60 * 25),
+        readAt: new Date(msgNow - 1000 * 60 * 60 * 24),
+      },
+      {
+        senderId: student.id,
+        recipientId: instructor.id,
+        body: "Köszönöm! Akkor még átnézem ma este.",
+        createdAt: new Date(msgNow - 1000 * 60 * 60 * 24),
+        readAt: null,
+      },
+    ],
+  });
+
   console.log("Seed kész ✓");
   console.log("");
   console.log("Belépés: <email> / password");
@@ -261,6 +297,7 @@ async function main() {
   console.log("  2 csoport (Haladó matek, Angol kezdő)");
   console.log("  6 órarend bejegyzés");
   console.log("  1 kérdőív (Szülői értekezlet időpont, 4 opció)");
+  console.log("  3 demo üzenet (Diák Béla ↔ Oktató Géza)");
 }
 
 main()

@@ -27,7 +27,6 @@ const NAV: NavItem[] = [
   { href: "/messages", label: "Üzenetek", icon: "MessageSquare" },
   { href: "/polls", label: "Szavazások", icon: "Vote" },
   { href: "/events", label: "Események", icon: "CalendarDays" },
-  { href: "/profile", label: "Profil", icon: "UserCircle" },
 ];
 
 export interface AppShellProps {
