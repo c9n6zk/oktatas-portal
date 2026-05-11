@@ -21,6 +21,7 @@ const NAV: NavItem[] = [
   { href: "/admin/subjects", label: "Tárgyak", roles: ["ADMIN", "SUPERADMIN"] },
   { href: "/admin/assignments", label: "Hozzárendelések", roles: ["ADMIN", "SUPERADMIN"] },
   { href: "/events", label: "Események" },
+  { href: "/profile", label: "Profil" },
 ];
 
 export interface AppShellProps {
