@@ -66,10 +66,26 @@ model User {
   substituteFor     ScheduleEntry[]     @relation("SubstituteTeacher")
   pollsCreated      Poll[]              @relation("PollCreator")
   pollResponses     PollResponse[]      @relation("PollResponseUser")
+  pushTokens        PushToken[]
+  messagesSent      Message[]           @relation("MessageSender")
+  messagesReceived  Message[]           @relation("MessageRecipient")
 
   // NextAuth
   sessions Session[]
   accounts Account[]
+}
+
+// Expo push notification token — egy user több eszközről is regisztrálhat.
+model PushToken {
+  id         String   @id @default(cuid())
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId     String
+  token      String   @unique // ExponentPushToken[xxxxxxx]
+  platform   String   @default("unknown") // "ios" | "android" | "web" | "unknown"
+  lastUsedAt DateTime @default(now())
+  createdAt  DateTime @default(now())
+
+  @@index([userId])
 }
 
 model SchoolClass {
@@ -202,6 +218,21 @@ model PollResponse {
   createdAt DateTime   @default(now())
 
   @@unique([pollId, userId]) // egy user egy szavazásban egyszer szavaz
+}
+
+// Diák↔Oktató kétirányú üzenet. A küldő/címzett közti összes üzenet egy "thread".
+model Message {
+  id          String   @id @default(cuid())
+  sender      User     @relation("MessageSender", fields: [senderId], references: [id], onDelete: Cascade)
+  senderId    String
+  recipient   User     @relation("MessageRecipient", fields: [recipientId], references: [id], onDelete: Cascade)
+  recipientId String
+  body        String
+  readAt      DateTime?
+  createdAt   DateTime @default(now())
+
+  @@index([senderId, recipientId, createdAt])
+  @@index([recipientId, readAt])
 }
 
 // Jelenléti rögzítés (mobil GPS-szel) — opcionális innovation feature.

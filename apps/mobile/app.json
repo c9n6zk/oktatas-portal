@@ -8,6 +8,11 @@
     "scheme": "oktatasportal",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0a0a0a"
+    },
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "hu.demo.oktatasportal",

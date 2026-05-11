@@ -2,6 +2,15 @@ import { NextResponse } from "next/server";
 import { prisma } from "@repo/db";
 import { gradeSchema, DEFAULT_GRADE_WEIGHT } from "@repo/shared";
 import { requireAnyRole, requireAuth } from "@/lib/rbac";
+import { notifyUser } from "@/lib/expo-push";
+
+const GRADE_TYPE_LABEL: Record<string, string> = {
+  ORAL: "Felelés",
+  TEST: "Témazáró",
+  HOMEWORK: "Házi",
+  MID_YEAR: "Féléves",
+  YEAR_END: "Év végi",
+};
 
 export async function GET(req: Request) {
   const session = await requireAuth();
@@ -71,8 +80,20 @@ export async function POST(req: Request) {
         weight,
         comment: parsed.data.comment ?? null,
       },
-      include: { student: { select: { name: true } } },
+      include: {
+        student: { select: { name: true } },
+        assignment: { include: { subject: { select: { name: true } } } },
+      },
     });
+
+    // Push értesítés a diáknak, ha van regisztrált eszköze.
+    const typeLabel = GRADE_TYPE_LABEL[created.type] ?? created.type;
+    notifyUser(created.studentId, {
+      title: `Új ${typeLabel.toLowerCase()} jegy: ${created.value}`,
+      body: `${created.assignment.subject.name} — ${typeLabel} (${weight}× súly)${created.comment ? ` · ${created.comment}` : ""}`,
+      data: { kind: "grade", gradeId: created.id, assignmentId: created.assignmentId },
+    }).catch((e) => console.warn("[grades] push notify failed", e));
+
     return NextResponse.json({ grade: created }, { status: 201 });
   } catch (e) {
     const msg = e instanceof Error ? e.message : String(e);

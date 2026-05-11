@@ -46,7 +46,8 @@ Az alábbi 4 fiókkal mind a 4 szerepkör kipróbálható. Jelszó: `password`.
 | **🌗 Sötét / világos mód** | `next-themes` integrációval, rendszer-szintű detektálás |
 | **📱 Reszponzív web + natív mobil** | Tailwind reszponzív + Expo natív kliens |
 | **📍 GPS-alapú jelenléti rendszer** | Mobilon "Itt vagyok" gomb → `expo-location` → lat/lng + assignment ID elküldése a backendnek |
-| **📷 Kamera + 🔔 Push értesítés** | Natív demo komponensek (`expo-camera`, `expo-notifications`) |
+| **📷 Kamera** | Natív demo komponens (`expo-camera`) |
+| **🔔 Push értesítés (end-to-end)** | Mobil app login után regisztrálja az Expo push tokent (`/api/mobile/push-token`). Jegybeíráskor a szerver értesítést küld a diák eszközére (`PushToken` modell + Expo push REST API). |
 
 ## 🏗️ Tech stack
 
@@ -122,6 +123,7 @@ Mind védve (`requireAuth` / `requireRole` / `requireAnyRole` middleware-ekkel).
 | `/api/mobile/me` | GET | Bearer | Aktuális user |
 | `/api/mobile/grades` | GET | Bearer (STUDENT) | Saját jegyek súlyozott átlaggal |
 | `/api/mobile/attendance` | GET / POST | Bearer (STUDENT) | Tárgylista / GPS check-in |
+| `/api/mobile/push-token` | POST / DELETE | Bearer | Expo push token regisztráció / törlés (új jegy értesítéshez) |
 
 ## 🚀 Gyors indítás (lokális)
 
@@ -157,6 +159,52 @@ pnpm dev
 ```
 
 A telepítési útmutató részletesen a [DEPLOY.md](./DEPLOY.md) fájlban (Vercel + Supabase cloud setup is).
+
+## 📱 Mobil app tesztelése
+
+### A) Expo Go fizikai telefonon (ajánlott — natív funkciók is működnek)
+
+1. Telepítsd a **Expo Go** appot: [Play Store](https://play.google.com/store/apps/details?id=host.exp.exponent) / [App Store](https://apps.apple.com/app/expo-go/id982107779).
+2. Backend megválasztása — a mobil `apps/mobile/.env`-ben állítható:
+   ```bash
+   # Vercel production backend (legegyszerűbb, semmit nem kell helyben futtatni)
+   EXPO_PUBLIC_API_URL="https://oktatas-portal.vercel.app"
+
+   # VAGY: helyi backend ugyanazon WiFi-n (PC IP-d, nem localhost!)
+   EXPO_PUBLIC_API_URL="http://192.168.x.x:3000"
+   ```
+3. `cd apps/mobile && pnpm dev` → terminálban QR kód megjelenik.
+4. **Android**: nyisd meg Expo Go-t → "Scan QR code" → szkenneld a kódot.  
+   **iOS**: nyisd meg a beépített Camera appot → szkennelj rá → "Open in Expo Go".
+5. Login képernyő — érintsd meg pl. a **Diák Béla** dev gombot egy klikkes belépéshez.
+
+### B) Web preview böngészőben (gyors UI-check, natív funkciók nélkül)
+
+```bash
+cd apps/mobile
+pnpm web
+# → http://localhost:8081 — UI átnézhető, de GPS/kamera/push nem megy
+```
+
+### C) Android emulátor / iOS simulator
+
+`pnpm dev` után az Expo terminálban nyomj `a` (Android) vagy `i` (iOS) billentyűt. Android emulátoron a host backend `10.0.2.2:3000`-on érhető el.
+
+### Natív funkciók kipróbálása
+
+- **📍 GPS jelenléti**: belépés diákként → `Jelenléti` tab → engedélyezd a helymeghatározást → `Itt vagyok` gomb. Backend `/api/mobile/attendance` POST-ot kap GPS koordinátákkal és tárolja az `Attendance` táblába.
+- **📷 Kamera**: `Natív` tab → `Fotó készítése` — engedélyezd a kamerát, készíts képet.
+- **🔔 Push értesítés**: `Natív` tab → `Push token regisztráció` (csak fizikai eszközön; emulátoron nem). Helyi értesítés `Helyi értesítés` gombbal.
+
+### Saját buildelt APK (opcionális, EAS Build)
+
+A versenybírálathoz Expo Go-val is teljesen tesztelhető a kliens, de saját telepíthető APK is buildelhető:
+
+```bash
+pnpm dlx eas-cli login
+pnpm dlx eas-cli build --platform android --profile preview
+# → kb. 10 perc felhő-build, végén letölthető .apk link
+```
 
 ## 🧪 Smoke teszt curl-lel
 

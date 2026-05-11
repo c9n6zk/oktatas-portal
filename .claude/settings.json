@@ -28,7 +28,15 @@
       "Bash(git commit -m ' *)",
       "Bash(git push *)",
       "Bash(ls \"c:\\\\Work\\\\GondDoc\")",
-      "Read(//c/Work/GondDoc/**)"
+      "Read(//c/Work/GondDoc/**)",
+      "Bash(findstr /i \"splash icon\")",
+      "PowerShell($env:DATABASE_URL=\"postgresql://postgres:postgres@localhost:5433/oktatas?schema=public\"; $env:DIRECT_URL=\"postgresql://postgres:postgres@localhost:5433/oktatas?schema=public\"; pnpm db:push 2>&1 | Select-Object -Last 8)",
+      "PowerShell($env:DATABASE_URL=\"postgresql://postgres.cfngfevjdpnnznotjedb:.%25yrfM7%267q5ApFM@aws-0-eu-west-1.pooler.supabase.com:6543/postgres?pgbouncer=true\"; $env:DIRECT_URL=\"postgresql://postgres.cfngfevjdpnnznotjedb:.%25yrfM7%267q5ApFM@aws-0-eu-west-1.pooler.supabase.com:5432/postgres\"; pnpm --filter @repo/db exec prisma db push --skip-generate 2>&1 | Select-Object -Last 5)",
+      "PowerShell(pnpm --filter web exec tsc --noEmit 2>&1)",
+      "PowerShell(pnpm --filter @repo/mobile exec tsc --noEmit 2>&1)",
+      "Bash(pnpm db:push)",
+      "PowerShell($env:DATABASE_URL=\"postgresql://postgres:postgres@localhost:5433/oktatas?schema=public\"; $env:DIRECT_URL=\"postgresql://postgres:postgres@localhost:5433/oktatas?schema=public\"; pnpm db:push 2>&1 | Select-Object -Last 5; \"---Supabase---\"; $env:DATABASE_URL=\"postgresql://postgres.cfngfevjdpnnznotjedb:.%25yrfM7%267q5ApFM@aws-0-eu-west-1.pooler.supabase.com:6543/postgres?pgbouncer=true\"; $env:DIRECT_URL=\"postgresql://postgres.cfngfevjdpnnznotjedb:.%25yrfM7%267q5ApFM@aws-0-eu-west-1.pooler.supabase.com:5432/postgres\"; pnpm --filter @repo/db exec prisma db push --skip-generate 2>&1 | Select-Object -Last 4)",
+      "Bash(pnpm --filter @repo/db generate)"
     ]
   }
 }

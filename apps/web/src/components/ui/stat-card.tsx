@@ -13,7 +13,7 @@ export function StatCard({ label, value, hint, className }: StatCardProps) {
   return (
     <Card
       className={cn(
-        "flex h-full min-h-[5.5rem] flex-col justify-between p-2.5 sm:min-h-[6rem] sm:p-4",
+        "flex min-h-[5.5rem] flex-col justify-between p-2.5 sm:min-h-[6rem] sm:p-4",
         className,
       )}
     >

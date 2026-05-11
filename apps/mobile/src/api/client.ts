@@ -59,3 +59,10 @@ export async function fetchMe() {
     "/api/mobile/me",
   );
 }
+
+export async function registerPushToken(token: string, platform: string) {
+  return apiFetch<{ ok: true }>("/api/mobile/push-token", {
+    method: "POST",
+    body: JSON.stringify({ token, platform }),
+  });
+}
