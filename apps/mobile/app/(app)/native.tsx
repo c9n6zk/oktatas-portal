@@ -50,7 +50,7 @@ export default function NativeFeaturesScreen() {
   async function handleSendLocalNotification() {
     await Notifications.scheduleNotificationAsync({
       content: {
-        title: "Oktatás Portál",
+        title: "Padtárs",
         body: "Helyi értesítés teszt — natív Expo funkció ✓",
       },
       trigger: { seconds: 1 } as Notifications.NotificationTriggerInput,

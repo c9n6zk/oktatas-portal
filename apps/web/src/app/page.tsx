@@ -2,6 +2,7 @@ import Link from "next/link";
 import { auth } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { Logo } from "@/components/logo";
 
 export default async function Home() {
   const session = await auth();
@@ -10,7 +11,7 @@ export default async function Home() {
     <div className="min-h-screen flex flex-col">
       <header className="border-b">
         <div className="container flex h-16 items-center justify-between">
-          <div className="font-bold text-lg">Oktatás Portál</div>
+          <Logo size="md" />
           <div className="flex items-center gap-2">
             <ThemeToggle />
             {session?.user ? (
@@ -33,9 +34,13 @@ export default async function Home() {
 
       <main className="flex-1 container py-16">
         <div className="max-w-2xl mx-auto text-center space-y-6">
-          <h1 className="text-4xl font-bold tracking-tight">Oktatásszervezési Portál</h1>
+          <div className="flex justify-center">
+            <Logo size="lg" showText={false} />
+          </div>
+          <h1 className="text-4xl font-bold tracking-tight">Padtárs</h1>
           <p className="text-muted-foreground text-lg">
-            Modern fullstack rendszer hallgatók, oktatók és adminisztrátorok számára.
+            A digitális iskolatársad — modern oktatásszervezési portál diákok, oktatók és
+            adminisztrátorok számára.
           </p>
           {!session?.user && (
             <div className="flex justify-center gap-3 pt-4">

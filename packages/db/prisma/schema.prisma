@@ -43,6 +43,8 @@ model User {
   classId           String?
   taughtAssignments SubjectAssignment[] @relation("TeacherAssignments")
   grades            Grade[]             @relation("StudentGrades")
+  attendances       Attendance[]        @relation("StudentAttendance")
+  eventsCreated     Event[]             @relation("EventCreator")
 
   // NextAuth
   sessions Session[]
@@ -81,6 +83,7 @@ model SubjectAssignment {
   teacher     User        @relation("TeacherAssignments", fields: [teacherId], references: [id])
   teacherId   String
   grades      Grade[]
+  attendances Attendance[] @relation("AssignmentAttendance")
   createdAt   DateTime    @default(now())
 
   @@unique([year, subjectId, classId])
@@ -97,6 +100,34 @@ model Grade {
   weight       Int               @default(1)
   comment      String?
   givenAt      DateTime          @default(now())
+}
+
+// Iskolai esemény (admin létrehoz, mindenki látja).
+model Event {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  location    String?
+  startsAt    DateTime
+  endsAt      DateTime?
+  createdBy   User     @relation("EventCreator", fields: [createdById], references: [id])
+  createdById String
+  createdAt   DateTime @default(now())
+}
+
+// Jelenléti rögzítés (mobil GPS-szel) — opcionális innovation feature.
+model Attendance {
+  id           String            @id @default(cuid())
+  student      User              @relation("StudentAttendance", fields: [studentId], references: [id], onDelete: Cascade)
+  studentId    String
+  assignment   SubjectAssignment @relation("AssignmentAttendance", fields: [assignmentId], references: [id], onDelete: Cascade)
+  assignmentId String
+  present      Boolean           @default(true)
+  recordedAt   DateTime          @default(now())
+  // GPS koordináták ha mobilról rögzítve
+  latitude     Float?
+  longitude    Float?
+  source       String            @default("manual") // "manual" | "gps" | "qr"
 }
 
 // NextAuth required models

@@ -4,8 +4,8 @@ import { Toaster } from "sonner";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Oktatás Portál",
-  description: "Modern Fullstack Verseny — oktatásszervezési portál",
+  title: "Padtárs",
+  description: "Padtárs — a digitális iskolatársad, modern oktatásszervezési portál",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

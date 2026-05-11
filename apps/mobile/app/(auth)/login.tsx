@@ -26,7 +26,12 @@ export default function LoginScreen() {
       behavior={Platform.OS === "ios" ? "padding" : undefined}
     >
       <View style={styles.card}>
-        <Text style={styles.title}>Oktatás Portál</Text>
+        <View style={styles.logoRow}>
+          <View style={styles.logoBox}>
+            <Text style={styles.logoLetter}>P</Text>
+          </View>
+          <Text style={styles.title}>Padtárs</Text>
+        </View>
         <Text style={styles.subtitle}>Belépés a mobil alkalmazásba</Text>
 
         <Text style={styles.label}>Email</Text>
@@ -61,6 +66,16 @@ export default function LoginScreen() {
 const styles = StyleSheet.create({
   container: { flex: 1, justifyContent: "center", padding: 24, backgroundColor: "#0a0a0a" },
   card: { backgroundColor: "#1a1a1a", padding: 24, borderRadius: 16, gap: 8 },
+  logoRow: { flexDirection: "row", alignItems: "center", gap: 10, marginBottom: 4 },
+  logoBox: {
+    width: 40,
+    height: 40,
+    borderRadius: 10,
+    backgroundColor: "#8b5cf6",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  logoLetter: { color: "#fff", fontSize: 22, fontWeight: "800" },
   title: { fontSize: 28, fontWeight: "700", color: "#fff", marginBottom: 4 },
   subtitle: { fontSize: 14, color: "#888", marginBottom: 16 },
   label: { color: "#ccc", fontSize: 13, marginTop: 8 },

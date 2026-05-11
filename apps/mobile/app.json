@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Oktatás Portál",
-    "slug": "oktatas-portal-mobile",
+    "name": "Padtárs",
+    "slug": "padtars-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
     "scheme": "oktatasportal",

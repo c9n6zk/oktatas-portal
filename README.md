@@ -1,6 +1,6 @@
-# Oktatás Portál
+# Padtárs
 
-Oktatásszervezési portál fullstack megvalósítása a **Modern Fullstack és Mobil Fejlesztői Verseny 2026** keretében.
+**Padtárs** — a digitális iskolatársad. Középiskolai oktatásszervezési portál fullstack megvalósítása a **Modern Fullstack és Mobil Fejlesztői Verseny 2026** keretében.
 
 ## Tech stack
 
