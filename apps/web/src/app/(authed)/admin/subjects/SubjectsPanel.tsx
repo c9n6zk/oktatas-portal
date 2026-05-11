@@ -126,43 +126,80 @@ export function SubjectsPanel({ initial }: { initial: SubjectRow[] }) {
         </Dialog>
       </div>
 
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Kód</TableHead>
-            <TableHead>Név</TableHead>
-            <TableHead>Tankönyv</TableHead>
-            <TableHead>Leckék</TableHead>
-            <TableHead className="text-center">Hozzárendelés</TableHead>
-            <TableHead className="text-right">Művelet</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {items.map((s) => (
-            <TableRow key={s.id}>
-              <TableCell className="font-mono">{s.code}</TableCell>
-              <TableCell className="font-medium">{s.name}</TableCell>
-              <TableCell className="text-sm text-muted-foreground">
-                {s.bookTitle ?? "—"}
-              </TableCell>
-              <TableCell className="text-sm text-muted-foreground">
-                {s.lessons.length > 0 ? `${s.lessons.length} db` : "—"}
-              </TableCell>
-              <TableCell className="text-center">{s.assignmentCount}</TableCell>
-              <TableCell className="text-right">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => handleDelete(s.id)}
-                  aria-label="Törlés"
-                >
-                  <Trash2 className="h-4 w-4 text-destructive" />
-                </Button>
-              </TableCell>
+      {/* Desktop: table */}
+      <div className="hidden md:block">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Kód</TableHead>
+              <TableHead>Név</TableHead>
+              <TableHead>Tankönyv</TableHead>
+              <TableHead>Leckék</TableHead>
+              <TableHead className="text-center">Hozzárendelés</TableHead>
+              <TableHead className="text-right">Művelet</TableHead>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHeader>
+          <TableBody>
+            {items.map((s) => (
+              <TableRow key={s.id}>
+                <TableCell className="font-mono">{s.code}</TableCell>
+                <TableCell className="font-medium">{s.name}</TableCell>
+                <TableCell className="text-sm text-muted-foreground">
+                  {s.bookTitle ?? "—"}
+                </TableCell>
+                <TableCell className="text-sm text-muted-foreground">
+                  {s.lessons.length > 0 ? `${s.lessons.length} db` : "—"}
+                </TableCell>
+                <TableCell className="text-center">{s.assignmentCount}</TableCell>
+                <TableCell className="text-right">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => handleDelete(s.id)}
+                    aria-label="Törlés"
+                  >
+                    <Trash2 className="h-4 w-4 text-destructive" />
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+
+      {/* Mobile: card list */}
+      <div className="md:hidden space-y-3">
+        {items.map((s) => (
+          <div key={s.id} className="border rounded-lg p-3 space-y-2">
+            <div className="flex items-start justify-between gap-2">
+              <div className="min-w-0 flex-1">
+                <div className="flex items-baseline gap-2">
+                  <span className="font-mono text-xs text-muted-foreground">{s.code}</span>
+                  <span className="font-medium">{s.name}</span>
+                </div>
+                {s.bookTitle && (
+                  <div className="text-xs text-muted-foreground mt-1 truncate">
+                    📖 {s.bookTitle}
+                  </div>
+                )}
+              </div>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => handleDelete(s.id)}
+                aria-label="Törlés"
+                className="shrink-0"
+              >
+                <Trash2 className="h-4 w-4 text-destructive" />
+              </Button>
+            </div>
+            <div className="flex gap-4 text-xs text-muted-foreground">
+              <div>{s.lessons.length > 0 ? `${s.lessons.length} lecke` : "nincs lecke"}</div>
+              <div>{s.assignmentCount} hozzárendelés</div>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

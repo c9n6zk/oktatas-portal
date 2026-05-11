@@ -13,12 +13,18 @@
       "PowerShell(git add CLAUDE.md)",
       "PowerShell(git commit -m \"docs: add project-local CLAUDE.md \\(auto-loaded reference in every Claude Code window\\)\" 2>&1)",
       "PowerShell(npx kill-port 3000 2>&1 | Select-Object -Last 1; Start-Sleep -Seconds 2; \"---Lokál push---\"; $env:DATABASE_URL=\"postgresql://postgres:postgres@localhost:5433/oktatas?schema=public\"; $env:DIRECT_URL=\"postgresql://postgres:postgres@localhost:5433/oktatas?schema=public\"; pnpm db:push 2>&1 | Select-Object -Last 5; \"---Supabase push---\"; $env:DATABASE_URL=\"postgresql://postgres.cfngfevjdpnnznotjedb:.%25yrfM7%267q5ApFM@aws-0-eu-west-1.pooler.supabase.com:6543/postgres?pgbouncer=true\"; $env:DIRECT_URL=\"postgresql://postgres.cfngfevjdpnnznotjedb:.%25yrfM7%267q5ApFM@aws-0-eu-west-1.pooler.supabase.com:5432/postgres\"; pnpm --filter @repo/db exec prisma db push --skip-generate 2>&1 | Select-Object -Last 4)",
-      "PowerShell(Get-NetTCPConnection -State Listen | Where-Object { $_.LocalPort -eq 3000 } | Select-Object LocalPort,OwningProcess)",
-      "Bash(curl -s -o nul -w \"%{http_code}\" http://localhost:3000/login)",
-      "PowerShell(Get-NetTCPConnection -State Listen | Where-Object { $_.LocalPort -in 3000,3001,3002,4000 } | Select-Object LocalPort,OwningProcess | Format-Table)",
-      "PowerShell(Get-Process node -ErrorAction SilentlyContinue)",
-      "PowerShell($ready = $false; $attempts = 0; while \\(-not $ready -and $attempts -lt 30\\) { try { $r = Invoke-WebRequest -Uri \"http://localhost:3000/login\" -UseBasicParsing -TimeoutSec 2 -ErrorAction Stop; if \\($r.StatusCode -eq 200\\) { $ready = $true } } catch { Start-Sleep 2; $attempts++ } }; if \\($ready\\) { \"Ready on 3000\" } else { \"Not ready\" })",
-      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/login)"
+      "PowerShell($env:DATABASE_URL=\"postgresql://postgres:postgres@localhost:5433/oktatas?schema=public\"; $env:DIRECT_URL=\"postgresql://postgres:postgres@localhost:5433/oktatas?schema=public\"; pnpm db:seed 2>&1 | Select-Object -Last 16; \"---Supabase---\"; $env:DATABASE_URL=\"postgresql://postgres.cfngfevjdpnnznotjedb:.%25yrfM7%267q5ApFM@aws-0-eu-west-1.pooler.supabase.com:6543/postgres?pgbouncer=true\"; $env:DIRECT_URL=\"postgresql://postgres.cfngfevjdpnnznotjedb:.%25yrfM7%267q5ApFM@aws-0-eu-west-1.pooler.supabase.com:5432/postgres\"; pnpm db:seed 2>&1 | Select-Object -Last 3)",
+      "PowerShell($env:DATABASE_URL=\"postgresql://postgres:postgres@localhost:5433/oktatas?schema=public\"; $env:DIRECT_URL=\"postgresql://postgres:postgres@localhost:5433/oktatas?schema=public\"; pnpm db:seed 2>&1 | Select-Object -Last 20)",
+      "PowerShell($env:DATABASE_URL=\"postgresql://postgres.cfngfevjdpnnznotjedb:.%25yrfM7%267q5ApFM@aws-0-eu-west-1.pooler.supabase.com:6543/postgres?pgbouncer=true\"; $env:DIRECT_URL=\"postgresql://postgres.cfngfevjdpnnznotjedb:.%25yrfM7%267q5ApFM@aws-0-eu-west-1.pooler.supabase.com:5432/postgres\"; pnpm db:seed 2>&1 | Select-Object -Last 3)",
+      "PowerShell(Get-ChildItem \"$env:USERPROFILE\\\\.claude\\\\\" -File | Select-Object Name | Format-Table -AutoSize; \"---\"; Get-Content \"$env:USERPROFILE\\\\.claude\\\\settings.json\" -ErrorAction SilentlyContinue | Select-Object -First 60)",
+      "PowerShell(Get-Content \"$env:USERPROFILE\\\\.claude\\\\settings.json\" -ErrorAction SilentlyContinue | Select-String -Pattern \"mcp|playwright|server\" -CaseSensitive:$false | Select-Object -First 30)",
+      "PowerShell(claude mcp list 2>&1)",
+      "PowerShell($cfg = Get-Content \"$env:USERPROFILE\\\\.claude.json\" -Raw | ConvertFrom-Json; $cfg.mcpServers.playwright | ConvertTo-Json -Depth 5)",
+      "PowerShell(Copy-Item \"$env:USERPROFILE\\\\.claude.json\" \"$env:USERPROFILE\\\\.claude.json.bak\" -Force; \"Backup created\"; \"---\"; $cfg = Get-Content \"$env:USERPROFILE\\\\.claude.json\" -Raw | ConvertFrom-Json; $cfg.mcpServers.playwright.args = @\\(\"@playwright/mcp@latest\", \"--isolated\"\\); $cfg | ConvertTo-Json -Depth 32 | Set-Content \"$env:USERPROFILE\\\\.claude.json\" -Encoding UTF8; \"Updated\"; \"---\"; \\(Get-Content \"$env:USERPROFILE\\\\.claude.json\" -Raw | ConvertFrom-Json\\).mcpServers.playwright | ConvertTo-Json)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/login)",
+      "Bash(pnpm --filter web exec tsc --noEmit)",
+      "Bash(pnpm exec *)",
+      "PowerShell(try { $r = Invoke-WebRequest -Uri \"http://localhost:3000/login\" -UseBasicParsing -TimeoutSec 3; \"$\\($r.StatusCode\\)\" } catch { \"DOWN\" })"
     ]
   }
 }

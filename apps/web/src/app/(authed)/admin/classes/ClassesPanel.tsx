@@ -122,37 +122,66 @@ export function ClassesPanel({ initial }: { initial: ClassRow[] }) {
         </Dialog>
       </div>
 
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Osztály</TableHead>
-            <TableHead className="text-center">Diákok</TableHead>
-            <TableHead className="text-center">Tárgyhozzárendelések</TableHead>
-            <TableHead className="text-right">Művelet</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {items.map((c) => (
-            <TableRow key={c.id}>
-              <TableCell className="font-mono font-semibold">
-                {c.startYear}/{c.identifier}
-              </TableCell>
-              <TableCell className="text-center">{c.studentCount}</TableCell>
-              <TableCell className="text-center">{c.assignmentCount}</TableCell>
-              <TableCell className="text-right">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => handleDelete(c.id)}
-                  aria-label="Törlés"
-                >
-                  <Trash2 className="h-4 w-4 text-destructive" />
-                </Button>
-              </TableCell>
+      {/* Desktop: table */}
+      <div className="hidden md:block">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Osztály</TableHead>
+              <TableHead className="text-center">Diákok</TableHead>
+              <TableHead className="text-center">Tárgyhozzárendelések</TableHead>
+              <TableHead className="text-right">Művelet</TableHead>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHeader>
+          <TableBody>
+            {items.map((c) => (
+              <TableRow key={c.id}>
+                <TableCell className="font-mono font-semibold">
+                  {c.startYear}/{c.identifier}
+                </TableCell>
+                <TableCell className="text-center">{c.studentCount}</TableCell>
+                <TableCell className="text-center">{c.assignmentCount}</TableCell>
+                <TableCell className="text-right">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => handleDelete(c.id)}
+                    aria-label="Törlés"
+                  >
+                    <Trash2 className="h-4 w-4 text-destructive" />
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+
+      {/* Mobile: card list */}
+      <div className="md:hidden space-y-3">
+        {items.map((c) => (
+          <div key={c.id} className="border rounded-lg p-3">
+            <div className="flex items-center justify-between gap-2">
+              <div className="font-mono font-semibold text-lg">
+                {c.startYear}/{c.identifier}
+              </div>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => handleDelete(c.id)}
+                aria-label="Törlés"
+                className="shrink-0"
+              >
+                <Trash2 className="h-4 w-4 text-destructive" />
+              </Button>
+            </div>
+            <div className="mt-2 flex gap-4 text-sm text-muted-foreground">
+              <div>{c.studentCount} diák</div>
+              <div>{c.assignmentCount} tárgy</div>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

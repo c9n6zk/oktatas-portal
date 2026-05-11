@@ -42,3 +42,7 @@ packages/db/prisma/migrations/dev.db*
 coverage/
 
 .vercel
+
+# Debug / test artifacts
+.playwright-mcp/
+*.png

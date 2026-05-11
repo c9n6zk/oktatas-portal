@@ -3,6 +3,7 @@ import { signOut } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Logo } from "@/components/logo";
+import { MobileNav } from "@/components/mobile-nav";
 import type { Role } from "@repo/shared";
 import { LogOut } from "lucide-react";
 
@@ -50,12 +51,34 @@ const roleLabel: Record<Role, string> = {
 export function AppShell({ user, children }: AppShellProps) {
   const visibleNav = NAV.filter((item) => !item.roles || item.roles.includes(user.role));
 
+  const logoutForm = (
+    <form
+      action={async () => {
+        "use server";
+        await signOut({ redirectTo: "/" });
+      }}
+    >
+      <Button type="submit" variant="ghost" size="icon" aria-label="Kilépés">
+        <LogOut className="h-4 w-4" />
+      </Button>
+    </form>
+  );
+
   return (
     <div className="min-h-screen flex flex-col">
-      <header className="border-b sticky top-0 bg-background/95 backdrop-blur z-10">
-        <div className="container flex h-24 items-center justify-between gap-4">
-          <div className="flex items-center gap-6">
-            <Link href="/dashboard" className="whitespace-nowrap">
+      <header className="border-b sticky top-0 bg-background md:bg-background/95 md:backdrop-blur shadow-sm md:shadow-none z-30">
+        <div className="container flex h-16 md:h-24 items-center justify-between gap-2 md:gap-4">
+          <div className="flex items-center gap-2 md:gap-6 min-w-0">
+            <MobileNav
+              items={visibleNav.map(({ href, label }) => ({ href, label }))}
+              user={{
+                name: user.name,
+                email: user.email,
+              }}
+              themeToggle={<ThemeToggle />}
+              logoutForm={logoutForm}
+            />
+            <Link href="/dashboard" className="whitespace-nowrap shrink-0">
               <Logo />
             </Link>
             <nav className="hidden md:flex items-center gap-1">
@@ -66,38 +89,18 @@ export function AppShell({ user, children }: AppShellProps) {
               ))}
             </nav>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="hidden md:flex items-center gap-3 shrink-0">
             <span className={`text-xs font-medium px-2 py-1 rounded ${roleBadge[user.role]}`}>
               {roleLabel[user.role]}
             </span>
-            <span className="text-sm text-muted-foreground hidden sm:block">{user.email}</span>
+            <span className="text-sm text-muted-foreground hidden lg:block">{user.email}</span>
             <ThemeToggle />
-            <form
-              action={async () => {
-                "use server";
-                await signOut({ redirectTo: "/" });
-              }}
-            >
-              <Button type="submit" variant="ghost" size="icon" aria-label="Kilépés">
-                <LogOut className="h-4 w-4" />
-              </Button>
-            </form>
+            {logoutForm}
           </div>
         </div>
       </header>
 
-      {/* Mobile nav (visible <md) */}
-      <nav className="md:hidden border-b overflow-x-auto">
-        <div className="container flex gap-1 py-2">
-          {visibleNav.map((item) => (
-            <Button key={item.href} variant="ghost" size="sm" asChild className="whitespace-nowrap">
-              <Link href={item.href}>{item.label}</Link>
-            </Button>
-          ))}
-        </div>
-      </nav>
-
-      <main className="flex-1 container py-8">{children}</main>
+      <main className="flex-1 container py-4 md:py-8">{children}</main>
 
       <footer className="border-t py-4 text-center text-sm text-muted-foreground">
         <div className="container">Padtárs · Modern Fullstack Verseny 2026</div>

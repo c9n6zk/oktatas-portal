@@ -3,6 +3,7 @@ import { prisma } from "@repo/db";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { EventsPanel } from "./EventsPanel";
+import { DeleteEventButton } from "./DeleteEventButton";
 
 export default async function EventsPage() {
   const session = await requireAuth();
@@ -63,7 +64,10 @@ export default async function EventsPage() {
                           )}`}
                       </CardDescription>
                     </div>
-                    {isPast && <Badge variant="outline">Lezárult</Badge>}
+                    <div className="flex items-center gap-2 shrink-0">
+                      {isPast && <Badge variant="outline">Lezárult</Badge>}
+                      {isAdmin && <DeleteEventButton id={e.id} title={e.title} />}
+                    </div>
                   </div>
                 </CardHeader>
                 <CardContent className="space-y-2 text-sm">

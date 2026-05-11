@@ -83,6 +83,25 @@ export function AssignmentsPanel({
       toast.error(err.error ?? "Nem sikerült");
       return;
     }
+    const { assignment } = await res.json();
+    const target = assignment.schoolClass
+      ? `${assignment.schoolClass.startYear}/${assignment.schoolClass.identifier}`
+      : assignment.group
+        ? assignment.group.name
+        : "—";
+    setItems((p) => [
+      {
+        id: assignment.id,
+        year: assignment.year,
+        subjectName: assignment.subject.name,
+        subjectCode: assignment.subject.code,
+        target,
+        targetKind: assignment.schoolClass ? "class" : "group",
+        teacherName: assignment.teacher.name,
+        gradeCount: 0,
+      },
+      ...p,
+    ]);
     toast.success("Hozzárendelés létrehozva");
     setOpen(false);
     router.refresh();

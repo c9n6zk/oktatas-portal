@@ -12,14 +12,20 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ id: st
       return NextResponse.json({ error: parsed.error.flatten() }, { status: 400 });
     }
 
-    // ADMIN nem promotolhat ADMIN-t/SUPERADMIN-t
-    if (
-      parsed.data.role &&
-      (parsed.data.role === "ADMIN" || parsed.data.role === "SUPERADMIN") &&
-      session.user.role !== "SUPERADMIN"
-    ) {
+    const target = await prisma.user.findUnique({ where: { id }, select: { role: true } });
+    if (!target) {
+      return NextResponse.json({ error: "Felhasználó nem található" }, { status: 404 });
+    }
+
+    const isSuperAdmin = session.user.role === "SUPERADMIN";
+    const targetIsPrivileged = target.role === "ADMIN" || target.role === "SUPERADMIN";
+    const promotingToPrivileged =
+      parsed.data.role === "ADMIN" || parsed.data.role === "SUPERADMIN";
+
+    // ADMIN nem érhet ADMIN/SUPERADMIN userhez, és nem promotálhat ilyen szerepre.
+    if (!isSuperAdmin && (targetIsPrivileged || promotingToPrivileged)) {
       return NextResponse.json(
-        { error: "Csak szuper-admin adhat admin szerepkört" },
+        { error: "Csak szuper-admin módosíthat admin szintű fiókot" },
         { status: 403 },
       );
     }
@@ -43,6 +49,20 @@ export async function DELETE(_req: Request, { params }: { params: Promise<{ id: 
     return NextResponse.json({ error: "Magadat nem törölheted" }, { status: 400 });
   }
   try {
+    const target = await prisma.user.findUnique({ where: { id }, select: { role: true } });
+    if (!target) {
+      return NextResponse.json({ error: "Felhasználó nem található" }, { status: 404 });
+    }
+
+    const isSuperAdmin = session.user.role === "SUPERADMIN";
+    const targetIsPrivileged = target.role === "ADMIN" || target.role === "SUPERADMIN";
+    if (!isSuperAdmin && targetIsPrivileged) {
+      return NextResponse.json(
+        { error: "Csak szuper-admin törölhet admin szintű fiókot" },
+        { status: 403 },
+      );
+    }
+
     await prisma.user.delete({ where: { id } });
     return NextResponse.json({ ok: true });
   } catch (e) {

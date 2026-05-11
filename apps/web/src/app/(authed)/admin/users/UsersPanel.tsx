@@ -197,26 +197,94 @@ export function UsersPanel({
         </Dialog>
       </div>
 
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Név</TableHead>
-            <TableHead>Email</TableHead>
-            <TableHead>Szerepkör</TableHead>
-            <TableHead>Osztály</TableHead>
-            <TableHead className="text-right">Műveletek</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {users.map((u) => (
-            <TableRow key={u.id}>
-              <TableCell className="font-medium">{u.name}</TableCell>
-              <TableCell className="text-muted-foreground">{u.email}</TableCell>
-              <TableCell>
+      {/* Desktop: table */}
+      <div className="hidden md:block">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Név</TableHead>
+              <TableHead>Email</TableHead>
+              <TableHead>Szerepkör</TableHead>
+              <TableHead>Osztály</TableHead>
+              <TableHead className="text-right">Műveletek</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {users.map((u) => {
+              const targetPrivileged = u.role === "ADMIN" || u.role === "SUPERADMIN";
+              const locked =
+                u.id === currentUserId || (!isSuperAdmin && targetPrivileged);
+              return (
+                <TableRow key={u.id}>
+                  <TableCell className="font-medium">{u.name}</TableCell>
+                  <TableCell className="text-muted-foreground">{u.email}</TableCell>
+                  <TableCell>
+                    <select
+                      value={u.role}
+                      onChange={(e) => handleRoleChange(u.id, e.target.value as Role)}
+                      disabled={locked}
+                      className={`text-xs font-medium px-2 py-1 rounded ${roleBadge[u.role]} bg-transparent border-0`}
+                    >
+                      {allowedRoles.map((r) => (
+                        <option key={r} value={r}>
+                          {roleLabel[r]}
+                        </option>
+                      ))}
+                      {!allowedRoles.includes(u.role) && (
+                        <option value={u.role}>{roleLabel[u.role]}</option>
+                      )}
+                    </select>
+                  </TableCell>
+                  <TableCell>
+                    {u.className ? <Badge variant="outline">{u.className}</Badge> : "—"}
+                  </TableCell>
+                  <TableCell className="text-right">
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => handleDelete(u.id)}
+                      disabled={locked}
+                      aria-label="Törlés"
+                    >
+                      <Trash2 className="h-4 w-4 text-destructive" />
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </div>
+
+      {/* Mobile: card list */}
+      <div className="md:hidden space-y-3">
+        {users.map((u) => {
+          const targetPrivileged = u.role === "ADMIN" || u.role === "SUPERADMIN";
+          const locked =
+            u.id === currentUserId || (!isSuperAdmin && targetPrivileged);
+          return (
+            <div key={u.id} className="border rounded-lg p-3 space-y-2">
+              <div className="flex items-start justify-between gap-2">
+                <div className="min-w-0 flex-1">
+                  <div className="font-medium truncate">{u.name}</div>
+                  <div className="text-xs text-muted-foreground truncate">{u.email}</div>
+                </div>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => handleDelete(u.id)}
+                  disabled={locked}
+                  aria-label="Törlés"
+                  className="shrink-0"
+                >
+                  <Trash2 className="h-4 w-4 text-destructive" />
+                </Button>
+              </div>
+              <div className="flex items-center gap-2 flex-wrap">
                 <select
                   value={u.role}
                   onChange={(e) => handleRoleChange(u.id, e.target.value as Role)}
-                  disabled={u.id === currentUserId}
+                  disabled={locked}
                   className={`text-xs font-medium px-2 py-1 rounded ${roleBadge[u.role]} bg-transparent border-0`}
                 >
                   {allowedRoles.map((r) => (
@@ -228,25 +296,12 @@ export function UsersPanel({
                     <option value={u.role}>{roleLabel[u.role]}</option>
                   )}
                 </select>
-              </TableCell>
-              <TableCell>
-                {u.className ? <Badge variant="outline">{u.className}</Badge> : "—"}
-              </TableCell>
-              <TableCell className="text-right">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => handleDelete(u.id)}
-                  disabled={u.id === currentUserId}
-                  aria-label="Törlés"
-                >
-                  <Trash2 className="h-4 w-4 text-destructive" />
-                </Button>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+                {u.className && <Badge variant="outline">{u.className}</Badge>}
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }

@@ -74,6 +74,17 @@ export function GroupsPanel({
       toast.error(err.error ?? "Nem sikerült");
       return;
     }
+    const { group } = await res.json();
+    setGroups((p) => [
+      ...p,
+      {
+        id: group.id,
+        name: group.name,
+        description: group.description,
+        members: group.members.map((m: Member) => ({ id: m.id, name: m.name, email: m.email })),
+        assignmentCount: 0,
+      },
+    ]);
     toast.success("Csoport létrehozva");
     setOpenNew(false);
     setSelectedMembers(new Set());
@@ -90,6 +101,21 @@ export function GroupsPanel({
       toast.error("Nem sikerült");
       return;
     }
+    const { group } = await res.json();
+    setGroups((p) =>
+      p.map((g) =>
+        g.id === groupId
+          ? {
+              ...g,
+              members: group.members.map((m: Member) => ({
+                id: m.id,
+                name: m.name,
+                email: m.email,
+              })),
+            }
+          : g,
+      ),
+    );
     toast.success("Tagok frissítve");
     setEditingId(null);
     setSelectedMembers(new Set());
