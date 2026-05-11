@@ -1,0 +1,25 @@
+# Lokális fejlesztő / zsűri-fallback környezet.
+# Csak a Postgres-t hozza fel; a Next.js-t `pnpm dev` indítja host-on.
+# Ha teljes "klikkre indul" deploy kell, ld. README "Docker (full)" szekció.
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: oktatas-pg
+    restart: unless-stopped
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_DB: oktatas
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d oktatas"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pg-data:

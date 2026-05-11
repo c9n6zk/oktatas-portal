@@ -1,0 +1,59 @@
+{
+  "expo": {
+    "name": "Oktatás Portál",
+    "slug": "oktatas-portal-mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "oktatasportal",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "hu.demo.oktatasportal",
+      "infoPlist": {
+        "NSCameraUsageDescription": "Profilkép és dokumentumok rögzítése",
+        "NSLocationWhenInUseUsageDescription": "Jelenléti adatok jelölése a kampuszon",
+        "NSPhotoLibraryUsageDescription": "Képek kiválasztása"
+      }
+    },
+    "android": {
+      "package": "hu.demo.oktatasportal",
+      "permissions": [
+        "CAMERA",
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION",
+        "RECEIVE_BOOT_COMPLETED",
+        "VIBRATE"
+      ]
+    },
+    "web": {
+      "bundler": "metro"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-secure-store",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Profilkép és dokumentumok rögzítése"
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Jelenléti adatok rögzítése"
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/notification-icon.png",
+          "color": "#3b82f6"
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
