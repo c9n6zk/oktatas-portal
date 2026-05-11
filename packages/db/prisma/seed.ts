@@ -149,6 +149,39 @@ async function main() {
     ],
   });
 
+  // 6. Iskolai események (Events)
+  const oneDay = 24 * 60 * 60 * 1000;
+  const now = Date.now();
+  await prisma.event.deleteMany({});
+  await prisma.event.createMany({
+    data: [
+      {
+        title: "Szalagavató 2025",
+        description: "A végzős évfolyam szalagavató ünnepélye.",
+        location: "Sportcsarnok",
+        startsAt: new Date(now + 7 * oneDay),
+        endsAt: new Date(now + 7 * oneDay + 3 * 60 * 60 * 1000),
+        createdById: admin.id,
+      },
+      {
+        title: "Iskolai sportnap",
+        description: "Évszakos sportnap minden évfolyamnak. Atlétika, labdajátékok.",
+        location: "Tornapálya",
+        startsAt: new Date(now + 14 * oneDay),
+        endsAt: new Date(now + 14 * oneDay + 6 * 60 * 60 * 1000),
+        createdById: admin.id,
+      },
+      {
+        title: "Szülői értekezlet",
+        description: "Második félév zárása, jegyek megbeszélése.",
+        location: "Aula",
+        startsAt: new Date(now + 21 * oneDay + 18 * 60 * 60 * 1000),
+        endsAt: new Date(now + 21 * oneDay + 20 * 60 * 60 * 1000),
+        createdById: superadmin.id,
+      },
+    ],
+  });
+
   console.log("Seed kész ✓");
   console.log("");
   console.log("Belépés: <email> / password");
