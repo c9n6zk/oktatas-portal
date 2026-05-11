@@ -17,6 +17,7 @@ const NAV: NavItem[] = [
   { href: "/dashboard", label: "Áttekintés", icon: "LayoutDashboard" },
   { href: "/student/grades", label: "Saját jegyek", icon: "GraduationCap", roles: ["STUDENT"] },
   { href: "/instructor/grading", label: "Jegybeírás", icon: "ClipboardCheck", roles: ["INSTRUCTOR", "ADMIN", "SUPERADMIN"] },
+  { href: "/instructor/attendance", label: "Jelenléti napló", icon: "MapPin", roles: ["INSTRUCTOR", "ADMIN", "SUPERADMIN"] },
   { href: "/admin/users", label: "Felhasználók", icon: "Users", roles: ["ADMIN", "SUPERADMIN"] },
   { href: "/admin/classes", label: "Osztályok", icon: "School", roles: ["ADMIN", "SUPERADMIN"] },
   { href: "/admin/subjects", label: "Tárgyak", icon: "BookOpen", roles: ["ADMIN", "SUPERADMIN"] },

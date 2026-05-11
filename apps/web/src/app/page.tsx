@@ -54,12 +54,6 @@ export default async function Home() {
           )}
         </div>
       </main>
-
-      <footer className="border-t py-4 text-center text-sm text-muted-foreground">
-        <div className="container">
-          Modern Fullstack Verseny 2026 · Built with Next.js, Prisma, NextAuth, Expo
-        </div>
-      </footer>
     </div>
   );
 }
