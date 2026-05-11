@@ -11,10 +11,12 @@ import {
   CalendarDays,
   ChevronUp,
   ClipboardCheck,
+  Contrast,
   GraduationCap,
   LayoutDashboard,
   ListChecks,
   LogOut,
+  MessageSquare,
   Monitor,
   Moon,
   PanelLeftClose,
@@ -42,6 +44,7 @@ const ICON_MAP: Record<string, LucideIcon> = {
   Vote,
   CalendarDays,
   UserCircle,
+  MessageSquare,
 };
 import { Logo } from "@/components/logo";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -173,6 +176,7 @@ function UserDropdown({
   const themeIcon =
     theme === "dark" ? <Moon className="h-4 w-4" /> :
     theme === "light" ? <Sun className="h-4 w-4" /> :
+    theme === "high-contrast" ? <Contrast className="h-4 w-4" /> :
     <Monitor className="h-4 w-4" />;
 
   return (
@@ -188,9 +192,7 @@ function UserDropdown({
         </Avatar>
         {!collapsed && (
           <>
-            <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium truncate leading-tight">{displayName}</p>
-            </div>
+            <span className="flex-1 min-w-0 text-sm font-medium truncate leading-tight">{displayName}</span>
             <ChevronUp className="h-4 w-4 text-muted-foreground shrink-0" />
           </>
         )}
@@ -221,6 +223,10 @@ function UserDropdown({
             <DropdownMenuItem onClick={() => setTheme("dark")}>
               <Moon className="mr-2 h-4 w-4" />
               Sötét
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => setTheme("high-contrast")}>
+              <Contrast className="mr-2 h-4 w-4" />
+              Magas kontraszt
             </DropdownMenuItem>
             <DropdownMenuItem onClick={() => setTheme("system")}>
               <Monitor className="mr-2 h-4 w-4" />
