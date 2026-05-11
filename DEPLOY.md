@@ -1,6 +1,10 @@
 # Deploy útmutató — Vercel + Supabase (cloud) + Docker (local fallback)
 
+> **Padtárs** — deploy lépésenként
+>
 > Verseny **előtt**, otthonról csináld végig. Verseny alatt csak `git push` kell.
+>
+> Megjegyzés: a Vercel/Supabase projekt-slug az infra-oldalon `oktatas-portal` maradt (már létrehozva); a felhasználói app neve **Padtárs**.
 
 ## 1. Supabase projekt (5 perc)
 

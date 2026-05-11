@@ -1,5 +1,7 @@
 # Domain előterv
 
+> **Padtárs** — adatmodell-vázlat
+>
 > Ezt a feladatkiírás megérkezésekor (18:00) finomítjuk. A "hint" alapján már most prediktálható az adatmodell ~80%-a.
 
 ## Adatmodell terv (Prisma)

@@ -1,5 +1,7 @@
 # Verseny Cheatsheet
 
+> **Padtárs** — verseny közbeni gyors-referencia
+>
 > Verseny alatt erre referálj. Időkeret: 3 óra (18:00–21:00).
 
 ## Pontozási prioritás (mit éri meg fejleszteni)

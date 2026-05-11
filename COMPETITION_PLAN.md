@@ -1,5 +1,7 @@
 # Verseny plan — 18:00–21:00 (3 óra)
 
+> **Padtárs** — a digitális iskolatársad · középiskolai oktatásszervezési portál
+
 ## A feladat röviden
 Középiskolai oktatásszervező portál. 4 role: Diák / Oktató / Admin / Szuperadmin.
 Osztály (pl. 2009/C), Tárgy (leírás+könyv+leckék), évenkénti tárgy-osztály-oktató hozzárendelés.

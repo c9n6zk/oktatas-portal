@@ -1,5 +1,7 @@
 # AI használat nyilatkozat
 
+> **Padtárs** — Modern Fullstack és Mobil Fejlesztői Verseny 2026
+
 A Modern Fullstack és Mobil Fejlesztői Verseny 2026 kiírása megengedi az AI eszközök használatát, **kötelező nyilatkozattal**. Ez a fájl részletezi az AI-t.
 
 ## Használt AI eszköz
