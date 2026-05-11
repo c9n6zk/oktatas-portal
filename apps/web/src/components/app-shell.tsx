@@ -16,6 +16,7 @@ interface NavItem {
 const NAV: NavItem[] = [
   { href: "/dashboard", label: "Áttekintés", icon: "LayoutDashboard" },
   { href: "/student/grades", label: "Saját jegyek", icon: "GraduationCap", roles: ["STUDENT"] },
+  { href: "/student/attendance", label: "Jelenlét", icon: "MapPin", roles: ["STUDENT"] },
   { href: "/instructor/grading", label: "Jegybeírás", icon: "ClipboardCheck", roles: ["INSTRUCTOR", "ADMIN", "SUPERADMIN"] },
   { href: "/instructor/attendance", label: "Jelenléti napló", icon: "MapPin", roles: ["INSTRUCTOR", "ADMIN", "SUPERADMIN"] },
   { href: "/admin/users", label: "Felhasználók", icon: "Users", roles: ["ADMIN", "SUPERADMIN"] },
