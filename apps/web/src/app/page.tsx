@@ -19,14 +19,14 @@ export default async function Home() {
                 <Link href="/dashboard">Dashboard</Link>
               </Button>
             ) : (
-              <>
+              <div className="hidden sm:flex items-center gap-2">
                 <Button variant="ghost" asChild>
                   <Link href="/login">Belépés</Link>
                 </Button>
                 <Button asChild>
                   <Link href="/register">Regisztráció</Link>
                 </Button>
-              </>
+              </div>
             )}
           </div>
         </div>

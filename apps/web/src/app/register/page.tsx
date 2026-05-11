@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 import { signIn } from "next-auth/react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -39,7 +40,13 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
+    <div className="min-h-screen flex flex-col items-center justify-center p-4 gap-4">
+      <Button variant="ghost" size="sm" asChild className="self-start sm:self-center">
+        <Link href="/">
+          <ArrowLeft className="size-4" />
+          Vissza a főoldalra
+        </Link>
+      </Button>
       <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle>Regisztráció</CardTitle>
