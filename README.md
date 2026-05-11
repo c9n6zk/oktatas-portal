@@ -184,10 +184,6 @@ erDiagram
   User ||--o{ Event : "létrehoz"
 ```
 
-## 🤖 AI használat
-
-Ez a projekt **Claude Code** (Anthropic, Opus 4.7 modell) segítségével készült. Részletes nyilatkozat: [AI_DISCLOSURE.md](./AI_DISCLOSURE.md).
-
 ## 📄 Licenc
 
 A verseny céljaira készült demonstrációs projekt.
