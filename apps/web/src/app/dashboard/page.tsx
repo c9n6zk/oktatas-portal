@@ -288,7 +288,7 @@ async function AdminDashboard({ userName, role }: { userName: string; role: stri
         <p className="text-muted-foreground">{ROLE_GREETING[role]} áttekintés</p>
       </div>
 
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-2 gap-2 sm:gap-3 lg:grid-cols-4">
         <StatCard
           label="Felhasználók"
           value={userCount}

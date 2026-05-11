@@ -242,48 +242,83 @@ export function AssignmentsPanel({
         </Dialog>
       </div>
 
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Tanév</TableHead>
-            <TableHead>Tárgy</TableHead>
-            <TableHead>Célközönség</TableHead>
-            <TableHead>Oktató</TableHead>
-            <TableHead className="text-center">Jegyek</TableHead>
-            <TableHead className="text-right">Művelet</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {items.map((a) => (
-            <TableRow key={a.id}>
-              <TableCell className="font-mono">
-                {a.year}/{a.year + 1}
-              </TableCell>
-              <TableCell>
-                <div className="font-medium">{a.subjectName}</div>
-                <div className="text-xs text-muted-foreground">{a.subjectCode}</div>
-              </TableCell>
-              <TableCell>
-                <Badge variant={a.targetKind === "class" ? "default" : "secondary"}>
-                  {a.target}
-                </Badge>
-              </TableCell>
-              <TableCell>{a.teacherName}</TableCell>
-              <TableCell className="text-center">{a.gradeCount}</TableCell>
-              <TableCell className="text-right">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => handleDelete(a.id)}
-                  aria-label="Törlés"
-                >
-                  <Trash2 className="h-4 w-4 text-destructive" />
-                </Button>
-              </TableCell>
+      {/* Desktop: table */}
+      <div className="hidden md:block">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Tanév</TableHead>
+              <TableHead>Tárgy</TableHead>
+              <TableHead>Célközönség</TableHead>
+              <TableHead>Oktató</TableHead>
+              <TableHead className="text-center">Jegyek</TableHead>
+              <TableHead className="text-right">Művelet</TableHead>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHeader>
+          <TableBody>
+            {items.map((a) => (
+              <TableRow key={a.id}>
+                <TableCell className="font-mono">
+                  {a.year}/{a.year + 1}
+                </TableCell>
+                <TableCell>
+                  <div className="font-medium">{a.subjectName}</div>
+                  <div className="text-xs text-muted-foreground">{a.subjectCode}</div>
+                </TableCell>
+                <TableCell>
+                  <Badge variant={a.targetKind === "class" ? "default" : "secondary"}>
+                    {a.target}
+                  </Badge>
+                </TableCell>
+                <TableCell>{a.teacherName}</TableCell>
+                <TableCell className="text-center">{a.gradeCount}</TableCell>
+                <TableCell className="text-right">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => handleDelete(a.id)}
+                    aria-label="Törlés"
+                  >
+                    <Trash2 className="h-4 w-4 text-destructive" />
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+
+      {/* Mobile: card list */}
+      <div className="md:hidden space-y-3">
+        {items.map((a) => (
+          <div key={a.id} className="border rounded-lg p-3 space-y-2">
+            <div className="flex items-start justify-between gap-2">
+              <div className="min-w-0 flex-1">
+                <div className="font-medium">{a.subjectName}</div>
+                <div className="text-xs text-muted-foreground">
+                  {a.subjectCode} · {a.year}/{a.year + 1}
+                </div>
+              </div>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => handleDelete(a.id)}
+                aria-label="Törlés"
+                className="shrink-0"
+              >
+                <Trash2 className="h-4 w-4 text-destructive" />
+              </Button>
+            </div>
+            <div className="flex items-center gap-2 flex-wrap">
+              <Badge variant={a.targetKind === "class" ? "default" : "secondary"}>
+                {a.target}
+              </Badge>
+              <span className="text-xs text-muted-foreground">· {a.teacherName}</span>
+              <span className="text-xs text-muted-foreground">· {a.gradeCount} jegy</span>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

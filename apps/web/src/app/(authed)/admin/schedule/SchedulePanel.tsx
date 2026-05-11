@@ -199,9 +199,9 @@ export function SchedulePanel({
                   return (
                     <div
                       key={e.id}
-                      className="flex items-center justify-between gap-3 border rounded p-2 flex-wrap"
+                      className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 md:gap-3 border rounded p-2"
                     >
-                      <div className="flex items-center gap-3 flex-1 min-w-0">
+                      <div className="flex items-center gap-2 md:gap-3 flex-wrap">
                         <Badge variant="outline" className="whitespace-nowrap">
                           {dayLabel}
                         </Badge>
@@ -215,13 +215,13 @@ export function SchedulePanel({
                           </Badge>
                         )}
                       </div>
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2 min-w-0">
                         <select
                           value={e.substituteTeacherId ?? ""}
                           onChange={(ev) =>
                             handleSetSubstitute(e.id, ev.target.value || null)
                           }
-                          className="text-xs border rounded px-2 py-1 bg-background"
+                          className="text-xs border rounded px-2 py-1 bg-background flex-1 min-w-0"
                         >
                           <option value="">— nincs helyettes —</option>
                           {teachers.map((t) => (
@@ -235,6 +235,7 @@ export function SchedulePanel({
                           size="icon"
                           onClick={() => handleDelete(e.id)}
                           aria-label="Törlés"
+                          className="shrink-0"
                         >
                           <Trash2 className="h-4 w-4 text-destructive" />
                         </Button>

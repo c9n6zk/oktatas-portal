@@ -109,44 +109,76 @@ export default async function StudentGradesPage() {
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead>Típus</TableHead>
-                        <TableHead className="text-center">Jegy</TableHead>
-                        <TableHead className="text-center">Súly</TableHead>
-                        <TableHead>Megjegyzés</TableHead>
-                        <TableHead className="text-right">Dátum</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {g.grades.map((grade) => (
-                        <TableRow key={grade.id}>
-                          <TableCell>
-                            <Badge variant="secondary">
+                  {/* Desktop: full table */}
+                  <div className="hidden sm:block">
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead>Típus</TableHead>
+                          <TableHead className="text-center">Jegy</TableHead>
+                          <TableHead className="text-center">Súly</TableHead>
+                          <TableHead>Megjegyzés</TableHead>
+                          <TableHead className="text-right">Dátum</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {g.grades.map((grade) => (
+                          <TableRow key={grade.id}>
+                            <TableCell>
+                              <Badge variant="secondary">
+                                {GRADE_TYPE_LABEL[grade.type as GradeType]}
+                              </Badge>
+                            </TableCell>
+                            <TableCell className="text-center">
+                              <span
+                                className={`inline-flex h-7 w-7 items-center justify-center rounded-full font-semibold ${gradeColor[grade.value]}`}
+                              >
+                                {grade.value}
+                              </span>
+                            </TableCell>
+                            <TableCell className="text-center text-muted-foreground">
+                              {grade.weight}×
+                            </TableCell>
+                            <TableCell className="text-sm text-muted-foreground">
+                              {grade.comment ?? "—"}
+                            </TableCell>
+                            <TableCell className="text-right text-sm text-muted-foreground">
+                              {grade.givenAt.toLocaleDateString("hu-HU")}
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </div>
+
+                  {/* Mobile: compact rows */}
+                  <div className="sm:hidden divide-y">
+                    {g.grades.map((grade) => (
+                      <div key={grade.id} className="py-2 flex items-center gap-3">
+                        <span
+                          className={`inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full font-semibold ${gradeColor[grade.value]}`}
+                        >
+                          {grade.value}
+                        </span>
+                        <div className="min-w-0 flex-1">
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <Badge variant="secondary" className="text-xs">
                               {GRADE_TYPE_LABEL[grade.type as GradeType]}
                             </Badge>
-                          </TableCell>
-                          <TableCell className="text-center">
-                            <span
-                              className={`inline-flex h-7 w-7 items-center justify-center rounded-full font-semibold ${gradeColor[grade.value]}`}
-                            >
-                              {grade.value}
-                            </span>
-                          </TableCell>
-                          <TableCell className="text-center text-muted-foreground">
-                            {grade.weight}×
-                          </TableCell>
-                          <TableCell className="text-sm text-muted-foreground">
-                            {grade.comment ?? "—"}
-                          </TableCell>
-                          <TableCell className="text-right text-sm text-muted-foreground">
-                            {grade.givenAt.toLocaleDateString("hu-HU")}
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
+                            <span className="text-xs text-muted-foreground">{grade.weight}×</span>
+                          </div>
+                          {grade.comment && (
+                            <div className="text-xs text-muted-foreground mt-0.5 truncate">
+                              {grade.comment}
+                            </div>
+                          )}
+                        </div>
+                        <div className="text-xs text-muted-foreground shrink-0 whitespace-nowrap">
+                          {grade.givenAt.toLocaleDateString("hu-HU")}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </CardContent>
               </Card>
             );
