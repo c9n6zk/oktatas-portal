@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { Alert, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import * as Location from "expo-location";
-import * as ImagePicker from "expo-image-picker";
 import * as Notifications from "expo-notifications";
 import * as Device from "expo-device";
 
@@ -15,7 +14,6 @@ Notifications.setNotificationHandler({
 
 export default function NativeFeaturesScreen() {
   const [location, setLocation] = useState<Location.LocationObject | null>(null);
-  const [photoUri, setPhotoUri] = useState<string | null>(null);
   const [pushToken, setPushToken] = useState<string | null>(null);
 
   async function handleGetLocation() {
@@ -23,13 +21,6 @@ export default function NativeFeaturesScreen() {
     if (status !== "granted") return Alert.alert("Hiba", "Helymeghatározás engedély megtagadva");
     const loc = await Location.getCurrentPositionAsync({});
     setLocation(loc);
-  }
-
-  async function handleTakePhoto() {
-    const { status } = await ImagePicker.requestCameraPermissionsAsync();
-    if (status !== "granted") return Alert.alert("Hiba", "Kamera engedély megtagadva");
-    const result = await ImagePicker.launchCameraAsync({ allowsEditing: true, quality: 0.7 });
-    if (!result.canceled && result.assets[0]) setPhotoUri(result.assets[0].uri);
   }
 
   async function handleRegisterPush() {
@@ -75,14 +66,6 @@ export default function NativeFeaturesScreen() {
       </View>
 
       <View style={styles.card}>
-        <Text style={styles.cardTitle}>📷 Kamera</Text>
-        <TouchableOpacity style={styles.button} onPress={handleTakePhoto}>
-          <Text style={styles.buttonText}>Fotó készítése</Text>
-        </TouchableOpacity>
-        {photoUri && <Image source={{ uri: photoUri }} style={styles.photo} />}
-      </View>
-
-      <View style={styles.card}>
         <Text style={styles.cardTitle}>🔔 Push értesítések</Text>
         <TouchableOpacity style={styles.button} onPress={handleRegisterPush}>
           <Text style={styles.buttonText}>Push token regisztráció</Text>
@@ -111,5 +94,4 @@ const styles = StyleSheet.create({
   },
   buttonText: { color: "#fff", fontWeight: "600" },
   mono: { color: "#aaa", fontFamily: "monospace", fontSize: 12 },
-  photo: { width: "100%", height: 200, borderRadius: 8, resizeMode: "cover" },
 });

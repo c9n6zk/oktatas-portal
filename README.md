@@ -50,7 +50,6 @@ Az alábbi 4 fiókkal mind a 4 szerepkör kipróbálható. Jelszó: `password`.
 | **♿ Accessibility** — világos / sötét / **magas kontraszt** | `next-themes` + 3. téma WCAG AAA ~21:1 fekete/sárga kontraszttal, vastag keretek, aláhúzott linkek, erős focus outline |
 | **📱 Reszponzív web** | Tailwind breakpoint-ok, mobil hamburger nav, mobil-első üzenőfal (`100dvh` dynamic viewport) |
 | **📍 GPS-alapú jelenléti rendszer** *(innováció)* | **Két platformról**: (a) Mobilon `Jelenléti` tab → `expo-location` → "Itt vagyok" gomb; (b) Webről `/student/attendance` → `navigator.geolocation` → ugyanaz az "Itt vagyok" gomb. Mindkettő POST `/api/attendance` (web) / `/api/mobile/attendance` (mobil), `Attendance.source="gps"`. Az oktató/admin **valós időben látja** a `/instructor/attendance` Jelenléti naplóban (kattintható Google Maps link, tárgyanként csoportosítva). |
-| **📷 Kamera** | Natív demo komponens (`expo-camera`) |
 | **🔔 Push értesítés (end-to-end)** | Mobil app login után regisztrálja az Expo push tokent (`/api/mobile/push-token`). Jegybeíráskor a szerver értesítést küld a diák eszközére (`PushToken` modell + Expo push REST API). |
 
 ## 🏗️ Tech stack
@@ -232,8 +231,7 @@ pnpm web
 ### Natív funkciók kipróbálása
 
 - **📍 GPS jelenléti**: belépés diákként → `Jelenléti` tab → engedélyezd a helymeghatározást → `Itt vagyok` gomb. Backend `/api/mobile/attendance` POST-ot kap GPS koordinátákkal és tárolja az `Attendance` táblába. Az oktató/admin a webes `/instructor/attendance` oldalon valós időben látja a beérkező check-ineket (kattintható Google Maps link). *Web-only alternatíva: ugyanezt diákként a `https://oktatas-portal.vercel.app/student/attendance` oldalon is le lehet adni `navigator.geolocation`-nal — nincs telefon? Akkor is működik.*
-- **📷 Kamera**: `Natív` tab → `Fotó készítése` — engedélyezd a kamerát, készíts képet.
-- **🔔 Push értesítés**: `Natív` tab → `Push token regisztráció` (csak fizikai eszközön; emulátoron nem). Helyi értesítés `Helyi értesítés` gombbal.
+- **🔔 Push értesítés**: a login után automatikusan regisztrál egy Expo push tokent (csak fizikai eszközön; emulátoron nem). Ha egy oktató jegyet ír be a diáknak a webről, **azonnal érkezik egy push notif** a diák telefonjára (tárgy + jegyérték + súly). A `Natív` tab `Helyi értesítés` gombbal pedig in-app teszt küldhető.
 
 ### Saját buildelt APK (opcionális, EAS Build)
 
