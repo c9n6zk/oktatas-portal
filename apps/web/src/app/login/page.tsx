@@ -9,40 +9,133 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
+interface DemoAccount {
+  email: string;
+  name: string;
+  role: string;
+  color: string;
+  description: string;
+}
+
+const DEMO_ACCOUNTS: DemoAccount[] = [
+  {
+    email: "superadmin@demo.hu",
+    name: "Szuper Admin",
+    role: "Szuper-admin",
+    color: "bg-red-500/10 hover:bg-red-500/20 text-red-700 dark:text-red-400 border-red-500/30",
+    description: "Minden funkció, admin kezelés",
+  },
+  {
+    email: "admin@demo.hu",
+    name: "Admin Anna",
+    role: "Admin",
+    color: "bg-amber-500/10 hover:bg-amber-500/20 text-amber-700 dark:text-amber-400 border-amber-500/30",
+    description: "Felhasználók, tárgyak, osztályok",
+  },
+  {
+    email: "instructor@demo.hu",
+    name: "Oktató Géza",
+    role: "Oktató",
+    color: "bg-blue-500/10 hover:bg-blue-500/20 text-blue-700 dark:text-blue-400 border-blue-500/30",
+    description: "Jegybeírás, statisztika",
+  },
+  {
+    email: "student@demo.hu",
+    name: "Diák Béla",
+    role: "Diák",
+    color: "bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 border-emerald-500/30",
+    description: "Saját jegyek, súlyozott átlag",
+  },
+];
+
 function LoginForm() {
   const router = useRouter();
   const search = useSearchParams();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [quickLoading, setQuickLoading] = useState<string | null>(null);
 
-  async function onSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setLoading(true);
+  async function loginWith(emailToUse: string, pwToUse: string) {
     const res = await signIn("credentials", {
-      email,
-      password,
+      email: emailToUse,
+      password: pwToUse,
       redirect: false,
     });
-    setLoading(false);
     if (res?.error) {
       toast.error("Hibás email vagy jelszó");
-      return;
+      return false;
     }
     toast.success("Sikeres belépés");
     router.push(search.get("from") ?? "/dashboard");
     router.refresh();
+    return true;
+  }
+
+  async function onSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setLoading(true);
+    await loginWith(email, password);
+    setLoading(false);
+  }
+
+  async function quickLogin(account: DemoAccount) {
+    setQuickLoading(account.email);
+    await loginWith(account.email, "password");
+    setQuickLoading(null);
   }
 
   return (
     <Card className="w-full max-w-md">
       <CardHeader>
         <CardTitle>Belépés</CardTitle>
-        <CardDescription>Add meg az email címedet és a jelszavadat.</CardDescription>
+        <CardDescription>Kattints egy demo fiókra vagy add meg a saját adataidat.</CardDescription>
       </CardHeader>
-      <CardContent>
-        <form onSubmit={onSubmit} className="space-y-4">
-          <div className="space-y-2">
+      <CardContent className="space-y-4">
+        {/* Demo quick-login gombok */}
+        <div className="space-y-2">
+          <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+            Demo fiókok (1-kattintásos belépés)
+          </p>
+          <div className="grid gap-2">
+            {DEMO_ACCOUNTS.map((account) => (
+              <button
+                key={account.email}
+                type="button"
+                onClick={() => quickLogin(account)}
+                disabled={quickLoading !== null || loading}
+                className={`text-left rounded-md border px-3 py-2 transition disabled:opacity-50 ${account.color}`}
+              >
+                <div className="flex items-center justify-between gap-2">
+                  <div>
+                    <div className="font-medium text-sm">
+                      {quickLoading === account.email ? "Belépés..." : account.name}
+                    </div>
+                    <div className="text-xs opacity-80">
+                      {account.role} · {account.description}
+                    </div>
+                  </div>
+                  <div className="text-xs font-mono opacity-60 hidden sm:block">
+                    {account.email.split("@")[0]}
+                  </div>
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="relative">
+          <div className="absolute inset-0 flex items-center">
+            <span className="w-full border-t" />
+          </div>
+          <div className="relative flex justify-center text-xs uppercase">
+            <span className="bg-background px-2 text-muted-foreground">vagy saját fiók</span>
+          </div>
+        </div>
+
+        {/* Manuális belépés form */}
+        <form onSubmit={onSubmit} className="space-y-3">
+          <div className="space-y-1.5">
             <Label htmlFor="email">Email</Label>
             <Input
               id="email"
@@ -51,9 +144,10 @@ function LoginForm() {
               onChange={(e) => setEmail(e.target.value)}
               required
               autoComplete="email"
+              placeholder="te@iskola.hu"
             />
           </div>
-          <div className="space-y-2">
+          <div className="space-y-1.5">
             <Label htmlFor="password">Jelszó</Label>
             <Input
               id="password"
@@ -64,25 +158,17 @@ function LoginForm() {
               autoComplete="current-password"
             />
           </div>
-          <Button type="submit" className="w-full" disabled={loading}>
+          <Button type="submit" className="w-full" disabled={loading || quickLoading !== null}>
             {loading ? "Belépés..." : "Belépés"}
           </Button>
-          <p className="text-sm text-center text-muted-foreground">
-            Nincs még fiókod?{" "}
-            <Link href="/register" className="underline">
-              Regisztrálj
-            </Link>
-          </p>
-          <div className="text-xs text-muted-foreground border-t pt-3">
-            <p className="font-medium mb-1">Demo fiókok (password: <code>password</code>):</p>
-            <ul className="space-y-0.5 font-mono">
-              <li>superadmin@demo.hu</li>
-              <li>admin@demo.hu</li>
-              <li>instructor@demo.hu</li>
-              <li>student@demo.hu</li>
-            </ul>
-          </div>
         </form>
+
+        <p className="text-sm text-center text-muted-foreground">
+          Nincs még fiókod?{" "}
+          <Link href="/register" className="underline">
+            Regisztrálj
+          </Link>
+        </p>
       </CardContent>
     </Card>
   );
