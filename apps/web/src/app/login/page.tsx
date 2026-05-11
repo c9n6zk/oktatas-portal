@@ -89,50 +89,9 @@ function LoginForm() {
     <Card className="w-full max-w-md">
       <CardHeader>
         <CardTitle>Belépés</CardTitle>
-        <CardDescription>Kattints egy demo fiókra vagy add meg a saját adataidat.</CardDescription>
+        <CardDescription>Lépj be a saját adataiddal, vagy próbáld ki egy demo fiókkal.</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
-        {/* Demo quick-login gombok */}
-        <div className="space-y-2">
-          <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
-            Demo fiókok (1-kattintásos belépés)
-          </p>
-          <div className="grid gap-2">
-            {DEMO_ACCOUNTS.map((account) => (
-              <button
-                key={account.email}
-                type="button"
-                onClick={() => quickLogin(account)}
-                disabled={quickLoading !== null || loading}
-                className={`text-left rounded-md border px-3 py-2 transition disabled:opacity-50 ${account.color}`}
-              >
-                <div className="flex items-center justify-between gap-2">
-                  <div>
-                    <div className="font-medium text-sm">
-                      {quickLoading === account.email ? "Belépés..." : account.name}
-                    </div>
-                    <div className="text-xs opacity-80">
-                      {account.role} · {account.description}
-                    </div>
-                  </div>
-                  <div className="text-xs font-mono opacity-60 hidden sm:block">
-                    {account.email.split("@")[0]}
-                  </div>
-                </div>
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div className="relative">
-          <div className="absolute inset-0 flex items-center">
-            <span className="w-full border-t" />
-          </div>
-          <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-background px-2 text-muted-foreground">vagy saját fiók</span>
-          </div>
-        </div>
-
         {/* Manuális belépés form */}
         <form onSubmit={onSubmit} className="space-y-3">
           <div className="space-y-1.5">
@@ -169,6 +128,47 @@ function LoginForm() {
             Regisztrálj
           </Link>
         </p>
+
+        <div className="relative">
+          <div className="absolute inset-0 flex items-center">
+            <span className="w-full border-t" />
+          </div>
+          <div className="relative flex justify-center text-xs uppercase">
+            <span className="bg-background px-2 text-muted-foreground">demo fiókok</span>
+          </div>
+        </div>
+
+        {/* Demo quick-login gombok — a form ALATT */}
+        <div className="space-y-2">
+          <p className="text-xs text-muted-foreground text-center">
+            Kattints egy fiókra a gyors belépéshez
+          </p>
+          <div className="grid gap-2">
+            {DEMO_ACCOUNTS.map((account) => (
+              <button
+                key={account.email}
+                type="button"
+                onClick={() => quickLogin(account)}
+                disabled={quickLoading !== null || loading}
+                className={`text-left rounded-md border px-3 py-2 transition disabled:opacity-50 ${account.color}`}
+              >
+                <div className="flex items-center justify-between gap-2">
+                  <div>
+                    <div className="font-medium text-sm">
+                      {quickLoading === account.email ? "Belépés..." : account.name}
+                    </div>
+                    <div className="text-xs opacity-80">
+                      {account.role} · {account.description}
+                    </div>
+                  </div>
+                  <div className="text-xs font-mono opacity-60 hidden sm:block">
+                    {account.email.split("@")[0]}
+                  </div>
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
       </CardContent>
     </Card>
   );
