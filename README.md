@@ -49,7 +49,7 @@ Az alábbi 4 fiókkal mind a 4 szerepkör kipróbálható. Jelszó: `password`.
 | **👥 Csoportok** (osztály-független) | `Group` modell, tetszőleges diák-halmaz, `SubjectAssignment` `groupId`-vel — pl. nyelvi csoport, haladó matek (`/admin/groups`) |
 | **♿ Accessibility** — világos / sötét / **magas kontraszt** | `next-themes` + 3. téma WCAG AAA ~21:1 fekete/sárga kontraszttal, vastag keretek, aláhúzott linkek, erős focus outline |
 | **📱 Reszponzív web** | Tailwind breakpoint-ok, mobil hamburger nav, mobil-első üzenőfal (`100dvh` dynamic viewport) |
-| **📍 GPS-alapú jelenléti rendszer** *(innováció)* | Mobilon "Itt vagyok" gomb → `expo-location` → lat/lng + assignment ID elküldése a backendnek (`Attendance.source="gps"`) |
+| **📍 GPS-alapú jelenléti rendszer** *(innováció)* | **Két platformról**: (a) Mobilon `Jelenléti` tab → `expo-location` → "Itt vagyok" gomb; (b) Webről `/student/attendance` → `navigator.geolocation` → ugyanaz az "Itt vagyok" gomb. Mindkettő POST `/api/attendance` (web) / `/api/mobile/attendance` (mobil), `Attendance.source="gps"`. Az oktató/admin **valós időben látja** a `/instructor/attendance` Jelenléti naplóban (kattintható Google Maps link, tárgyanként csoportosítva). |
 | **📷 Kamera** | Natív demo komponens (`expo-camera`) |
 | **🔔 Push értesítés (end-to-end)** | Mobil app login után regisztrálja az Expo push tokent (`/api/mobile/push-token`). Jegybeíráskor a szerver értesítést küld a diák eszközére (`PushToken` modell + Expo push REST API). |
 
@@ -62,7 +62,7 @@ Az alábbi 4 fiókkal mind a 4 szerepkör kipróbálható. Jelszó: `password`.
 - **Auth:** NextAuth v5 (Credentials) + JWT (Bearer, mobil)
 - **UI:** Tailwind CSS + shadcn/ui (Radix primitives) + lucide-react ikonok
 - **Validáció:** Zod (megosztott `@repo/shared`)
-- **Mobil:** Expo SDK 52 + expo-router (tab navigátor)
+- **Mobil:** Expo SDK 54 + expo-router (tab navigátor) + expo-location/camera/notifications
 - **Deploy:** Vercel (auto-deploy GitHub main push-ra) + Supabase managed PostgreSQL
 
 ## 🗂️ Architektúra
@@ -72,7 +72,9 @@ apps/
   web/                      Next.js 15 — frontend + REST API
     src/app/(authed)/       Védett oldalak (Server Component layout)
       student/grades/       Diák: saját jegyek + súlyozott átlag
+      student/attendance/   Diák: GPS jelenlét leadás (navigator.geolocation)
       instructor/grading/   Oktató: jegybeírás osztály-bontásban + statisztika
+      instructor/attendance/ Oktató/Admin: Jelenléti napló (beérkező check-inek + Google Maps)
       admin/users/          Admin: felhasználók
       admin/classes/        Admin: osztályok
       admin/subjects/       Admin: tárgyak
@@ -86,7 +88,7 @@ apps/
       profile/              Saját profil
     src/app/api/            REST endpoint-ok (NextAuth + domain + mobil)
       classes /subjects /assignments /grades /events /admin/users
-      messages /polls /groups /schedule
+      messages /polls /groups /schedule /attendance
       mobile/ login,me,grades,attendance,push-token
     src/app/                error.tsx, global-error.tsx, not-found.tsx
     src/lib/                auth.ts (full), auth.config.ts (Edge), rbac, mobile-auth, messaging
@@ -138,6 +140,7 @@ Mind védve (`requireAuth` / `requireRole` / `requireAnyRole` middleware-ekkel).
 | `/api/groups/[id]` | PATCH / DELETE | ADMIN+ | Tagok módosítása / törlés |
 | `/api/schedule` | GET / POST | auth / ADMIN+ | Heti órarend / új óra (terem, idő) |
 | `/api/schedule/[id]` | PATCH / DELETE | ADMIN+ | Helyettesítő tanár / törlés |
+| `/api/attendance` | GET / POST | auth / STUDENT | Webes GPS jelenlét leadás (`navigator.geolocation`) — csak a saját osztály tárgyaira |
 | `/api/admin/users` | GET / POST | ADMIN+ | Felhasználó lista / létrehozás |
 | `/api/admin/users/[id]` | PATCH / DELETE | ADMIN+ / SUPERADMIN promotion-höz | Role-változtatás / törlés |
 | `/api/register` | POST | public | Új diák regisztráció |
@@ -228,7 +231,7 @@ pnpm web
 
 ### Natív funkciók kipróbálása
 
-- **📍 GPS jelenléti**: belépés diákként → `Jelenléti` tab → engedélyezd a helymeghatározást → `Itt vagyok` gomb. Backend `/api/mobile/attendance` POST-ot kap GPS koordinátákkal és tárolja az `Attendance` táblába.
+- **📍 GPS jelenléti**: belépés diákként → `Jelenléti` tab → engedélyezd a helymeghatározást → `Itt vagyok` gomb. Backend `/api/mobile/attendance` POST-ot kap GPS koordinátákkal és tárolja az `Attendance` táblába. Az oktató/admin a webes `/instructor/attendance` oldalon valós időben látja a beérkező check-ineket (kattintható Google Maps link). *Web-only alternatíva: ugyanezt diákként a `https://oktatas-portal.vercel.app/student/attendance` oldalon is le lehet adni `navigator.geolocation`-nal — nincs telefon? Akkor is működik.*
 - **📷 Kamera**: `Natív` tab → `Fotó készítése` — engedélyezd a kamerát, készíts képet.
 - **🔔 Push értesítés**: `Natív` tab → `Push token regisztráció` (csak fizikai eszközön; emulátoron nem). Helyi értesítés `Helyi értesítés` gombbal.
 
