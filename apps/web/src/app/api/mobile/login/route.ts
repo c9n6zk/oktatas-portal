@@ -31,7 +31,10 @@ export async function POST(req: Request) {
       user: { id: user.id, email: user.email, name: user.name, role: user.role },
     });
   } catch (e) {
-    console.error("mobile login error", e);
-    return NextResponse.json({ error: "Belső hiba" }, { status: 500 });
+    const msg = e instanceof Error ? e.message : String(e);
+    const stack = e instanceof Error ? e.stack : undefined;
+    console.error("mobile login error:", msg, stack);
+    // VERSENY: csak fejlesztés alatt; production-ben generikus üzenet ajánlott
+    return NextResponse.json({ error: "Belső hiba", debug: msg }, { status: 500 });
   }
 }

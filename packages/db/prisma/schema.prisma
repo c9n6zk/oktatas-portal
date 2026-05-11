@@ -2,7 +2,9 @@
 // Domain entities (Subject, Course, Enrollment, ...) are added during the contest.
 
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
+  // native = local OS (Windows dev), rhel-openssl-3.0.x = Vercel serverless runtime
+  binaryTargets = ["native", "rhel-openssl-3.0.x"]
 }
 
 datasource db {
